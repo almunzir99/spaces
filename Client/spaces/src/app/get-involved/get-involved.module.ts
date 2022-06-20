@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GetInvolvedComponent } from './get-involved.component';
+import { GetInvolvedRoutingModule } from './get-involved-routing.module';
 
 
 
@@ -9,7 +10,8 @@ import { GetInvolvedComponent } from './get-involved.component';
     GetInvolvedComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    GetInvolvedRoutingModule
   ]
 })
 export class GetInvolvedModule { }
