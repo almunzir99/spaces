@@ -1,1 +1,87 @@
-<p>footer works!</p>
+<footer>
+    <div class="section">
+        <div class="intro-container">
+            <img class="logo" src="assets/logo-white.svg" alt="">
+            <div class="intro-content">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel, incidunt. Error amet consequatur dolores
+                et aperiam. Inventore doloremque at ducimus deserunt quibusdam ea maiores odio, aperiam est eos porro
+                delectus.
+            </div>
+            <div class="socials">
+                <div class="icon-container"><i class="cib-facebook"></i></div>
+                <div class="icon-container"><i class="cib-twitter"></i></div>
+                <div class="icon-container"><i class="cib-instagram"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="quick-links">
+            <div class="title">Explore Links</div>
+            <ul class="links">
+                <li *ngFor="let link of links">{{link.title}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="section">
+        <div class="gallery-area">
+            <div class="title">Gallery</div>
+            <div class="images">
+                <img src="assets/temp/images/portfolio-1.jpg" alt="">
+                <img src="assets/temp/images/portfolio-2.jpg" alt="">
+                <img src="assets/temp/images/portfolio-3.jpg" alt="">
+                <img src="assets/temp/images/portfolio-4.jpg" alt="">
+                <img src="assets/temp/images/portfolio-5.jpg" alt="">
+                <img src="assets/temp/images/portfolio-6.jpg" alt="">
+
+            </div>
+        </div>
+    </div>
+    <div class="contact-area">
+        <div class="title-container">
+            <div class="icon-container">
+                <i class="cil-chat-bubble"></i>
+            </div>
+            <div class="title">
+                Get In Touch
+            </div>
+        </div>
+        <div class="contacts-info">
+            <div class="contact-info">
+                <div class="icon">
+                    <i class="cil-phone"></i>
+                </div>
+                <div>
+                    <div class="title">Phone</div>
+                    <div class="content">
+                        +249-128-6470-19
+                    </div>
+                </div>
+            </div>
+            <div class="contact-info">
+                <div class="icon">
+                    <i class="cil-envelope-open"></i>
+                </div>
+                <div>
+                    <div class="title">Email</div>
+                    <div class="content">
+                        Spaces@spaces.com
+                    </div>
+                </div>
+            </div>
+            <div class="contact-info">
+                <div class="icon">
+                    <i class="cil-map"></i>
+                </div>
+                <div>
+                    <div class="title">Location</div>
+                    <div class="content">
+                        khartoum,Arkwit, square 15
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copy-right-area">
+        © All Copyright are reserved by Spaces Organization
+    </div>
+</footer>

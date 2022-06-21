@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { navBarList } from '../nav-bar/navbar-list';
 
 @Component({
   selector: 'spaces-footer',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-
+  links = navBarList;
   constructor() { }
 
   ngOnInit(): void {
