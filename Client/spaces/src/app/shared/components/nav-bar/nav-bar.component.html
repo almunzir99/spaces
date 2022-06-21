@@ -1,0 +1,57 @@
+<nav>
+    <div class="top-nav">
+        <div class="contacts-info">
+            <div class="contact-info">
+                <div class="icon-container">
+                <i class="cil-envelope-open"></i>
+                </div>
+                spaces@spaces.com
+
+            </div>
+            <div class="contact-info">
+                <div class="icon-container">
+                <i class="cil-phone"></i>
+                </div>
+                +249-128-6470-19
+            </div>
+            <div class="contact-info">
+                <div class="icon-container">
+                <i class="cil-map"></i>
+                </div>
+                khartoum,Arkwit, square 15
+            </div>
+           
+        </div>
+        <div class="socials">
+            <div class="icon-container"><i class="cib-facebook"></i></div>
+            <div class="icon-container"><i class="cib-twitter"></i></div>
+            <div class="icon-container"><i class="cib-instagram"></i></div>
+
+
+        </div>
+    </div>
+    <div [class.opened]="opened" class="main-nav">
+        <div class="logo"></div>
+        <div class="navbar-list">
+            <ul class="main-list">
+                <li class="main-menu-item" [routerLink]="['/','en',item.route]" *ngFor="let item of navList"><p>{{item.title}}</p>
+                    <div [style.height.px]="item.children?.length! * 40" *ngIf="item.children?.length! > 0" class="sub-menu-container">
+                        <ul>
+                            <li class="submenu-item" *ngFor="let subItem of item.children">
+                                {{subItem.title}}
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="act-buttons">
+            <div (click)="opened = !opened" class="act-button icon basic">
+                <i class="cil-menu"></i>
+            </div>
+            <div class="act-button">Donate Now</div>
+            <div class="act-button accent">Get Involved</div>
+        </div>
+    </div>
+    
+</nav>

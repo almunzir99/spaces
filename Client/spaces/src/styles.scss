@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+@import "variables";
+@import "~@coreui/icons/css/all.min.css";
+@font-face {
+    font-family: "Poppin";
+    src: url("assets/Poppins-Regular.ttf");
+}
+@font-face {
+    font-family: "Poppin";
+    src: url("assets/Poppins-Bold.ttf");
+    font-weight: 700;
+}
+@font-face {
+    font-family: "Poppin";
+    src: url("assets/Poppins-ExtraBold.ttf");
+    font-weight: 800;
+}
+@font-face {
+    font-family: "Poppin";
+    src: url("assets/Poppins-Medium.ttf");
+    font-weight: 500;
+}
+@font-face {
+    font-family: "Poppin";
+    src: url("assets/Poppins-SemiBold.ttf");
+    font-weight: 600;
+}
+@font-face {
+    font-family: "Poppin";
+    src: url("assets/Poppins-Light.ttf");
+    font-weight: 100;
+}
+*{
+    font-family: "Poppin";
+    padding: 0px;
+    margin: 0px;
+}
