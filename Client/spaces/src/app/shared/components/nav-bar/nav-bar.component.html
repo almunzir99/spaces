@@ -31,7 +31,9 @@
         </div>
     </div>
     <div [class.opened]="opened" class="main-nav">
-        <div class="logo"></div>
+        <div class="logo">
+            <img src="assets/logo.svg">
+        </div>
         <div class="navbar-list">
             <ul class="main-list">
                 <li class="main-menu-item" [routerLink]="['/','en',item.route]" *ngFor="let item of navList"><p>{{item.title}}</p>

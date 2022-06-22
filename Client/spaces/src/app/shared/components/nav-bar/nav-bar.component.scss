@@ -68,7 +68,12 @@ nav {
         justify-content: space-between;
         align-items: center;
         transition: 1s max-height ease;
-
+        .logo{
+            margin: 0px 20px;
+            img{
+                width: 140px;
+            }
+        }
         ul.main-list {
             display: flex;
             align-items: center;
