@@ -1,1 +1,367 @@
-<p>home works!</p>
+<swiper [config]="config" #swiper (swiper)="onSwiper($event)" (slideChange)="onSlideChange($event)">
+    <ng-template swiperSlide>
+        <div class="hero">
+            <img class="hero-img" src="assets/temp/images/hero-banner.jpg" alt="">
+            <div *ngIf="currentIndex == 1 || currentIndex == 4" class="hero-content">
+                <div class="content">
+                    <div class="subtitle">Banner heading Subtitle</div>
+                    <div class="title">Banner Big Title</div>
+                    <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, magnam? At nemo
+                        sint, nisi quo </div>
+                    <div class="act-button">Read More</div>
+
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template swiperSlide>
+        <div class="hero">
+
+            <img class="hero-img" src="assets/temp/images/hero-banner3.jpg" alt="">
+            <div *ngIf="currentIndex == 2" class="hero-content">
+                <div class="content">
+                    <div class="subtitle">Banner heading Subtitle</div>
+                    <div class="title">Banner Big Title</div>
+                    <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, magnam? At nemo
+                        sint, nisi quo </div>
+                    <div class="act-button">Read More</div>
+
+                </div>
+
+            </div>
+        </div>
+    </ng-template>
+    <ng-template swiperSlide>
+        <div class="hero">
+            <img class="hero-img" src="assets/temp/images/hero-banner2.jpg" alt="">
+            <div *ngIf="currentIndex == 3" class="hero-content">
+                <div class="content">
+                    <div class="subtitle">Banner heading Subtitle</div>
+                    <div class="title">Banner Big Title</div>
+                    <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, magnam? At nemo
+                        sint, nisi quo </div>
+                    <div class="act-button">Read More</div>
+
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+</swiper>
+<!-- intro section -->
+<div class="intro-section">
+    <div class="bg-area">
+
+    </div>
+    <div class="shape"></div>
+    <div class="images-section">
+        <div class="pattern-dots-md gray-light image-container">
+            <img src="assets/temp/images/portfolio-1.jpg" alt="">
+        </div>
+    </div>
+    <div class="content-section">
+        <div class="subtitle">
+            What's Spaces?
+        </div>
+        <div class="title">
+            Welcome To Spaces For Peace and Development
+        </div>
+        <div class="content">
+            Spaces for peace and development organization is a non- governmental
+            non – profit nonpolitical national organization founded and registered with
+            the Humanitarian Aid Commission (HAC) in Sudan 2020; and aims on
+            promoting the interest of the local communities to achieve universal and
+            equal access to safe, affordable drinking water (IWRM), quality education,
+            ٌSustainable and resilient cities, clean energy and management of local
+            consumption and production.
+        </div>
+        <div class="act-button accent">Read More</div>
+
+    </div>
+</div>
+<!-- Focus area section -->
+<div class="focus-area-section">
+    <div class="title">Spaces Focus Sectors</div>
+    <hr class="sep">
+    <h3>Discover More About Spaces Focus Sectors</h3>
+    <div class="sectors-cards">
+        <div class="sector-card-container">
+            <div class="sector-card">
+                <div class="icon-container">
+                    <svg-icon class="icon" src="assets/icons/fsl.svg" [applyClass]="true"></svg-icon>
+                </div>
+                <div class="card-title">FSL & Narration</div>
+            </div>
+        </div>
+        <div class="sector-card-container">
+            <div class="sector-card">
+                <div class="icon-container">
+                    <svg-icon class="icon" src="assets/icons/water.svg" [applyClass]="true"></svg-icon>
+                </div>
+                <div class="card-title">WASH</div>
+            </div>
+        </div>
+        <div class="sector-card-container">
+            <div class="sector-card">
+                <div class="icon-container">
+                    <svg-icon class="icon" src="assets/icons/medicine.svg" [applyClass]="true"></svg-icon>
+                </div>
+                <div class="card-title">Health</div>
+            </div>
+        </div>
+        <div class="sector-card-container">
+            <div class="sector-card">
+                <div class="icon-container">
+                    <svg-icon class="icon" src="assets/icons/shield.svg" [applyClass]="true"></svg-icon>
+                </div>
+                <div class="card-title">Protection</div>
+            </div>
+        </div>
+        <div class="sector-card-container">
+            <div class="sector-card">
+                <div class="icon-container">
+                    <svg-icon class="icon" src="assets/icons/education.svg" [applyClass]="true"></svg-icon>
+                </div>
+                <div class="card-title">Education</div>
+            </div>
+        </div>
+        <div class="sector-card-container">
+            <div class="sector-card">
+                <div class="icon-container">
+                    <svg-icon class="icon" src="assets/icons/handshake.svg" [applyClass]="true"></svg-icon>
+                </div>
+                <div class="card-title">Peace Building</div>
+            </div>
+        </div>
+        <div class="sector-card-container">
+            <div class="sector-card">
+                <div class="icon-container">
+                    <svg-icon class="icon" src="assets/icons/emergency.svg" [applyClass]="true"></svg-icon>
+                </div>
+                <div class="card-title">Emergency</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Partners Area -->
+<div class="partners-section">
+    <div class="content-section">
+        <div class="pattern pattern-diagonal-lines-sm gray-light"></div>
+        <div class="subtitle">
+            Who's Trust Us?
+        </div>
+        <div class="title">
+            Spaces is Trusted By Many Organizations in Sudan and Around The World
+        </div>
+        <div class="content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum nam voluptatem consectetur
+            reprehenderit quod corporis tempora nulla quibusdam aut id iusto itaque illum saepe recusandae et, inventore
+            maiores deserunt. Ducimus.</div>
+    </div>
+    <div class="logos-section">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <img src="assets/temp/images/client-1.png" alt="">
+
+                    </td>
+                    <td>
+                        <img src="assets/temp/images/client-2.png" alt="">
+
+                    </td>
+                    <td>
+                        <img src="assets/temp/images/client-3.png" alt="">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="assets/temp/images/client-4.png" alt="">
+
+                    </td>
+                    <td>
+                        <img src="assets/temp/images/client-5.png" alt="">
+
+                    </td>
+                    <td>
+                        <img src="assets/temp/images/client-6.png" alt="">
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<!-- Media Area -->
+<div class="media-section">
+    <div class="video-section">
+        <div class="content">
+            <div class="play-icon">
+                <i class="cil-media-play"></i>
+            </div>
+            <h4 class="subtitle">
+                WATCH OUR FEW MINUTES VIDEO
+            </h4>
+            <h1 class="bg-content">
+                The Measure of a Life is Not its Duration, but its Donation
+            </h1>
+        </div>
+    </div>
+    <div class="gallery-section">
+        <swiper [autoplay]="{delay:1000}" [slidesPerView]="3.5">
+            <ng-template swiperSlide>
+                <img src="assets/temp/images/portfolio-1.jpg" alt="">
+            </ng-template>
+            <ng-template swiperSlide>
+                <img src="assets/temp/images/portfolio-2.jpg" alt="">
+            </ng-template>
+            <ng-template swiperSlide>
+                <img src="assets/temp/images/portfolio-2.jpg" alt="">
+            </ng-template>
+            <ng-template swiperSlide>
+                <img src="assets/temp/images/portfolio-4.jpg" alt="">
+            </ng-template>
+            <ng-template swiperSlide>
+                <img src="assets/temp/images/portfolio-5.jpg" alt="">
+            </ng-template>
+        </swiper>
+    </div>
+</div>
+<div class="testimonial-section">
+    <h1 class="title">Testimonials</h1>
+    <hr class="sep">
+    <h3>WHAT PEOPLE SAY ABOUT US</h3>
+    <swiper [autoplay]="{delay:1000}" [slidesPerView]="1">
+        <ng-template swiperSlide>
+            <div class="testimonial">
+                <p class="content">
+                    The legal definition of a charitable organization (and of charity) varies between countries and in
+                    some instances regions of the country. The regulation, the tax treatment.
+                </p>
+                <div class="author">
+                    <img src="assets/temp/images/bio1-150x150.jpg" alt="">
+                    <div>
+                        <div class="name">Ahmed Khalid</div>
+                        <div class="pos">Journalist, Khartoum</div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template swiperSlide>
+            <div class="testimonial">
+                <p class="content">
+                    The legal definition of a charitable organization (and of charity) varies between countries and in
+                    some instances regions of the country. The regulation, the tax treatment.
+                </p>
+                <div class="author">
+                    <img src="assets/temp/images/bio2-150x150.jpg" alt="">
+                    <div>
+                        <div class="name">Ahmed Khalid</div>
+                        <div class="pos">Journalist, Khartoum</div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template swiperSlide>
+            <div class="testimonial">
+                <p class="content">
+                    The legal definition of a charitable organization (and of charity) varies between countries and in
+                    some instances regions of the country. The regulation, the tax treatment.
+                </p>
+                <div class="author">
+                    <img src="assets/temp/images/bio1-150x150.jpg" alt="">
+                    <div>
+                        <div class="name">Ahmed Khalid</div>
+                        <div class="pos">Journalist, Khartoum</div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </swiper>
+</div>
+<div class="news-section">
+    <div class="intro-sec">
+        <div class="content">
+            <h4 class="subtitle">
+                Check Spaces News & Articles
+            </h4>
+            <h1 class="title">
+                News & Articles
+            </h1>
+            <hr class="sep">
+        </div>
+    </div>
+    <div class="news">
+        <swiper [slidesPerView]="3" [autoplay]="{delay:2000}">
+            <ng-template swiperSlide>
+                <div class="new-card">
+                    <img src="assets/temp/images/portfolio-1.jpg" alt="">
+                    <div class="content">
+                        <div class="author">
+                            <i class="cil-user"></i>
+                            By Almunzir Alhassan
+                        </div>
+                        <h3>Article Heading 1</h3>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex a porro  </p>
+                        <div class="view-more">
+                            <i class="cil-arrow-right"></i>
+                            View More
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template swiperSlide>
+                <div class="new-card">
+                    <img src="assets/temp/images/portfolio-2.jpg" alt="">
+                    <div class="content">
+                        <div class="author">
+                            <i class="cil-user"></i>
+                            By Almunzir Alhassan
+                        </div>
+                        <h3>Article Heading 1</h3>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex a porro  </p>
+                        <div class="view-more">
+                            <i class="cil-arrow-right"></i>
+                            View More
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template swiperSlide>
+                <div class="new-card">
+                    <img src="assets/temp/images/portfolio-3.jpg" alt="">
+                    <div class="content">
+                        <div class="author">
+                            <i class="cil-user"></i>
+                            By Almunzir Alhassan
+                        </div>
+                        <h3>Article Heading 1</h3>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex a porro  </p>
+                        <div class="view-more">
+                            <i class="cil-arrow-right"></i>
+                            View More
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template swiperSlide>
+                <div class="new-card">
+                    <img src="assets/temp/images/portfolio-4.jpg" alt="">
+                    <div class="content">
+                        <div class="author">
+                            <i class="cil-user"></i>
+                            By Almunzir Alhassan
+                        </div>
+                        <h3>Article Heading 1</h3>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex a porro  </p>
+                        <div class="view-more">
+                            <i class="cil-arrow-right"></i>
+                            View More
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </swiper>
+    </div>
+</div>

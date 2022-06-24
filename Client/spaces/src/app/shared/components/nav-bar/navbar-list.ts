@@ -22,8 +22,8 @@ export const  navBarList:NavBarItem[] = [
                 route:"what-we-do/health"
             },
             {
-                title:"Health",
-                route:"what-we-do/health"
+                title:"Protection",
+                route:"what-we-do/Protection"
             },
             {
                 title:"FSL & Narration",
@@ -31,6 +31,10 @@ export const  navBarList:NavBarItem[] = [
             },
             {
                 title:"Peace Building",
+                route:"what-we-do/peace-building"
+            },
+            {
+                title:"Education",
                 route:"what-we-do/peace-building"
             },
             {

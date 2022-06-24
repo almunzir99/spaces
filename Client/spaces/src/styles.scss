@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "variables";
 @import "~@coreui/icons/css/all.min.css";
+@import 'swiper/scss';
+@import 'swiper/scss/navigation';
+@import 'swiper/scss/pagination';
+@import 'swiper/css/autoplay';
+@import '~pattern.css/dist/pattern.min.css';
 @font-face {
     font-family: "Poppin";
     src: url("assets/fonts/Poppins-Regular.ttf");
