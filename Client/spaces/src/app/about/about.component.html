@@ -1,1 +1,208 @@
-<p>about works!</p>
+<!-- Page Header -->
+<div class="page-header">
+    <div class="content">
+        <h1 class="title">About Spaces</h1>
+        <h5 class="nav-link"><span [routerLink]="['/','en','home']">Home</span><span> >> </span><span>About
+                Spaces</span></h5>
+    </div>
+</div>
+<div class="intro-section">
+    <div class="bg-area">
+
+    </div>
+    <div class="shape"></div>
+    <div class="images-section">
+        <div class="pattern-dots-md gray-light image-container">
+            <img src="assets/temp/images/about.jpg" alt="">
+        </div>
+    </div>
+    <div class="content-section">
+        <div class="subtitle">
+            What's Spaces?
+        </div>
+        <div class="title">
+            Welcome To Spaces For Peace and Development
+        </div>
+        <div class="content">
+            Spaces for peace and development organization is a non- governmental
+            non – profit nonpolitical national organization founded and registered with
+            the Humanitarian Aid Commission (HAC) in Sudan 2020; and aims on
+            promoting the interest of the local communities to achieve universal and
+            equal access to safe, affordable drinking water (IWRM), quality education,
+            ٌSustainable and resilient cities, clean energy and management of local
+            consumption and production.
+        </div>
+
+    </div>
+</div>
+<div class="vms-section">
+    <div class="section dark">
+        <div class="icon-container">
+            <svg-icon [applyClass]="true" class="icon eye" src="assets/icons/eye.svg"></svg-icon>
+        </div>
+        <hr class="sep">
+        <h1>Our Vision</h1>
+        <div class="content">
+            Enabling the communities to make a positive change and to be the compass
+            for positive change for those working in the humanitarian field.
+        </div>
+    </div>
+    <div class="section">
+        <div class="icon-container">
+            <svg-icon [applyClass]="true" class="icon " src="assets/icons/target.svg"></svg-icon>
+        </div>
+        <hr class="sep">
+        <h1>Our Mission</h1>
+        <div class="content">
+            We exist to be the first responders to every crisis, providing humanitarian
+            interventions in the best way possible and to sharpen the skills of our
+            community in handling difficult situations through professional training and
+            capacity building.
+        </div>
+    </div>
+    <div class="section light">
+        <div class="icon-container">
+            <svg-icon [applyClass]="true" class="icon" src="assets/icons/strategy.svg"></svg-icon>
+        </div>
+        <hr class="sep">
+
+        <h1>Our Strategy</h1>
+        <div class="content">
+            Spaces organization strategy to create and enabling environment, enhance
+            local capabilities and strengthen and empower communities and civil society.
+        </div>
+    </div>
+</div>
+<div class="values-section">
+    <h1 class="title">Our Core Values</h1>
+    <hr class="sep">
+    <h3>Spaces adopted the common humanitarian values</h3>
+    <div class="values">
+        <div *ngFor="let value of values; let i = index" class="value">
+            <div class="title-container">
+                <div class="bg-number">0{{i}}</div>
+                <h2>
+                    {{value.title}}
+                </h2>
+            </div>
+            <div class="content">
+                {{value.content}}
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+</div>
+
+<div class="objectives-section">
+    <div class="bg-img"></div>
+    <div class="content">
+        <div class="pattern pattern-dots-lg"></div>
+        <div style="margin:30px;">
+            <h4>Learn more about Spaces Objectives</h4>
+            <h1>Our Objectives</h1>
+            <hr class="sep">
+        </div>
+        <div class="objectives">
+            <div *ngFor="let obj of objectives;let i = index" class="objective">
+                <div class="number">
+                    {{i}}
+                </div>
+                <div class="content-text">
+                    {{obj}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="team-section">
+    <div class="intro">
+        <div class="pattern pattern-diagonal-lines-sm gray-light"></div>
+        <div class="subtitle">
+            Spaces Team
+        </div>
+        <div class="title">
+            Meet The Amazing People Behind Our Success
+        </div>
+        <div class="content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum nam voluptatem consectetur
+            reprehenderit quod corporis tempora nulla quibusdam aut id iusto itaque illum saepe recusandae et, inventore
+            maiores deserunt. Ducimus.</div>
+    </div>
+    <div style="margin: 0px 35px;" class="team">
+        <div class="team-card">
+            <div style="background-image: url('/assets/images/team/team-1.jpg');background-size:cover" class="image">
+                <div class="socials">
+                    <i class="cib-facebook-f"></i>
+                    <i class="cib-twitter"></i>
+                    <i class="cib-linkedin"></i>
+                    <i class="cib-instagram"></i>
+                </div>
+            </div>
+            <div class="name">Salah Omer</div>
+            <div class="pos">CEO & CO-Founder</div>
+        </div>
+        <div class="team-card">
+            <div style="background-image: url('/assets/images/team/team-2.jpg');background-size:cover" class="image">
+                <div class="socials">
+                    <i class="cib-facebook-f"></i>
+                    <i class="cib-twitter"></i>
+                    <i class="cib-linkedin"></i>
+                    <i class="cib-instagram"></i>
+                </div>
+            </div>
+            <div class="name">Salah Omer</div>
+            <div class="pos">CEO & CO-Founder</div>
+        </div>
+    </div>
+
+</div>
+<div class="team">
+    <div class="team-card">
+        <div style="background-image: url('/assets/images/team/team-3.jpg');background-size:cover" class="image">
+            <div class="socials">
+                <i class="cib-facebook-f"></i>
+                <i class="cib-twitter"></i>
+                <i class="cib-linkedin"></i>
+                <i class="cib-instagram"></i>
+            </div>
+        </div>
+        <div class="name">Salah Omer</div>
+        <div class="pos">CEO & CO-Founder</div>
+    </div>
+     <div class="team-card">
+        <div style="background-image: url('/assets/images/team/team-4.jpg');background-size:cover" class="image">
+            <div class="socials">
+                <i class="cib-facebook-f"></i>
+                <i class="cib-twitter"></i>
+                <i class="cib-linkedin"></i>
+                <i class="cib-instagram"></i>
+            </div>
+        </div>
+        <div class="name">Salah Omer</div>
+        <div class="pos">CEO & CO-Founder</div>
+    </div>
+    <div class="team-card">
+        <div style="background-image: url('/assets/images/team/team-5.jpg');background-size:cover" class="image">
+            <div class="socials">
+                <i class="cib-facebook-f"></i>
+                <i class="cib-twitter"></i>
+                <i class="cib-linkedin"></i>
+                <i class="cib-instagram"></i>
+            </div>
+        </div>
+        <div class="name">Salah Omer</div>
+        <div class="pos">CEO & CO-Founder</div>
+    </div>
+    <div class="team-card">
+        <div style="background-image: url('/assets/images/team/team-6.jpg');background-size:cover" class="image">
+            <div class="socials">
+                <i class="cib-facebook-f"></i>
+                <i class="cib-twitter"></i>
+                <i class="cib-linkedin"></i>
+                <i class="cib-instagram"></i>
+            </div>
+        </div>
+        <div class="name">Salah Omer</div>
+        <div class="pos">CEO & CO-Founder</div>
+    </div>
+</div>
+<br><br><br>
