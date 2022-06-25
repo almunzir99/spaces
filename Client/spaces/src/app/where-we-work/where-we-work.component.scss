@@ -1,0 +1,117 @@
+@import 'variables';
+
+.page-header {
+    width: 100%;
+    height: 60vh;
+    background-image: url("/assets/images/header-bg.jpg");
+    background-size: cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+
+    h1 {
+        font-size: 38px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+    }
+
+}
+
+.map-section {
+    min-height: 110vh;
+    width: 97%;
+    background-color: whitesmoke;
+    display: flex;
+    margin: 25px;
+    display: flex;
+    justify-content: space-between;
+
+    .map {
+        width: 50%;
+
+        svg {
+            height: 95%;
+            width: 95%;
+            fill: $primary-color;
+            margin: 20px;
+            .sp-region {
+                fill: darken($color: $primary-color, $amount: 10%) !important;
+                cursor: pointer;
+            }
+
+            .sp-region:hover {
+                fill: $accent-color !important;
+                cursor: pointer;
+            }
+
+            path.selected {
+                fill: $accent-color !important;
+
+            }
+        }
+    }
+
+    .location-detail {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .content {
+            margin: 20px;
+            width: 100%;
+
+            .image-container {
+                height: 330px;
+                width: 330px;
+                color: $primary-color;
+                margin-bottom: 30px;
+
+                img {
+                    height: 310px;
+                    width: 310px;
+                    margin-left: 20px;
+                    margin-top: 20px;
+                }
+            }
+
+            .subtitle {
+                font-size: 14px;
+                font-weight: bold;
+                color: $accent-color;
+                margin-bottom: 10px;
+                text-transform: uppercase;
+                align-self: flex-start;
+
+
+            }
+
+            .title {
+                font-size: 25px;
+                font-weight: bold;
+                color: $primary-color;
+                margin-bottom: 25px;
+                width: 70%;
+
+
+            }
+
+            .text-content {
+                text-align: justify;
+                margin-bottom: 25px;
+                width: 70%;
+                font-size: 14px;
+            }
+
+            .note {
+                font-weight: bold;
+                color: $accent-color;
+                margin-top: 25px;
+                font-size: 12px;
+            }
+        }
+    }
+}
