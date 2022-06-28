@@ -15,31 +15,31 @@ export const  navBarList:NavBarItem[] = [
         children:[
             {
                 title:"WASH",
-                route:"what-we-do/wash"
+                route:"wash"
             },
             {
                 title:"Health",
-                route:"what-we-do/health"
+                route:"health"
             },
             {
                 title:"Protection",
-                route:"what-we-do/Protection"
+                route:"Protection"
             },
             {
                 title:"FSL & Narration",
-                route:"what-we-do/FSL"
+                route:"FSL"
             },
             {
                 title:"Peace Building",
-                route:"what-we-do/peace-building"
+                route:"peace-building"
             },
             {
                 title:"Education",
-                route:"what-we-do/peace-building"
+                route:"peace-building"
             },
             {
                 title:"Emergency Intervention",
-                route:"what-we-do/emergeny"
+                route:"emergeny"
             }
              
         ]

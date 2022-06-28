@@ -1,1 +1,73 @@
-<p>what-we-do works!</p>
+<div class="page-header">
+    <div class="content">
+        <h1 class="title">{{section}}</h1>
+        <h5 class="nav-link"><span class="link active" [routerLink]="['/','en','home']">Home</span><span> >>
+            </span><span>{{section}}
+            </span></h5>
+    </div>
+</div>
+<div class="intro-section">
+
+    <div class="shape"></div>
+    <div class="images-section">
+        <div class="pattern-dots-md gray-light image-container">
+            <img src="assets/temp/images/obj-bg.jpg" alt="">
+        </div>
+    </div>
+    <div class="content-section">
+        <div class="subtitle">
+            Spaces Major Sectors
+        </div>
+        <div class="title">
+            {{section}}
+        </div>
+        <div class="content">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, incidunt possimus? Odit aperiam recusandae
+            quaerat ad, odio voluptatem minima labore eligendi rem enim, libero unde magni saepe quis eaque vitae?
+        </div>
+        <br><br>
+        <div class="stats">
+            <div class="stat">
+                <svg-icon src="assets/icons/project.svg" [applyClass]="true" class="icon"></svg-icon>
+                <div>
+                    <h1 class="number">34</h1>
+                    <h5>Projects</h5>
+                </div>
+            </div>
+            <div class="stat">
+                <svg-icon src="assets/icons/people.svg" [applyClass]="true" class="icon"></svg-icon>
+                <div>
+                    <h1 class="number">4000</h1>
+                    <h5>beneficiaries</h5>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="projects-section">
+    <div class="subtitle">
+        Check all we have done in {{section}}
+    </div>
+    <div class="title">
+        {{section}} Projects
+    </div>
+    <br><br>
+    <div class="projects">
+        <div *ngFor="let i of [1,2,3,4,5,6]" class="project-card-container">
+            <div class="project-card">
+                <h5>Blue Nile State</h5>
+                <h3>Lead Heading for Project Title {{i}}</h3>
+                <p class="content">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium impedit numquam ut? Minima,
+                    excepturi error
+                </p>
+                <img [src]="'assets/temp/images/portfolio-'+ i +'.jpg'" alt="">
+            </div>
+            <div class="date">
+                <div class="day">21</div>
+                <div class="month">JULY</div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -17,6 +17,14 @@
         margin-bottom: 20px;
         text-transform: uppercase;
     }
+    .link{
+        cursor: pointer;
+    }
+    .link.active{
+        color:  $accent-color;
+        font-size: 18px;
+    }
+
 
 }
 
