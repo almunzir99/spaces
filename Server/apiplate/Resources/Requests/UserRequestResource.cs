@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace apiplate.Resources.Requests
 {
-    public class UserRequestResource 
+    public class UserRequestResource
     {
         [Required]
         [MaxLength(30)]
@@ -14,6 +14,6 @@ namespace apiplate.Resources.Requests
         public string Phone { get; set; }
         public string Password { get; set; }
         public string Image { get; set; }
-        
+
     }
 }

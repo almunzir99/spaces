@@ -18,10 +18,16 @@ namespace apiplate.Mapping
             CreateMap<MessageRequestResource, Message>().ReverseMap();
             CreateMap<AdminResource, Admin>().ReverseMap();
             CreateMap<NotificationResource, Notification>().ReverseMap();
-            CreateMap<TranslationResource,Translation>();
-            
+            CreateMap<TranslationResource,Translation>().ReverseMap();
+            CreateMap<TagResource,Tag>().ReverseMap();
+            CreateMap<ImageResource,Image>().ReverseMap();
+            CreateMap<ArticleResource,Article>().ReverseMap();
+            CreateMap<ArticleRequestResource,Article>().ReverseMap();
+            CreateMap<CommentResource,Comment>().ReverseMap();
+
 
         }
+
          
     }
 

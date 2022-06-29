@@ -24,5 +24,10 @@ namespace apiplate.Helpers
 
 
         }
+
+        internal static object CreatePagedResponse<T>(IList<T> result, object validFilter, IUriService uriSerivce, int totalRecords, string value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -21,7 +21,11 @@ namespace apiplate.DataBase
             builder.Entity<Admin>().HasIndex(c => c.Email).IsUnique();
             builder.Entity<Admin>().HasData(GetManagerUser());
             builder.Entity<Role>().HasIndex(c => c.Title).IsUnique();
-
+            builder.Entity<Article>().HasOne<Translation>(c => c.Title).WithOne().HasForeignKey<Article>(c => c.TitleId);
+            builder.Entity<Article>().HasOne<Translation>(c => c.Subtitle).WithOne().HasForeignKey<Article>(c => c.SubtitleId);
+            builder.Entity<Article>().HasOne<Translation>(c => c.Content).WithOne().HasForeignKey<Article>(c => c.ContentId);
+            builder.Entity<Article>().HasOne<Image>(c => c.Image).WithOne().HasForeignKey<Article>(c => c.ImageId);
+            builder.Entity<Tag>().HasOne<Translation>(c => c.Translation).WithOne().HasForeignKey<Tag>(c => c.TranslationId);
         }
         private Admin GetManagerUser()
         {
@@ -50,6 +54,12 @@ namespace apiplate.DataBase
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Translation> Translations { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<Image> Images { get; set; }
+
+
 
 
 

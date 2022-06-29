@@ -9,6 +9,8 @@ namespace apiplate.Resources
         public PermissionResource MessagesPermissions { get; set; } = new PermissionResource(false, false, false, false);
         public PermissionResource AdminsPermissions { get; set; } = new PermissionResource(false, false, false, false);
         public PermissionResource RolesPermissions { get; set; } = new PermissionResource(false, false, false, false); 
+        public PermissionResource ArticlesPermissions { get; set; } = new PermissionResource(false, false, false, false); 
+
 
     }
 }

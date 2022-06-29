@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using apiplate.DataBase;
 
 namespace apiplate.Migrations
 {
     [DbContext(typeof(ApiplateDbContext))]
-    partial class ApiplateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220629205154_addArticlePermissionsToRoles")]
+    partial class addArticlePermissionsToRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,12 +115,12 @@ namespace apiplate.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 6, 30, 0, 48, 31, 804, DateTimeKind.Local).AddTicks(1983),
+                            CreatedAt = new DateTime(2022, 6, 29, 22, 51, 53, 406, DateTimeKind.Local).AddTicks(8075),
                             Email = "almunzir99@gmail.com",
                             IsManager = true,
-                            LastUpdate = new DateTime(2022, 6, 30, 0, 48, 31, 805, DateTimeKind.Local).AddTicks(4597),
-                            PasswordHash = new byte[] { 238, 122, 209, 17, 212, 62, 234, 50, 191, 92, 96, 207, 159, 168, 55, 162, 89, 217, 41, 209, 193, 76, 72, 61, 174, 222, 91, 95, 240, 154, 213, 116, 111, 125, 195, 87, 203, 70, 38, 10, 183, 86, 168, 254, 77, 226, 7, 30, 97, 97, 57, 162, 164, 124, 75, 10, 152, 153, 23, 254, 239, 118, 90, 27 },
-                            PasswordSalt = new byte[] { 66, 199, 39, 251, 24, 131, 217, 151, 16, 203, 156, 227, 68, 39, 241, 219, 106, 94, 198, 35, 147, 143, 22, 14, 182, 43, 58, 89, 195, 181, 232, 69, 31, 62, 68, 249, 221, 120, 13, 125, 37, 188, 82, 65, 132, 121, 245, 243, 17, 76, 235, 203, 141, 103, 249, 57, 40, 228, 236, 47, 131, 251, 27, 62, 56, 137, 54, 142, 194, 131, 118, 36, 41, 149, 99, 162, 92, 199, 211, 175, 137, 138, 224, 85, 127, 231, 27, 77, 245, 108, 143, 226, 117, 12, 0, 44, 197, 194, 130, 85, 159, 195, 24, 211, 22, 203, 37, 113, 145, 227, 135, 219, 14, 251, 209, 66, 32, 122, 36, 186, 65, 42, 153, 143, 84, 66, 221, 45 },
+                            LastUpdate = new DateTime(2022, 6, 29, 22, 51, 53, 407, DateTimeKind.Local).AddTicks(9190),
+                            PasswordHash = new byte[] { 92, 118, 77, 35, 207, 60, 7, 150, 220, 231, 160, 212, 123, 243, 80, 60, 162, 118, 236, 189, 16, 7, 133, 46, 19, 39, 33, 75, 127, 35, 128, 154, 74, 161, 106, 24, 131, 179, 137, 240, 5, 62, 119, 84, 131, 143, 11, 102, 157, 214, 246, 13, 69, 174, 241, 29, 108, 17, 111, 90, 244, 141, 43, 245 },
+                            PasswordSalt = new byte[] { 41, 43, 184, 165, 123, 242, 82, 133, 29, 229, 99, 139, 30, 184, 107, 95, 102, 36, 246, 147, 36, 149, 111, 23, 119, 61, 218, 130, 15, 251, 79, 151, 35, 95, 52, 123, 1, 133, 77, 54, 58, 228, 220, 178, 104, 59, 70, 248, 15, 74, 20, 209, 34, 211, 223, 14, 94, 72, 82, 113, 1, 197, 96, 145, 199, 163, 56, 141, 78, 122, 26, 21, 151, 53, 145, 67, 75, 80, 76, 29, 83, 234, 210, 48, 244, 104, 199, 190, 189, 64, 104, 77, 55, 247, 176, 111, 154, 207, 151, 146, 115, 218, 27, 55, 162, 37, 108, 213, 47, 225, 89, 155, 208, 181, 91, 132, 189, 130, 17, 101, 167, 87, 150, 3, 10, 99, 5, 232 },
                             Phone = "249128647019",
                             Username = "almunzir99"
                         });
@@ -134,7 +136,7 @@ namespace apiplate.Migrations
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ContentId")
+                    b.Property<int?>("ContentId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -143,33 +145,27 @@ namespace apiplate.Migrations
                     b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("SubtitleId")
+                    b.Property<int?>("SubtitleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TitleId")
+                    b.Property<int?>("TitleId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
 
-                    b.HasIndex("ContentId")
-                        .IsUnique();
+                    b.HasIndex("ContentId");
 
-                    b.HasIndex("ImageId")
-                        .IsUnique();
+                    b.HasIndex("SubtitleId");
 
-                    b.HasIndex("SubtitleId")
-                        .IsUnique();
-
-                    b.HasIndex("TitleId")
-                        .IsUnique();
+                    b.HasIndex("TitleId");
 
                     b.ToTable("Articles");
                 });
@@ -207,24 +203,6 @@ namespace apiplate.Migrations
                     b.HasIndex("ArticleId");
 
                     b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("apiplate.Models.Image", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Path")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("apiplate.Models.Message", b =>
@@ -388,29 +366,6 @@ namespace apiplate.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("apiplate.Models.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ArticleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TranslationId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArticleId");
-
-                    b.HasIndex("TranslationId")
-                        .IsUnique();
-
-                    b.ToTable("Tags");
-                });
-
             modelBuilder.Entity("apiplate.Models.Translation", b =>
                 {
                     b.Property<int>("Id")
@@ -421,10 +376,15 @@ namespace apiplate.Migrations
                     b.Property<string>("AR")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ArticleId")
+                        .HasColumnType("int");
+
                     b.Property<string>("EN")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ArticleId");
 
                     b.ToTable("Translations");
                 });
@@ -456,34 +416,23 @@ namespace apiplate.Migrations
                         .IsRequired();
 
                     b.HasOne("apiplate.Models.Translation", "Content")
-                        .WithOne()
-                        .HasForeignKey("apiplate.Models.Article", "ContentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("apiplate.Models.Image", "Image")
-                        .WithOne()
-                        .HasForeignKey("apiplate.Models.Article", "ImageId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("ContentId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("apiplate.Models.Translation", "Subtitle")
-                        .WithOne()
-                        .HasForeignKey("apiplate.Models.Article", "SubtitleId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("SubtitleId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("apiplate.Models.Translation", "Title")
-                        .WithOne()
-                        .HasForeignKey("apiplate.Models.Article", "TitleId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("TitleId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Author");
 
                     b.Navigation("Content");
-
-                    b.Navigation("Image");
 
                     b.Navigation("Subtitle");
 
@@ -537,20 +486,12 @@ namespace apiplate.Migrations
                     b.Navigation("RolesPermissions");
                 });
 
-            modelBuilder.Entity("apiplate.Models.Tag", b =>
+            modelBuilder.Entity("apiplate.Models.Translation", b =>
                 {
                     b.HasOne("apiplate.Models.Article", null)
                         .WithMany("Tags")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("apiplate.Models.Translation", "Translation")
-                        .WithOne()
-                        .HasForeignKey("apiplate.Models.Tag", "TranslationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Translation");
                 });
 
             modelBuilder.Entity("apiplate.Models.Admin", b =>
