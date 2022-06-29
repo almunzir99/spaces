@@ -1,0 +1,78 @@
+@import 'variables';
+
+.page-layout {
+    padding: 20px;
+
+    .stats-cards {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .stats-card {
+            height: 185px;
+            min-width: 250px;
+            flex: 1;
+            position: relative;
+            margin: 0px 10px;
+            transition: 0.3s all ease;
+            .content-card {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 85%;
+                box-shadow: $box-shadow;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                border-radius: 20px;
+                overflow: hidden;
+                cursor: pointer;
+                .content {
+                    padding: 20px;
+                    margin-left: 100px;
+                    .title {
+                        font-size: 17px;
+                        font-weight: bold;
+                        color: #344;
+                        margin-bottom: 30px;
+                    }
+
+                    .counter {
+                        font-size: 45px;
+                        font-weight: bold;
+                        color: $primary-color;
+                    }
+                }
+                .navigation-button{
+                    padding: 5px;
+                    display: flex;
+                    justify-content: center;
+                    background-color: $primary-color;
+                    align-items: center;
+                    color: white;
+                }
+               
+            }
+            .icon-container{
+                height: 85px;
+                width: 85px;
+                border-radius: 50%;
+                position: absolute;
+                background-color: $primary-color;
+                display: flex;
+                align-items: center;
+                left: 20px;
+                justify-content: center;
+                z-index: 1000;
+                i{
+                    font-size: 60px;
+                    color: white;
+                }
+            }
+        }
+        .stats-card:hover{
+            transform: translateY(-10px);
+        }
+    }
+}

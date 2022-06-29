@@ -1,0 +1,104 @@
+<div class="page-container">
+    <div class="action-bar">
+        <div></div>
+        <div>
+            <div (click)="editForm()" class="ui primary left labeled icon button">
+                New Role
+                <i class="plus  icon"></i>
+            </div>
+
+        </div>
+
+    </div>
+    <data-table (sortChange)="onSortChange($event)" [(pageIndex)]="pageIndex" [total-items]="totalRecords"
+        [page-size]="pageSize" (pageIndexChanged)="pageIndexChanged($event)" [cell-template]="cellTemplate"
+        [loading]="isLoading" [cols]="cols" [rows]="data">
+        <ng-template #cellTemplate let-rowData="rowData" let-data="cellData" let-col="colIndex" let-row="rowIndex">
+            <ng-container [ngSwitch]="col">
+
+                <ng-container *ngSwitchCase="4">
+                    <div class="actions">
+
+                        <div rippleEffect (click)="onManagePermissionClicked(rowData)" style="margin: 5px;"
+                            class="ui yellow tiny icon button">
+                            <i class="cogs icon"></i> Manage Pemissions
+                        </div>
+
+                    </div>
+                </ng-container>
+                <ng-container *ngSwitchCase="5">
+                    <div class="actions-cell">
+
+                        <div fuiPopup popupText="update" (click)="editForm(rowData)" class="cell-btn edit-btn">
+                            <i class="edit outline icon"></i>
+                        </div>
+                        <div fuiPopup popupText="delete" (click)="delete(rowData.id)" class="cell-btn delete-btn">
+                            <i class="trash icon"></i>
+                        </div>
+                    </div>
+                </ng-container>
+                <div fuiPopup [popupText]="data" *ngSwitchDefault>{{data}}</div>
+            </ng-container>
+        </ng-template>
+    </data-table>
+</div>
+<ng-template #loading>
+    <div class="ui active loader">
+        <p>Loading...</p>
+
+    </div>
+</ng-template>
+<fui-dimmer class="page" [(isDimmed)]="DimLoading">
+    <div class="ui active loader"></div>
+    <p>Loading...</p>
+</fui-dimmer>
+<fui-modal *ngIf="showPermissionsModal" [isClosable]="false" (dismissed)="PermissionModalDismissed()" #modal>
+    <div class="header">Manage Permissions of {{selectedRole.title}}</div>
+    <div class="content">
+        <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th>Permission</th>
+                    <th>Read</th>
+                    <th>Create</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let key of GetPermissions(selectedRole)">
+                    <td>{{key.replace("Permissions","")}}</td>
+                    <td>
+                        <fui-checkbox [(ngModel)]="selectedRole[key].read" class="toggle"></fui-checkbox>
+                    </td>
+                    <td>
+                        <fui-checkbox [(ngModel)]="selectedRole[key].create" class="toggle"></fui-checkbox>
+
+                    </td>
+                    <td>
+                        <fui-checkbox [(ngModel)]="selectedRole[key].update" class="toggle"></fui-checkbox>
+
+                    </td>
+                    <td>
+                        <fui-checkbox [(ngModel)]="selectedRole[key].delete" class="toggle"></fui-checkbox>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <div style="display: flex;justify-content:flex-end;" class="actions">
+        <div class="ui buttons">
+            <button (click)="PermissionModalDismissed()" class="ui button">
+                <i class="times  icon"></i>
+                Cancel</button>
+            <div class="or"></div>
+            <button (click)="onApply(selectedRole)" class="ui yellow button">
+                <i class="check icon"></i>
+                Save</button>
+        </div>
+    </div>
+</fui-modal>

@@ -1,0 +1,55 @@
+<div *ngIf="!isLoading else loading" class="page-layout">
+    <div class="stats-cards">
+        <div  class="stats-card">
+            <div [routerLink]="['/','dashboard','users']" RippleEffect class="content-card">
+                <div class="content">
+                    <div class="title">Total Users</div>
+                    <div class="counter">{{stats.admins}}</div>
+                </div>
+                <div class="navigation-button">
+                    Show More
+                    <i class="las la-arrow-right"></i>
+                </div>
+            </div>
+            <div class="icon-container">
+                <i class="las la-user-tie"></i>
+            </div>
+        </div>
+        <div class="stats-card">
+            <div [routerLink]="['/','dashboard','roles']" RippleEffect class="content-card">
+                <div class="content">
+                    <div class="title">Total Roles</div>
+                    <div style="color: #15A085;" class="counter">{{stats.roles}}</div>
+                </div>
+                <div style="background-color: #15A085;" class="navigation-button">
+                    Show More
+                    <i class="las la-arrow-right"></i>
+                </div>
+            </div>
+            <div style="background-color: #15A085;" class="icon-container">
+                <i class="las la-user-cog"></i>
+            </div>
+        </div>
+        <div class="stats-card">
+            <div [routerLink]="['/','dashboard','messages']" RippleEffect class="content-card">
+                <div class="content">
+                    <div class="title">Total Messages</div>
+                    <div style="color:#EB9710;" class="counter">{{stats.messages}}</div>
+                </div>
+                <div style="background-color:#EB9710;" class="navigation-button">
+                    Show More
+                    <i class="las la-arrow-right"></i>
+                </div>
+            </div>
+            <div style="background-color:#EB9710;" class="icon-container">
+                <i class="las la-envelope"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <div class="loader-container">
+        <div class="ui active loader"></div>
+    </div>
+</ng-template>
