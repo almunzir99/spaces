@@ -71,7 +71,7 @@ namespace apiplate.Controllers
                 return BadRequest(response);
             }
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ADMIN")]
         [HttpDelete("{articleId}/comments/{id}")]
         public async Task<IActionResult> DeleteCommentAsync(int articleId, [FromBody] int commentId)
         {

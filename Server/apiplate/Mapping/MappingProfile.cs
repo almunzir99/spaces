@@ -24,8 +24,8 @@ namespace apiplate.Mapping
             CreateMap<ArticleResource,Article>().ReverseMap();
             CreateMap<ArticleRequestResource,Article>().ReverseMap();
             CreateMap<CommentResource,Comment>().ReverseMap();
-
-
+            CreateMap<SectorResource,Sector>().ReverseMap();
+            CreateMap<SectorRequestResource,Sector>().ReverseMap();
         }
 
          

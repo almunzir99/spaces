@@ -54,6 +54,8 @@ namespace apiplate
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IStatisticsService, StatisticsService>();
             services.AddScoped<IArticlesService, ArticlesService>();
+            services.AddScoped<ISectorsService, SectorsService>();
+
 
 
             services.AddCors(options =>

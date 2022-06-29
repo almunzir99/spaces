@@ -14,6 +14,10 @@ namespace apiplate.Interfaces
             Task DeleteCommentAsync(int id);
             
         }
+          public interface ISectorsService : IBaseService<Sector,SectorResource,SectorRequestResource>{
+            
+            
+        }
 
     
 }

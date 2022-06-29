@@ -25,6 +25,10 @@ namespace apiplate.DataBase
             builder.Entity<Article>().HasOne<Translation>(c => c.Subtitle).WithOne().HasForeignKey<Article>(c => c.SubtitleId);
             builder.Entity<Article>().HasOne<Translation>(c => c.Content).WithOne().HasForeignKey<Article>(c => c.ContentId);
             builder.Entity<Article>().HasOne<Image>(c => c.Image).WithOne().HasForeignKey<Article>(c => c.ImageId);
+            builder.Entity<Sector>().HasOne<Translation>(c => c.Title).WithOne().HasForeignKey<Sector>(c => c.TitleId);
+            builder.Entity<Sector>().HasOne<Translation>(c => c.Description).WithOne().HasForeignKey<Sector>(c => c.DescriptionId);
+            builder.Entity<Sector>().HasOne<Image>(c => c.Image).WithOne().HasForeignKey<Sector>(c => c.ImageId);
+            builder.Entity<Sector>().HasOne<Image>(c => c.Icon).WithOne().HasForeignKey<Sector>(c => c.IconId);
             builder.Entity<Tag>().HasOne<Translation>(c => c.Translation).WithOne().HasForeignKey<Tag>(c => c.TranslationId);
         }
         private Admin GetManagerUser()
@@ -58,6 +62,7 @@ namespace apiplate.DataBase
         public DbSet<Article> Articles { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<Sector> Sectors { get; set; }
 
 
 
