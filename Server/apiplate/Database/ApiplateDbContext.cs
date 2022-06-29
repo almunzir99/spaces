@@ -49,6 +49,7 @@ namespace apiplate.DataBase
         public DbSet<Role> Roles { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Translation> Translations { get; set; }
 
 
 
