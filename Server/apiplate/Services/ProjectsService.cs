@@ -14,9 +14,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace apiplate.Services
 {
-    public class ArticlesService : BaseService<Article, ArticleResource, ArticleRequestResource>, IArticlesService
+    public class ProjectsService : BaseService<Project, ProjectResource, ProjectRequestResource>, IProjectsService
     {
-        public ArticlesService(IMapper mapper, ApiplateDbContext context, IUriService uriService) : base(mapper, context, uriService)
+        public ProjectsService(IMapper mapper, ApiplateDbContext context, IUriService uriService) : base(mapper, context, uriService)
         {
         }
 
@@ -24,7 +24,7 @@ namespace apiplate.Services
         {
             try
             {
-                var target = await _context.Articles.Include(c => c.Comments).SingleOrDefaultAsync(c => c.Id == articleId);
+                var target = await _context.Projects.Include(c => c.Comments).SingleOrDefaultAsync(c => c.Id == articleId);
                 if (target == null)
                     throw new Exception("the target article isn't available");
                 var mappedComment = _mapper.Map<CommentResource, Comment>(comment);
@@ -82,11 +82,23 @@ namespace apiplate.Services
             return target.Comments.Count();
         }
 
-        protected override IQueryable<Article> GetDbSet()
+        public async Task<IList<ProjectResource>> ListAsync(PaginationFilter filter, IList<Func<Project, bool>> conditions, string search = "", string orderBy = "LastUpdate", bool ascending = true, int? sectorId = null, int? regionId = null)
+        { 
+          if(sectorId != null)
+          conditions.Add(c => c.SectorId == sectorId.Value);
+          if(regionId != null)
+          conditions.Add(c => c.RegionId == regionId.Value);
+          var result = await base.ListAsync(filter,conditions,search,orderBy,ascending);
+          return result;
+
+        }
+
+        protected override IQueryable<Project> GetDbSet()
         {
-            return _context.Articles.Include(c => c.Author)
+            return _context.Projects.Include(c => c.Author)
             .Include(c => c.Title).Include(c => c.Subtitle).Include(c => c.Image)
-            .Include(c => c.Content).Include(c => c.Tags).ThenInclude(c => c.Translation);
+            .Include(c => c.Content).Include(c => c.Tags)
+            .ThenInclude(c => c.Translation).Include(c => c.Sector).Include(c => c.Region);
 
 
         }

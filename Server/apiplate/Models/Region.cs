@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace apiplate.Models
 {
     public class Region : BaseModel
@@ -9,5 +11,7 @@ namespace apiplate.Models
         public Translation Description { get; set; }
         public int ImageId { get; set; }
         public Image Image { get; set; }
+        public IList<Project> Projects { get; set; }
+
     }
 }

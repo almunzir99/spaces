@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace apiplate.Models
 {
     public class Sector : BaseModel
@@ -11,5 +13,6 @@ namespace apiplate.Models
         public Image Icon { get; set; }
         public int ImageId { get; set; }
         public Image Image { get; set; }
+        public IList<Project> Projects { get; set; }
     }
 }

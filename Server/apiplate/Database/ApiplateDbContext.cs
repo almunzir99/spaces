@@ -46,7 +46,13 @@ namespace apiplate.DataBase
             builder.Entity<Testimonial>().HasOne<Translation>(c => c.Job).WithOne().HasForeignKey<Testimonial>(c => c.JobId);
             builder.Entity<Testimonial>().HasOne<Translation>(c => c.Content).WithOne().HasForeignKey<Testimonial>(c => c.ContentId);
             builder.Entity<Testimonial>().HasOne<Image>(c => c.Image).WithOne().HasForeignKey<Testimonial>(c => c.ImageId);
-            
+            builder.Entity<Project>().HasOne<Translation>(c => c.Title).WithOne().HasForeignKey<Project>(c => c.TitleId);
+            builder.Entity<Project>().HasOne<Translation>(c => c.Subtitle).WithOne().HasForeignKey<Project>(c => c.SubtitleId);
+            builder.Entity<Project>().HasOne<Translation>(c => c.Content).WithOne().HasForeignKey<Project>(c => c.ContentId);
+            builder.Entity<Project>().HasOne<Image>(c => c.Image).WithOne().HasForeignKey<Project>(c => c.ImageId);
+            builder.Entity<Sector>().HasMany<Project>(c => c.Projects).WithOne(c => c.Sector).HasForeignKey(c => c.SectorId);
+            builder.Entity<Region>().HasMany<Project>(c => c.Projects).WithOne(c => c.Region).HasForeignKey(c => c.RegionId);
+
         }
         private Admin GetManagerUser()
         {
@@ -85,6 +91,8 @@ namespace apiplate.DataBase
         public DbSet<Team> Team { get; set; }
         public DbSet<Partner> Partners { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
+        public DbSet<Project> Projects { get; set; }
+
 
 
 

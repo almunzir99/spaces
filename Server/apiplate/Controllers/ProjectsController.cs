@@ -16,11 +16,11 @@ namespace apiplate.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ArticlesController : BaseController<Article, ArticleResource, ArticleRequestResource, IArticlesService>
+    public class ProjectsController : BaseController<Project, ProjectResource, ProjectRequestResource, IProjectsService>
     {
         private readonly IRolesService _roleService;
 
-        public ArticlesController(IArticlesService service, IUriService uriService, IRolesService roleService) : base(service, uriService)
+        public ProjectsController(IProjectsService service, IUriService uriService, IRolesService roleService) : base(service, uriService)
         {
             _roleService = roleService;
         }
@@ -31,18 +31,32 @@ namespace apiplate.Controllers
             return result;
         }
         [AllowAnonymous]
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAsync([FromQuery] PaginationFilter filter = null, [FromQuery] string title = "",
+        [FromQuery] string orderBy = "LastUpdate", Boolean ascending = true,
+        [FromQuery] int? sectorId = null, [FromQuery] int? regionId = null)
+        {
+            var validFilter = (filter == null)
+          ? new PaginationFilter()
+          : new PaginationFilter(pageIndex: filter.PageIndex, pageSize: filter.PageSize);
+            var result = await _service.ListAsync(filter, new List<Func<Project, bool>>(), title, orderBy, ascending, sectorId, regionId);
+            var totalRecords = await _service.GetTotalRecords();
+            return Ok(PaginationHelper.CreatePagedResponse<ProjectResource>(result,
+            validFilter, _uriSerivce, totalRecords, Request.Path.Value));
+        }
+        [AllowAnonymous]
         public override async Task<IActionResult> SingleAsync(int id)
         {
             var result = await base.SingleAsync(id);
             return result;
         }
         [AllowAnonymous]
-        [HttpPost("{articleId}/comments")]
-        public async Task<IActionResult> PostCommentAsync(int articleId, [FromBody] CommentResource comment)
+        [HttpPost("{projectId}/comments")]
+        public async Task<IActionResult> PostCommentAsync(int projectId, [FromBody] CommentResource comment)
         {
             try
             {
-                var result = await _service.AddCommentAsync(articleId, comment);
+                var result = await _service.AddCommentAsync(projectId, comment);
                 var response = new Response<CommentResource>(data: result, message: "comment added successfully");
                 return Ok(response);
             }
@@ -54,13 +68,13 @@ namespace apiplate.Controllers
             }
         }
         [AllowAnonymous]
-        [HttpGet("{articleId}/comments")]
-        public async Task<IActionResult> GetCommentsAsync(int articleId, [FromQuery] PaginationFilter filter = null)
+        [HttpGet("{projectId}/comments")]
+        public async Task<IActionResult> GetCommentsAsync(int projectId, [FromQuery] PaginationFilter filter = null)
         {
             try
             {
-                var result = await _service.GetCommentsAsync(articleId, filter);
-                var totalRecords = await _service.GetCommentsTotalAsync(articleId);
+                var result = await _service.GetCommentsAsync(projectId, filter);
+                var totalRecords = await _service.GetCommentsTotalAsync(projectId);
                 return Ok(PaginationHelper.CreatePagedResponse<CommentResource>(result,
                 filter, _uriSerivce, totalRecords, Request.Path.Value));
             }
@@ -72,8 +86,8 @@ namespace apiplate.Controllers
             }
         }
         [Authorize(Roles = "ADMIN")]
-        [HttpDelete("{articleId}/comments/{id}")]
-        public async Task<IActionResult> DeleteCommentAsync(int articleId, [FromBody] int commentId)
+        [HttpDelete("{projectId}/comments/{id}")]
+        public async Task<IActionResult> DeleteCommentAsync(int projectId, [FromBody] int commentId)
         {
             try
             {

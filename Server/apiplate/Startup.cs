@@ -60,6 +60,8 @@ namespace apiplate
             services.AddScoped<ITeamService, TeamService>();
             services.AddScoped<IPartnersService, PartnersService>();
             services.AddScoped<ITestimonialsService, TestimonialsService>();
+            services.AddScoped<IProjectsService, ProjectsService>();
+
 
 
 
