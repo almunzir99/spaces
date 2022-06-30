@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { SectorsRoutingModule } from './sectors-routing.module';
 import { SectorsComponent } from './sectors.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { FormsModule } from '@angular/forms';
+import { FomanticUIModule } from 'ngx-fomantic-ui';
 
 
 @NgModule({
@@ -11,7 +14,10 @@ import { SectorsComponent } from './sectors.component';
   ],
   imports: [
     CommonModule,
-    SectorsRoutingModule
+    SectorsRoutingModule,
+    SharedModule,
+    FormsModule,
+    FomanticUIModule
   ]
 })
 export class SectorsModule { }

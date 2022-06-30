@@ -57,7 +57,7 @@
                 <i class="ui checkmark icon"></i>
             </div>
             <div (click)="onFileClick(file)" [ngSwitch]="true" class="node-icon">
-                <img *ngSwitchCase="file.contentType == '.jpg' || file.contentType == '.png' || file.contentType == '.jiff' || file.contentType == '.jpeg'" class="file image icon violet" [src]="file.uri">
+                <img *ngSwitchCase="file.contentType == '.jpg' || file.contentType == '.svg' || file.contentType == '.png' || file.contentType == '.jiff' || file.contentType == '.jpeg'" class="file image icon violet" [src]="file.uri">
                 <i *ngSwitchCase="file.contentType == '.mp3' || file.contentType == '.m4a' || file.contentType == '.ogg'" class="file audio icon red"></i>
                 <i *ngSwitchCase="file.contentType == '.docx' || file.contentType == '.doc' " class="file word icon blue"></i>
 
