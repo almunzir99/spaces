@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using apiplate.DataBase;
 
 namespace apiplate.Migrations
 {
     [DbContext(typeof(ApiplateDbContext))]
-    partial class ApiplateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220630134352_addClientCascadeForAllTables")]
+    partial class addClientCascadeForAllTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,12 +115,12 @@ namespace apiplate.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 6, 30, 16, 10, 38, 540, DateTimeKind.Local).AddTicks(6747),
+                            CreatedAt = new DateTime(2022, 6, 30, 15, 43, 52, 19, DateTimeKind.Local).AddTicks(181),
                             Email = "almunzir99@gmail.com",
                             IsManager = true,
-                            LastUpdate = new DateTime(2022, 6, 30, 16, 10, 38, 541, DateTimeKind.Local).AddTicks(7210),
-                            PasswordHash = new byte[] { 79, 57, 49, 217, 221, 35, 13, 31, 171, 208, 171, 157, 73, 35, 63, 229, 189, 149, 90, 52, 227, 223, 135, 58, 20, 144, 11, 89, 123, 173, 207, 113, 54, 107, 74, 12, 118, 112, 170, 255, 75, 234, 212, 216, 33, 97, 0, 211, 58, 14, 119, 118, 217, 128, 50, 37, 111, 201, 149, 110, 43, 168, 132, 208 },
-                            PasswordSalt = new byte[] { 201, 48, 26, 209, 91, 95, 107, 137, 152, 198, 3, 114, 146, 230, 98, 45, 249, 87, 203, 250, 239, 141, 142, 122, 250, 248, 85, 202, 183, 170, 132, 234, 103, 106, 187, 8, 34, 176, 217, 40, 200, 212, 207, 10, 135, 61, 125, 116, 69, 147, 157, 138, 65, 226, 58, 20, 11, 164, 219, 140, 75, 43, 119, 30, 51, 211, 75, 75, 122, 46, 110, 203, 133, 77, 4, 18, 181, 112, 67, 79, 149, 130, 139, 72, 186, 45, 187, 252, 181, 244, 138, 244, 87, 163, 234, 116, 75, 254, 161, 118, 214, 193, 143, 165, 36, 179, 105, 66, 105, 224, 193, 58, 181, 251, 134, 241, 152, 36, 86, 105, 117, 220, 36, 124, 122, 19, 158, 141 },
+                            LastUpdate = new DateTime(2022, 6, 30, 15, 43, 52, 21, DateTimeKind.Local).AddTicks(1516),
+                            PasswordHash = new byte[] { 77, 37, 72, 78, 142, 35, 246, 118, 43, 110, 51, 250, 153, 176, 168, 130, 50, 246, 3, 30, 151, 173, 211, 81, 8, 169, 178, 88, 254, 245, 89, 121, 109, 159, 132, 110, 211, 41, 174, 182, 242, 231, 61, 113, 252, 102, 206, 18, 184, 168, 121, 211, 235, 250, 188, 63, 165, 20, 105, 236, 9, 33, 146, 141 },
+                            PasswordSalt = new byte[] { 68, 246, 59, 235, 239, 141, 249, 73, 243, 248, 158, 8, 114, 161, 205, 172, 203, 130, 55, 253, 193, 92, 13, 192, 211, 247, 221, 175, 17, 153, 46, 54, 115, 127, 158, 198, 76, 65, 132, 7, 42, 108, 57, 4, 159, 216, 111, 249, 109, 40, 7, 79, 90, 173, 246, 117, 39, 201, 109, 78, 121, 196, 203, 75, 210, 239, 123, 47, 36, 149, 78, 122, 212, 2, 224, 245, 218, 39, 243, 211, 1, 164, 223, 221, 247, 99, 240, 164, 145, 57, 224, 83, 144, 4, 208, 72, 210, 40, 101, 76, 75, 159, 95, 239, 233, 93, 218, 105, 160, 177, 12, 201, 180, 26, 136, 207, 64, 152, 235, 12, 46, 242, 60, 240, 50, 118, 231, 126 },
                             Phone = "249128647019",
                             Username = "almunzir99"
                         });
@@ -307,42 +309,6 @@ namespace apiplate.Migrations
                     b.ToTable("Notifications");
                 });
 
-            modelBuilder.Entity("apiplate.Models.Partner", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("LogoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NameId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LogoId")
-                        .IsUnique();
-
-                    b.HasIndex("NameId")
-                        .IsUnique();
-
-                    b.ToTable("Partners");
-                });
-
             modelBuilder.Entity("apiplate.Models.Permission", b =>
                 {
                     b.Property<int>("Id")
@@ -443,9 +409,6 @@ namespace apiplate.Migrations
                     b.Property<int?>("MessagesPermissionsId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PartnersPermissionsId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("RegionsPermissionsId")
                         .HasColumnType("int");
 
@@ -471,8 +434,6 @@ namespace apiplate.Migrations
                     b.HasIndex("ArticlesPermissionsId");
 
                     b.HasIndex("MessagesPermissionsId");
-
-                    b.HasIndex("PartnersPermissionsId");
 
                     b.HasIndex("RegionsPermissionsId");
 
@@ -683,16 +644,14 @@ namespace apiplate.Migrations
                 {
                     b.HasOne("apiplate.Models.Admin", null)
                         .WithMany("Activities")
-                        .HasForeignKey("AdminId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("AdminId");
                 });
 
             modelBuilder.Entity("apiplate.Models.Admin", b =>
                 {
                     b.HasOne("apiplate.Models.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("RoleId");
 
                     b.Navigation("Role");
                 });
@@ -702,31 +661,31 @@ namespace apiplate.Migrations
                     b.HasOne("apiplate.Models.Admin", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("apiplate.Models.Translation", "Content")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Article", "ContentId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("apiplate.Models.Image", "Image")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Article", "ImageId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("apiplate.Models.Translation", "Subtitle")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Article", "SubtitleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("apiplate.Models.Translation", "Title")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Article", "TitleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.Navigation("Author");
@@ -744,35 +703,14 @@ namespace apiplate.Migrations
                 {
                     b.HasOne("apiplate.Models.Article", null)
                         .WithMany("Comments")
-                        .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ArticleId");
                 });
 
             modelBuilder.Entity("apiplate.Models.Notification", b =>
                 {
                     b.HasOne("apiplate.Models.Admin", null)
                         .WithMany("Notifications")
-                        .HasForeignKey("AdminId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("apiplate.Models.Partner", b =>
-                {
-                    b.HasOne("apiplate.Models.Image", "Logo")
-                        .WithOne()
-                        .HasForeignKey("apiplate.Models.Partner", "LogoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("apiplate.Models.Translation", "Name")
-                        .WithOne()
-                        .HasForeignKey("apiplate.Models.Partner", "NameId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Logo");
-
-                    b.Navigation("Name");
+                        .HasForeignKey("AdminId");
                 });
 
             modelBuilder.Entity("apiplate.Models.Region", b =>
@@ -780,19 +718,19 @@ namespace apiplate.Migrations
                     b.HasOne("apiplate.Models.Translation", "Description")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Region", "DescriptionId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("apiplate.Models.Image", "Image")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Region", "ImageId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("apiplate.Models.Translation", "Title")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Region", "TitleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.Navigation("Description");
@@ -806,56 +744,41 @@ namespace apiplate.Migrations
                 {
                     b.HasOne("apiplate.Models.Permission", "AdminsPermissions")
                         .WithMany()
-                        .HasForeignKey("AdminsPermissionsId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("AdminsPermissionsId");
 
                     b.HasOne("apiplate.Models.Permission", "ArticlesPermissions")
                         .WithMany()
-                        .HasForeignKey("ArticlesPermissionsId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ArticlesPermissionsId");
 
                     b.HasOne("apiplate.Models.Permission", "MessagesPermissions")
                         .WithMany()
-                        .HasForeignKey("MessagesPermissionsId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("apiplate.Models.Permission", "PartnersPermissions")
-                        .WithMany()
-                        .HasForeignKey("PartnersPermissionsId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("MessagesPermissionsId");
 
                     b.HasOne("apiplate.Models.Permission", "RegionsPermissions")
                         .WithMany()
-                        .HasForeignKey("RegionsPermissionsId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("RegionsPermissionsId");
 
                     b.HasOne("apiplate.Models.Permission", "RolesPermissions")
                         .WithMany()
-                        .HasForeignKey("RolesPermissionsId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("RolesPermissionsId");
 
                     b.HasOne("apiplate.Models.Permission", "SectorsPermissions")
                         .WithMany()
-                        .HasForeignKey("SectorsPermissionsId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("SectorsPermissionsId");
 
                     b.HasOne("apiplate.Models.Permission", "SlidersPermissions")
                         .WithMany()
-                        .HasForeignKey("SlidersPermissionsId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("SlidersPermissionsId");
 
                     b.HasOne("apiplate.Models.Permission", "TeamPermissions")
                         .WithMany()
-                        .HasForeignKey("TeamPermissionsId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("TeamPermissionsId");
 
                     b.Navigation("AdminsPermissions");
 
                     b.Navigation("ArticlesPermissions");
 
                     b.Navigation("MessagesPermissions");
-
-                    b.Navigation("PartnersPermissions");
 
                     b.Navigation("RegionsPermissions");
 
@@ -873,25 +796,25 @@ namespace apiplate.Migrations
                     b.HasOne("apiplate.Models.Translation", "Description")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Sector", "DescriptionId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("apiplate.Models.Image", "Icon")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Sector", "IconId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("apiplate.Models.Image", "Image")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Sector", "ImageId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("apiplate.Models.Translation", "Title")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Sector", "TitleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.Navigation("Description");
@@ -908,25 +831,25 @@ namespace apiplate.Migrations
                     b.HasOne("apiplate.Models.Translation", "Description")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Slider", "DescriptionId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("apiplate.Models.Image", "Image")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Slider", "ImageId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("apiplate.Models.Translation", "Subtitle")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Slider", "SubtitleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("apiplate.Models.Translation", "Title")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Slider", "TitleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.Navigation("Description");
@@ -942,13 +865,12 @@ namespace apiplate.Migrations
                 {
                     b.HasOne("apiplate.Models.Article", null)
                         .WithMany("Tags")
-                        .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ArticleId");
 
                     b.HasOne("apiplate.Models.Translation", "Translation")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Tag", "TranslationId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.Navigation("Translation");
@@ -959,19 +881,19 @@ namespace apiplate.Migrations
                     b.HasOne("apiplate.Models.Image", "Image")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Team", "ImageId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("apiplate.Models.Translation", "Name")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Team", "NameId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("apiplate.Models.Translation", "Position")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Team", "PositionId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.Navigation("Image");

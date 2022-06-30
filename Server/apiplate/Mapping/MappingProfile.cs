@@ -32,6 +32,8 @@ namespace apiplate.Mapping
             CreateMap<TeamRequestResource, Team>().ReverseMap();
             CreateMap<TeamResource, Team>().ReverseMap();
             CreateMap<TeamRequestResource, Team>().ReverseMap();
+            CreateMap<PartnerResource, Partner>().ReverseMap();
+            CreateMap<PartnerRequestResource, Partner>().ReverseMap();
 
 
         }

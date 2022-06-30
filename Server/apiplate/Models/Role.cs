@@ -9,9 +9,12 @@ namespace apiplate.Models
         public Permission ArticlesPermissions { get; set; }
         public Permission SectorsPermissions { get; set; }
         public Permission TeamPermissions { get; set; }
-
         public Permission RegionsPermissions { get; set; }
         public Permission SlidersPermissions { get; set; }
+        public Permission PartnersPermissions { get; set; }
+
+
+
 
         
 

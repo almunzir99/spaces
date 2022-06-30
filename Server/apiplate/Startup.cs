@@ -58,6 +58,8 @@ namespace apiplate
             services.AddScoped<IRegionsService, RegionsService>();
             services.AddScoped<ISlidersService, SlidersService>();
             services.AddScoped<ITeamService, TeamService>();
+            services.AddScoped<IPartnersService, PartnersService>();
+
 
 
             services.AddCors(options =>
