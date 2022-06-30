@@ -30,6 +30,9 @@ namespace apiplate.DataBase
             builder.Entity<Sector>().HasOne<Image>(c => c.Image).WithOne().HasForeignKey<Sector>(c => c.ImageId);
             builder.Entity<Sector>().HasOne<Image>(c => c.Icon).WithOne().HasForeignKey<Sector>(c => c.IconId);
             builder.Entity<Tag>().HasOne<Translation>(c => c.Translation).WithOne().HasForeignKey<Tag>(c => c.TranslationId);
+            builder.Entity<Region>().HasOne<Translation>(c => c.Title).WithOne().HasForeignKey<Region>(c => c.TitleId);
+            builder.Entity<Region>().HasOne<Translation>(c => c.Description).WithOne().HasForeignKey<Region>(c => c.DescriptionId);
+            builder.Entity<Region>().HasOne<Image>(c => c.Image).WithOne().HasForeignKey<Region>(c => c.ImageId);
         }
         private Admin GetManagerUser()
         {
@@ -63,6 +66,7 @@ namespace apiplate.DataBase
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Sector> Sectors { get; set; }
+        public DbSet<Region> Regions { get; set; }
 
 
 

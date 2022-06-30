@@ -55,6 +55,8 @@ namespace apiplate
             services.AddScoped<IStatisticsService, StatisticsService>();
             services.AddScoped<IArticlesService, ArticlesService>();
             services.AddScoped<ISectorsService, SectorsService>();
+            services.AddScoped<IRegionsService, RegionsService>();
+            
 
 
 

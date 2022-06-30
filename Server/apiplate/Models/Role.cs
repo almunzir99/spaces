@@ -8,6 +8,8 @@ namespace apiplate.Models
         public Permission RolesPermissions { get; set; }
         public Permission ArticlesPermissions { get; set; }
         public Permission SectorsPermissions { get; set; }
+        public Permission RegionsPermissions { get; set; }
+        
 
 
  

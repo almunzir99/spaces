@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using apiplate.DataBase;
 
 namespace apiplate.Migrations
 {
     [DbContext(typeof(ApiplateDbContext))]
-    partial class ApiplateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220630064323_addRegionsTable")]
+    partial class addRegionsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,12 +115,12 @@ namespace apiplate.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 6, 30, 8, 58, 16, 740, DateTimeKind.Local).AddTicks(8977),
+                            CreatedAt = new DateTime(2022, 6, 30, 8, 43, 23, 62, DateTimeKind.Local).AddTicks(692),
                             Email = "almunzir99@gmail.com",
                             IsManager = true,
-                            LastUpdate = new DateTime(2022, 6, 30, 8, 58, 16, 742, DateTimeKind.Local).AddTicks(8308),
-                            PasswordHash = new byte[] { 117, 53, 82, 94, 89, 111, 66, 65, 86, 22, 253, 156, 216, 41, 46, 53, 40, 159, 148, 4, 166, 25, 5, 204, 213, 220, 216, 228, 1, 115, 55, 189, 1, 61, 12, 214, 28, 77, 231, 7, 8, 40, 70, 41, 29, 202, 122, 229, 115, 97, 22, 120, 187, 244, 76, 59, 130, 37, 200, 160, 138, 147, 110, 253 },
-                            PasswordSalt = new byte[] { 110, 102, 175, 59, 14, 139, 196, 13, 82, 163, 162, 30, 113, 83, 76, 99, 49, 93, 59, 190, 80, 131, 51, 144, 213, 230, 247, 6, 37, 136, 106, 157, 12, 140, 85, 140, 63, 34, 19, 242, 92, 133, 190, 70, 71, 66, 116, 116, 78, 240, 172, 53, 71, 241, 72, 178, 64, 176, 158, 189, 69, 85, 58, 153, 124, 130, 139, 156, 179, 109, 65, 252, 146, 100, 130, 101, 84, 243, 140, 143, 216, 23, 10, 21, 61, 220, 244, 2, 33, 87, 127, 35, 149, 9, 21, 77, 44, 149, 69, 198, 206, 47, 209, 120, 207, 71, 93, 15, 178, 162, 47, 85, 134, 224, 55, 91, 82, 232, 17, 126, 93, 74, 242, 141, 197, 41, 238, 252 },
+                            LastUpdate = new DateTime(2022, 6, 30, 8, 43, 23, 63, DateTimeKind.Local).AddTicks(2125),
+                            PasswordHash = new byte[] { 35, 197, 150, 248, 156, 121, 162, 222, 164, 193, 179, 191, 43, 174, 187, 160, 243, 141, 19, 140, 203, 129, 101, 82, 51, 200, 61, 246, 57, 126, 126, 208, 59, 67, 11, 47, 191, 99, 149, 249, 9, 58, 233, 173, 181, 240, 53, 163, 86, 190, 60, 92, 142, 240, 119, 105, 169, 184, 120, 75, 120, 236, 238, 251 },
+                            PasswordSalt = new byte[] { 50, 62, 82, 0, 213, 173, 16, 84, 181, 90, 219, 91, 181, 42, 172, 73, 98, 125, 81, 219, 176, 62, 84, 184, 105, 60, 157, 187, 120, 230, 112, 42, 4, 251, 150, 44, 124, 80, 136, 255, 57, 102, 94, 19, 41, 155, 107, 134, 159, 55, 132, 85, 140, 199, 163, 204, 97, 44, 82, 159, 97, 178, 26, 213, 94, 251, 1, 96, 181, 171, 218, 115, 159, 8, 83, 10, 119, 204, 51, 237, 144, 37, 136, 36, 96, 146, 248, 111, 108, 28, 224, 250, 129, 127, 105, 253, 218, 245, 145, 54, 56, 14, 0, 32, 16, 251, 101, 41, 118, 242, 171, 168, 93, 72, 182, 203, 58, 147, 83, 198, 5, 177, 68, 0, 122, 206, 102, 122 },
                             Phone = "249128647019",
                             Username = "almunzir99"
                         });
@@ -359,9 +361,6 @@ namespace apiplate.Migrations
                     b.Property<int>("DescriptionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("datetime2");
 
@@ -371,9 +370,6 @@ namespace apiplate.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DescriptionId")
-                        .IsUnique();
-
-                    b.HasIndex("ImageId")
                         .IsUnique();
 
                     b.HasIndex("TitleId")
@@ -407,9 +403,6 @@ namespace apiplate.Migrations
                     b.Property<int?>("MessagesPermissionsId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RegionsPermissionsId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("RolesPermissionsId")
                         .HasColumnType("int");
 
@@ -426,8 +419,6 @@ namespace apiplate.Migrations
                     b.HasIndex("ArticlesPermissionsId");
 
                     b.HasIndex("MessagesPermissionsId");
-
-                    b.HasIndex("RegionsPermissionsId");
 
                     b.HasIndex("RolesPermissionsId");
 
@@ -611,12 +602,6 @@ namespace apiplate.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("apiplate.Models.Image", "Image")
-                        .WithOne()
-                        .HasForeignKey("apiplate.Models.Region", "ImageId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("apiplate.Models.Translation", "Title")
                         .WithOne()
                         .HasForeignKey("apiplate.Models.Region", "TitleId")
@@ -624,8 +609,6 @@ namespace apiplate.Migrations
                         .IsRequired();
 
                     b.Navigation("Description");
-
-                    b.Navigation("Image");
 
                     b.Navigation("Title");
                 });
@@ -647,11 +630,6 @@ namespace apiplate.Migrations
                         .HasForeignKey("MessagesPermissionsId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("apiplate.Models.Permission", "RegionsPermissions")
-                        .WithMany()
-                        .HasForeignKey("RegionsPermissionsId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("apiplate.Models.Permission", "RolesPermissions")
                         .WithMany()
                         .HasForeignKey("RolesPermissionsId")
@@ -667,8 +645,6 @@ namespace apiplate.Migrations
                     b.Navigation("ArticlesPermissions");
 
                     b.Navigation("MessagesPermissions");
-
-                    b.Navigation("RegionsPermissions");
 
                     b.Navigation("RolesPermissions");
 
