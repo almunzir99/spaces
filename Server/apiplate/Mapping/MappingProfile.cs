@@ -18,21 +18,25 @@ namespace apiplate.Mapping
             CreateMap<MessageRequestResource, Message>().ReverseMap();
             CreateMap<AdminResource, Admin>().ReverseMap();
             CreateMap<NotificationResource, Notification>().ReverseMap();
-            CreateMap<TranslationResource,Translation>().ReverseMap();
-            CreateMap<TagResource,Tag>().ReverseMap();
-            CreateMap<ImageResource,Image>().ReverseMap();
-            CreateMap<ArticleResource,Article>().ReverseMap();
-            CreateMap<ArticleRequestResource,Article>().ReverseMap();
-            CreateMap<CommentResource,Comment>().ReverseMap();
-            CreateMap<SectorResource,Sector>().ReverseMap();
-            CreateMap<SectorRequestResource,Sector>().ReverseMap();
-            CreateMap<RegionResource,Region>().ReverseMap();
-            CreateMap<SliderResource,Slider>().ReverseMap();
+            CreateMap<TranslationResource, Translation>().ReverseMap();
+            CreateMap<TagResource, Tag>().ReverseMap();
+            CreateMap<ImageResource, Image>().ReverseMap();
+            CreateMap<ArticleResource, Article>().ReverseMap();
+            CreateMap<ArticleRequestResource, Article>().ReverseMap();
+            CreateMap<CommentResource, Comment>().ReverseMap();
+            CreateMap<SectorResource, Sector>().ReverseMap();
+            CreateMap<SectorRequestResource, Sector>().ReverseMap();
+            CreateMap<RegionResource, Region>().ReverseMap();
+            CreateMap<RegionRequestResource, Region>().ReverseMap();
+            CreateMap<SliderResource, Slider>().ReverseMap();
+            CreateMap<TeamRequestResource, Team>().ReverseMap();
+            CreateMap<TeamResource, Team>().ReverseMap();
+            CreateMap<TeamRequestResource, Team>().ReverseMap();
 
-            
+
         }
 
-         
+
     }
 
 }

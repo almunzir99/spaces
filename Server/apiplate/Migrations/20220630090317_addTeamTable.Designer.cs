@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using apiplate.DataBase;
 
 namespace apiplate.Migrations
 {
     [DbContext(typeof(ApiplateDbContext))]
-    partial class ApiplateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220630090317_addTeamTable")]
+    partial class addTeamTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,12 +115,12 @@ namespace apiplate.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 6, 30, 11, 14, 14, 403, DateTimeKind.Local).AddTicks(8252),
+                            CreatedAt = new DateTime(2022, 6, 30, 11, 3, 16, 4, DateTimeKind.Local).AddTicks(3232),
                             Email = "almunzir99@gmail.com",
                             IsManager = true,
-                            LastUpdate = new DateTime(2022, 6, 30, 11, 14, 14, 405, DateTimeKind.Local).AddTicks(2613),
-                            PasswordHash = new byte[] { 160, 162, 191, 138, 45, 194, 205, 68, 31, 186, 67, 250, 112, 15, 81, 255, 185, 63, 85, 193, 23, 156, 115, 114, 114, 15, 249, 159, 8, 115, 23, 86, 168, 241, 48, 38, 43, 72, 130, 221, 36, 193, 203, 44, 107, 130, 95, 158, 181, 253, 89, 73, 64, 132, 62, 105, 86, 203, 74, 20, 50, 92, 103, 246 },
-                            PasswordSalt = new byte[] { 15, 215, 120, 207, 209, 57, 251, 174, 133, 45, 38, 95, 62, 79, 143, 215, 86, 89, 237, 97, 118, 178, 239, 9, 178, 232, 175, 14, 99, 233, 86, 142, 200, 201, 197, 156, 243, 217, 41, 166, 106, 69, 128, 78, 112, 142, 126, 131, 190, 177, 151, 153, 145, 51, 254, 132, 22, 89, 233, 150, 224, 218, 145, 245, 203, 180, 205, 219, 16, 60, 145, 227, 153, 210, 34, 215, 0, 218, 83, 10, 157, 191, 94, 218, 106, 221, 40, 62, 132, 236, 81, 253, 152, 168, 7, 89, 168, 76, 6, 19, 115, 49, 209, 97, 13, 92, 190, 216, 52, 158, 24, 24, 202, 230, 24, 142, 46, 116, 79, 230, 180, 65, 74, 103, 104, 245, 228, 84 },
+                            LastUpdate = new DateTime(2022, 6, 30, 11, 3, 16, 5, DateTimeKind.Local).AddTicks(3496),
+                            PasswordHash = new byte[] { 237, 77, 137, 184, 56, 186, 1, 21, 96, 73, 254, 102, 42, 201, 59, 17, 4, 93, 242, 104, 43, 166, 254, 78, 74, 190, 190, 189, 73, 21, 164, 37, 132, 117, 134, 59, 219, 120, 4, 196, 221, 197, 55, 37, 112, 243, 217, 53, 240, 191, 86, 19, 56, 224, 251, 27, 247, 48, 226, 130, 242, 75, 138, 31 },
+                            PasswordSalt = new byte[] { 202, 254, 158, 68, 37, 199, 158, 190, 61, 155, 86, 43, 213, 146, 50, 107, 213, 225, 11, 200, 3, 219, 206, 146, 157, 167, 15, 4, 78, 134, 225, 201, 156, 244, 69, 12, 107, 162, 255, 54, 226, 247, 1, 255, 152, 91, 5, 21, 100, 33, 227, 60, 252, 198, 131, 64, 54, 228, 102, 85, 15, 176, 149, 73, 103, 97, 198, 201, 201, 77, 149, 250, 170, 42, 63, 101, 181, 54, 0, 151, 159, 161, 230, 218, 177, 73, 50, 67, 217, 162, 8, 233, 49, 16, 90, 96, 52, 110, 75, 186, 135, 40, 179, 92, 115, 131, 25, 122, 253, 60, 230, 125, 22, 19, 26, 49, 52, 222, 53, 110, 245, 148, 180, 214, 188, 252, 217, 216 },
                             Phone = "249128647019",
                             Username = "almunzir99"
                         });
@@ -419,9 +421,6 @@ namespace apiplate.Migrations
                     b.Property<int?>("SlidersPermissionsId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TeamPermissionsId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(450)");
 
@@ -440,8 +439,6 @@ namespace apiplate.Migrations
                     b.HasIndex("SectorsPermissionsId");
 
                     b.HasIndex("SlidersPermissionsId");
-
-                    b.HasIndex("TeamPermissionsId");
 
                     b.HasIndex("Title")
                         .IsUnique()
@@ -598,9 +595,6 @@ namespace apiplate.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("PositionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Priority")
                         .HasColumnType("int");
 
                     b.Property<string>("Twitter")
@@ -779,11 +773,6 @@ namespace apiplate.Migrations
                         .HasForeignKey("SlidersPermissionsId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("apiplate.Models.Permission", "TeamPermissions")
-                        .WithMany()
-                        .HasForeignKey("TeamPermissionsId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("AdminsPermissions");
 
                     b.Navigation("ArticlesPermissions");
@@ -797,8 +786,6 @@ namespace apiplate.Migrations
                     b.Navigation("SectorsPermissions");
 
                     b.Navigation("SlidersPermissions");
-
-                    b.Navigation("TeamPermissions");
                 });
 
             modelBuilder.Entity("apiplate.Models.Sector", b =>

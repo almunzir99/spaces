@@ -13,6 +13,8 @@ namespace apiplate.Resources
         public PermissionResource SectorsPermissions { get; set; } = new PermissionResource(false, false, false, false);
         public PermissionResource RegionsPermissions { get; set; } = new PermissionResource(false, false, false, false);
         public PermissionResource SlidersPermissions { get; set; } = new PermissionResource(false, false, false, false);
+        public PermissionResource TeamPermissions { get; set; } = new PermissionResource(false, false, false, false);
+
 
     }
 }
