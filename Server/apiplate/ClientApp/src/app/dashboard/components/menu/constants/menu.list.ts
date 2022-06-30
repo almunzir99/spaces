@@ -26,7 +26,55 @@ export const MenuList: MenuGroup[] = [
     {
         title: "Pages",
         children: [
+            {
+                title: "Articles",
+                icon: "las la-newspaper",
+                route: "/dashboard/articles"
 
+            },
+            {
+                title: "Sectors",
+                icon: "las la-border-all",
+                route: "/dashboard/sectors"
+
+            },
+            {
+                title: "Regions",
+                icon: "las la-map-marked-alt",
+                route: "/dashboard/regions"
+
+            },
+            {
+                title: "Projects",
+                icon: "las la-clipboard-list",
+                route: "/dashboard/projects"
+
+            },
+            {
+                title: "Partners",
+                icon: "las la-handshake",
+                route: "/dashboard/partners"
+
+            },
+            {
+                title: "Slider",
+                icon: "las la-image",
+                route: "/dashboard/slider"
+
+            },
+            {
+                title: "team",
+                icon: "las la-users",
+                route: "/dashboard/team"
+
+            },
+            {
+                title: "Testimonials",
+                icon: "las la-comment",
+                route: "/dashboard/testimonials"
+
+            },
+            
             {
                 title: "Messages",
                 icon: "las la-envelope",

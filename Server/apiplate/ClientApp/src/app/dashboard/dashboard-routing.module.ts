@@ -47,6 +47,38 @@ const routes: Routes = [
       {
         path:"files-manager",
         loadChildren: () => import("./file-manager/file-manager.module").then(c => c.FileManagerModule)
+      },
+      {
+        path:"articles",
+        loadChildren: () => import("./articles/articles.module").then(c => c.ArticlesModule)
+      },
+      {
+        path:"sectors",
+        loadChildren: () => import("./sectors/sectors.module").then(c => c.SectorsModule)
+      },
+      {
+        path:"regions",
+        loadChildren: () => import("./Regions/Regions.module").then(c => c.RegionsModule)
+      },
+      {
+        path:"projects",
+        loadChildren: () => import("./projects/projects.module").then(c => c.ProjectsModule)
+      },
+      {
+        path:"slider",
+        loadChildren: () => import("./slider/slider.module").then(c => c.SliderModule)
+      },
+      {
+        path:"testimonials",
+        loadChildren: () => import("./testimonials/testimonials.module").then(c => c.TestimonialsModule)
+      },
+      {
+        path:"partners",
+        loadChildren: () => import("./partners/partners.module").then(c => c.PartnersModule)
+      },
+      {
+        path:"team",
+        loadChildren: () => import("./team/team.module").then(c => c.TeamModule)
       }
     ]
   }
