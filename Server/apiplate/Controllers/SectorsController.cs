@@ -38,7 +38,7 @@ namespace apiplate.Controllers
         {
             var role = await _roleService.GetRoleByTitle(title);
             if (role != null)
-                return role.RolesPermissions;
+                return role.SectorsPermissions;
             else
                 throw new System.Exception("Permission isn't implemented");
         }
