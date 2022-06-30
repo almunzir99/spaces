@@ -13,11 +13,11 @@ namespace apiplate.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class RegionsController : BaseController<Region, RegionResource, RegionRequestResource, IRegionsService>
+    public class TestimonialsController : BaseController<Testimonial, TestimonialResource, TestimonialRequestResource, ITestimonialsService>
     {
         private readonly IRolesService _roleService;
 
-        public RegionsController(IRegionsService service, IUriService uriService, IRolesService roleService) : base(service, uriService)
+        public TestimonialsController(ITestimonialsService service, IUriService uriService, IRolesService roleService) : base(service, uriService)
         {
             _roleService = roleService;
         }

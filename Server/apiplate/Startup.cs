@@ -59,6 +59,8 @@ namespace apiplate
             services.AddScoped<ISlidersService, SlidersService>();
             services.AddScoped<ITeamService, TeamService>();
             services.AddScoped<IPartnersService, PartnersService>();
+            services.AddScoped<ITestimonialsService, TestimonialsService>();
+
 
 
 

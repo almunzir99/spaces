@@ -15,6 +15,9 @@ namespace apiplate.Resources
         public PermissionResource SlidersPermissions { get; set; } = new PermissionResource(false, false, false, false);
         public PermissionResource TeamPermissions { get; set; } = new PermissionResource(false, false, false, false);
         public PermissionResource PartnersPermissions { get; set; } = new PermissionResource(false, false, false, false);
+        public PermissionResource TestimonialsPermissions { get; set; } = new PermissionResource(false, false, false, false);
+
+        
         
 
 

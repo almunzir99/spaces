@@ -42,6 +42,10 @@ namespace apiplate.DataBase
             builder.Entity<Team>().HasOne<Image>(c => c.Image).WithOne().HasForeignKey<Team>(c => c.ImageId);
             builder.Entity<Partner>().HasOne<Translation>(c => c.Name).WithOne().HasForeignKey<Partner>(c => c.NameId);
             builder.Entity<Partner>().HasOne<Image>(c => c.Logo).WithOne().HasForeignKey<Partner>(c => c.LogoId);
+            builder.Entity<Testimonial>().HasOne<Translation>(c => c.Author).WithOne().HasForeignKey<Testimonial>(c => c.AuthorId);
+            builder.Entity<Testimonial>().HasOne<Translation>(c => c.Job).WithOne().HasForeignKey<Testimonial>(c => c.JobId);
+            builder.Entity<Testimonial>().HasOne<Translation>(c => c.Content).WithOne().HasForeignKey<Testimonial>(c => c.ContentId);
+            builder.Entity<Testimonial>().HasOne<Image>(c => c.Image).WithOne().HasForeignKey<Testimonial>(c => c.ImageId);
             
         }
         private Admin GetManagerUser()
@@ -80,6 +84,7 @@ namespace apiplate.DataBase
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Team> Team { get; set; }
         public DbSet<Partner> Partners { get; set; }
+        public DbSet<Testimonial> Testimonials { get; set; }
 
 
 
