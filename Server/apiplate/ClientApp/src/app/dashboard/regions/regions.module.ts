@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { RegionsRoutingModule } from './regions-routing.module';
 import { RegionsComponent } from './regions.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { FormsModule } from '@angular/forms';
+import { FomanticUIModule } from 'ngx-fomantic-ui';
 
 
 @NgModule({
@@ -11,7 +14,10 @@ import { RegionsComponent } from './regions.component';
   ],
   imports: [
     CommonModule,
-    RegionsRoutingModule
+    RegionsRoutingModule,
+    SharedModule,
+    FormsModule,
+    FomanticUIModule 
   ]
 })
 export class RegionsModule { }

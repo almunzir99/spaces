@@ -1,1 +1,76 @@
-<p>regions works!</p>
+<div class="page-container">
+    <div class="action-bar">
+        <div class="inputs-container">
+            <div class="ui left icon input">
+                <input #search name="search" (input)="onSearchChange(search.value)" type="text" placeholder="Search...">
+                <i class="search icon"></i>
+            </div>
+            <div class="selection-container">
+                <p>Page Size : </p>
+                <fui-select [(ngModel)]="pageSize" (selectedOptionChange)="pageSizeChanged($event)" class="selection" placeholder="Page Size">
+                    <fui-select-option *ngFor="let option of range(100,10,10)" [value]="option"></fui-select-option>
+                </fui-select>
+            </div>
+            <div class="selection-container">
+                <fui-select [(ngModel)]="selectedLang"   class="selection" placeholder="Language">
+                    <fui-select-option value="en">English</fui-select-option>
+                    <fui-select-option value="ar">Arabic</fui-select-option>
+                </fui-select>
+            </div>
+        </div>
+        <div class="actions-buttons">
+            <div RippleEffect (click)="downloadCSV()" class="ui violet left labeled icon button">
+                Export To CSV
+                <i class="file excel outline icon"></i>
+            </div>
+            <div RippleEffect (click)="openFormModal(null)" class="ui primary left labeled icon button">
+                New Region
+                <i class="plus  icon"></i>
+            </div>
+
+        </div>
+
+    </div>
+    <data-table (sortChange)="onSortChange($event)" [(pageIndex)]="pageIndex" [total-items]="totalRecords" [page-size]="pageSize" (pageIndexChanged)="pageIndexChanged($event)" [cell-template]="cellTemplate" [loading]="isDataLoading" [cols]="cols" [rows]="data">
+        <ng-template #cellTemplate let-rowData="rowData" let-data="cellData" let-col="colIndex" let-row="rowIndex">
+            <ng-container [ngSwitch]="col">
+                <ng-container *ngSwitchCase="0">
+                    <img class="big-cell-image" [src]="data.path" alt="No Photo">
+                </ng-container>
+               
+                
+                <ng-container *ngSwitchCase="3">
+                    <p [textContent]="selectedLang == 'en' ? data.en : data.ar"></p>
+                </ng-container>
+                <ng-container *ngSwitchCase="4">
+                    <button (click)="selectedLang == 'en' ? selectedContent = data.en : selectedContent = data.ar" class="ui button left labeled icon yellow tiny">
+                        <i class="file icon"></i> 
+                        <span [textContent]="selectedLang == 'en' ? 'Show Content' : 'عرض المحتوى'"></span></button>
+                </ng-container>
+               
+                <ng-container *ngSwitchCase="7">
+                    <div class="actions-cell">
+                         
+                        <div fuiPopup popupText="update" (click)="openFormModal(rowData)" class="cell-btn edit-btn">
+                            <i class="edit outline icon"></i>
+                        </div>
+                        <div fuiPopup popupText="delete" (click)="delete(rowData.id)" class="cell-btn delete-btn">
+                            <i class="trash icon"></i>
+                        </div>
+                    </div>
+                </ng-container>
+                <div *ngSwitchDefault>{{data}}</div>
+            </ng-container>
+        </ng-template>
+    </data-table>
+</div>
+<fui-dimmer class="page" [(isDimmed)]="DimLoading">
+    <div class="ui active loader"></div>
+</fui-dimmer>
+<fui-modal *ngIf="selectedContent != null" [isClosable]="true" (dismissed)="selectedContent = null" #modal>
+    <div class="header">Show Content</div>
+    <div style="max-width: 80vw;max-height:80vh;overflow:auto" [innerHTML]="selectedContent" class="content">
+         
+    </div>
+     
+</fui-modal>
