@@ -27,6 +27,8 @@ namespace apiplate.Mapping
             CreateMap<SectorResource,Sector>().ReverseMap();
             CreateMap<SectorRequestResource,Sector>().ReverseMap();
             CreateMap<RegionResource,Region>().ReverseMap();
+            CreateMap<SliderResource,Slider>().ReverseMap();
+
             
         }
 

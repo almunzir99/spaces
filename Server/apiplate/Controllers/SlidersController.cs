@@ -13,11 +13,11 @@ namespace apiplate.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class RegionsController : BaseController<Region, RegionResource, RegionRequestResource, IRegionsService>
+    public class SlidersController : BaseController<Slider, SliderResource, SliderRequestResource, ISlidersService>
     {
         private readonly IRolesService _roleService;
 
-        public RegionsController(IRegionsService service, IUriService uriService, IRolesService roleService) : base(service, uriService)
+        public SlidersController(ISlidersService service, IUriService uriService, IRolesService roleService) : base(service, uriService)
         {
             _roleService = roleService;
         }

@@ -33,6 +33,10 @@ namespace apiplate.DataBase
             builder.Entity<Region>().HasOne<Translation>(c => c.Title).WithOne().HasForeignKey<Region>(c => c.TitleId);
             builder.Entity<Region>().HasOne<Translation>(c => c.Description).WithOne().HasForeignKey<Region>(c => c.DescriptionId);
             builder.Entity<Region>().HasOne<Image>(c => c.Image).WithOne().HasForeignKey<Region>(c => c.ImageId);
+            builder.Entity<Slider>().HasOne<Translation>(c => c.Title).WithOne().HasForeignKey<Slider>(c => c.TitleId);
+            builder.Entity<Slider>().HasOne<Translation>(c => c.Subtitle).WithOne().HasForeignKey<Slider>(c => c.SubtitleId);
+            builder.Entity<Slider>().HasOne<Translation>(c => c.Description).WithOne().HasForeignKey<Slider>(c => c.DescriptionId);
+            builder.Entity<Slider>().HasOne<Image>(c => c.Image).WithOne().HasForeignKey<Slider>(c => c.ImageId);
         }
         private Admin GetManagerUser()
         {
@@ -67,6 +71,8 @@ namespace apiplate.DataBase
         public DbSet<Image> Images { get; set; }
         public DbSet<Sector> Sectors { get; set; }
         public DbSet<Region> Regions { get; set; }
+        public DbSet<Slider> Sliders { get; set; }
+
 
 
 

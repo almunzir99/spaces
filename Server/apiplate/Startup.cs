@@ -56,9 +56,7 @@ namespace apiplate
             services.AddScoped<IArticlesService, ArticlesService>();
             services.AddScoped<ISectorsService, SectorsService>();
             services.AddScoped<IRegionsService, RegionsService>();
-            
-
-
+            services.AddScoped<ISlidersService, SlidersService>();
 
             services.AddCors(options =>
        {
