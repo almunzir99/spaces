@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { ArticlesRoutingModule } from './articles-routing.module';
 import { ArticlesComponent } from './articles.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { FomanticUIModule } from 'ngx-fomantic-ui';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +14,10 @@ import { ArticlesComponent } from './articles.component';
   ],
   imports: [
     CommonModule,
-    ArticlesRoutingModule
+    ArticlesRoutingModule,
+    SharedModule,
+    FormsModule,
+    FomanticUIModule
   ]
 })
 export class ArticlesModule { }

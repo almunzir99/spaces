@@ -8,7 +8,7 @@
     </div>
     <ng-container *ngFor="let group of ControlsGroups">
         <h4 *ngIf="group.title" class="ui dividing header">{{group.title}}</h4>
-        <div class="form-fields">
+        <div [class.inner]="innerForm" class="form-fields">
             <div [style.width]="control.width" class="control" *ngFor="let control of group.controls">
                 <!-- 1.selection -->
                 <div *ngIf="control.controlType == controlTypes.Selection" class="field">
@@ -54,8 +54,8 @@
                     <div [class.ar]="control.alignRight" [class.error]="formGroup.controls[control.name].touched && formGroup.controls[control.name].invalid" *ngIf="control.controlType == controlTypes.TextInput || control.controlType == controlTypes.PasswordInput  || control.controlType == controlTypes.NumberInput"
                         class="field">
                         <label>{{control.title}}</label>
-                        <div class="ui left icon input">
-                            <i [attr.class]="control.icon"></i>
+                        <div [class.icon]="control.icon && control.icon != ''" class="ui left input">
+                            <i *ngIf="control.icon && control.icon != ''" [attr.class]="control.icon"></i>
                             <input [formControlName]="control.name" [attr.name]="control.name" [(ngModel)]="resultObject[control.name]" [attr.type]="control.controlType" [attr.placeholder]="control.title">
                         </div>
                         <div *ngIf="formGroup.controls[control.name].touched && formGroup.controls[control.name].invalid" class="error-message">
@@ -109,7 +109,7 @@
 
                     </div>
                     <!-- 10. Table Builder -->
-                    <div style="padding: 15px 25px;margin: 10px 10px;background-color: #f5f4f4;border-radius: 12px;" *ngIf="control.controlType ==  controlTypes.TableBuilder">
+                    <div style="padding: 15px 25px;margin: 10px 10px;background-color: whitesmoke;border: 1px solid #ddd8d8;" *ngIf="control.controlType ==  controlTypes.TableBuilder">
                         <form-builder (submit)="innerFormAdd($event,control.value)" [title]="control.title" [inner-form]="true" [control-groups]="control.controls"></form-builder>
                         <data-table [cell-template]="cellTemplate" [show-footer]="false" [cols]="mapControlsToCols(control.controls)" [rows]="control.value">
                             <ng-template #cellTemplate let-rowData="rowData" let-data="cellData" let-col="colIndex" let-row="rowIndex">

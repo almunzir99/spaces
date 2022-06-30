@@ -7,6 +7,7 @@ import { Translation } from "./translation.model";
 export class Article extends Base {
     title: Translation;
     subtitle: Translation;
+    content: Translation;
     comment: Translation;
     tags: Tag[];
     comments:Comment[];

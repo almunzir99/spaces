@@ -82,6 +82,7 @@ namespace apiplate.DataBase
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Translation> Translations { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<ArticleBase> ArticleBase { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Image> Images { get; set; }

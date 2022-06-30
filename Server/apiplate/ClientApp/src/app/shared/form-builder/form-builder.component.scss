@@ -1,13 +1,34 @@
+.form{
+    max-height: 80vh;
+    overflow: auto;
+}
+.ui.dividing.header{
+    background: whitesmoke;
+    padding: 15px;
+    margin-bottom: 0px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border: 1px solid #ece9e9;
+    margin-top: 15px;
+}
 .form-fields {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     justify-content: stretch;
-    max-height: 65vh;
+    max-height: fit-content;
     overflow-y: auto;
     overflow-x: hidden;
+    padding: 15px;
+    margin: 0px 15px;
+    border: 1px solid #ece9e9;
 }
+.form-fields.inner{
+    border: none;
+    padding: 0px;
+    margin: 15px;
 
+}
 .ui.form .field {
     margin: 10px;
     flex-grow: 1;

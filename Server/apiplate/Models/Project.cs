@@ -1,6 +1,6 @@
 namespace apiplate.Models
 {
-    public class Project : Article
+    public class Project : ArticleBase
     {
         public int SectorId { get; set; }
         public Sector Sector { get; set; }
