@@ -220,7 +220,7 @@ export class SliderComponent implements OnInit {
             value: item ? item.subtitle.ar : undefined
           },
           {
-            title: "",
+            title: "الوصف",
             name: "ar_description",
             controlType: ControlTypes.TextArea,
             width: "100%",
@@ -256,7 +256,7 @@ export class SliderComponent implements OnInit {
     ];
     this.modalService.open(new FormBuilderModal(
       {
-        title: item ? "Update Partner Info" : "New Partner",
+        title: item ? "Update Slider Info" : "New Slider",
         controlGroups: form
       }
     )).onApprove((result) => {

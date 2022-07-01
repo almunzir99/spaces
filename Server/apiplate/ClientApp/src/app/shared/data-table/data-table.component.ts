@@ -16,7 +16,7 @@ export class DataTableComponent implements OnInit {
   @Input('page-size') pageSize = 1;
   @Input("show-footer") showFooter = true;
   @Output('sortChange') sortChange = new EventEmitter<object>();
-  sortProp = "lastUpdate";
+  @Input('sortProp') sortProp = "lastUpdate";
   ascending = false;
   openTableModal = false;
   resizers: NodeListOf<HTMLElement>;
