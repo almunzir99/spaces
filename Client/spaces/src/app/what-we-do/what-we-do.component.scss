@@ -97,17 +97,19 @@
         .stats {
             display: flex;
             align-items: center;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
             width: 100%;
             background-color: $primary-color;
             color: white;
             border-top: 7px solid $accent-color;
-            height: 100px;
+            height: fit-content;
+
 
             .stat {
                 display: flex;
                 margin: 15px;
                 flex: 1;
+                min-width: 160px;
 
                 .icon {
                     fill: white;
@@ -202,6 +204,32 @@
             .project-card:hover{
                 transform: translateY(-10px);
             }
+        }
+    }
+}
+@media screen and (max-width:850px) {
+    .intro-section {
+        .images-section {
+            width: 55%;
+        }
+    }
+
+     
+}
+
+@media screen and (max-width:750px) {
+    .intro-section {
+        flex-direction: column;
+
+        .images-section,
+        .content-section {
+            width: 90%;
+            margin: 25px 0px
+        }
+
+        .images-section {
+            display: flex;
+            justify-content: center;
         }
     }
 }
