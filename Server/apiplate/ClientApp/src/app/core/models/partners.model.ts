@@ -4,6 +4,6 @@ import { Translation } from "./translation.model";
 
 export class Partners extends Base{
     logo:Image;
-    Name:Translation;
+    name:Translation;
     url:string;
 }
