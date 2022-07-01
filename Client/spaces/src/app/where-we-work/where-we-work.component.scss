@@ -123,3 +123,25 @@
         }
     }
 }
+@media screen and (max-width:855px) {
+    .map-section{
+        flex-direction: column;
+        align-items: center;
+
+        .map{
+            width: 100%;
+        }
+        .location-detail{
+            width: 90%;
+            .content{
+                width:fit-content ;
+                .title{
+                    width: 100%;
+                }
+                .text-content{
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
