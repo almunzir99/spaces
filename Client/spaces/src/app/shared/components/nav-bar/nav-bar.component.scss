@@ -5,6 +5,7 @@ nav {
     top: 0;
     width: 100%;
     z-index: 999;
+
     .top-nav {
         width: 100%;
         height: 50px;
@@ -62,19 +63,22 @@ nav {
 
     .main-nav {
         width: 100%;
-        height: 80px;
+        height: auto;
         max-height: 80px;
         background-color: white;
         display: flex;
         justify-content: space-between;
         align-items: center;
         transition: 1s max-height ease;
-        .logo{
+
+        .logo {
             margin: 0px 20px;
-            img{
+
+            img {
                 width: 215px;
             }
         }
+
         ul.main-list {
             display: flex;
             align-items: center;
@@ -93,6 +97,7 @@ nav {
                     position: absolute;
                     width: 200px;
                     z-index: 1000;
+                    height: auto;
                     transform: translateY(10px);
                     opacity: 0;
                     visibility: hidden;
@@ -106,7 +111,7 @@ nav {
                         flex-direction: column;
 
                         li {
-                            margin: 7px 10px;
+                            margin: 15px 10px;
                             color: black;
                         }
 
@@ -170,18 +175,33 @@ nav {
         }
     }
 }
-
 @media screen and (max-width:750px) {
     nav {
         .top-nav {
             height: auto;
-                
+
             .contacts-info {
                 display: block;
 
                 .contact-info {
                     margin: 15px 0px;
                     border-right: none;
+                }
+            }
+        }
+
+        .main-nav {
+            .act-buttons {
+                position: absolute;
+                right: 0;
+            }
+
+            .navbar-list {
+                display: flex;
+                width: 100%;
+
+                .main-list {
+                    align-self: flex-start !important;
                 }
             }
         }
@@ -198,24 +218,37 @@ nav {
                 display: block;
                 align-self: flex-end;
                 margin-top: 80px;
+
                 li {
-                    margin: 10px 0px;
+                    margin: 30px 0px;
+
                     .sub-menu-container {
                         position: initial;
                         max-height: 0px;
-                        animation: none;
+                        animation: none !important;
+                        transform: none;
+                        opacity: 1;
+                        visibility: visible;
                         overflow: hidden;
-                        padding-top: 0px;
-                        ul{
+                        padding: 0px;
+                        transition: 1s all ease;
+
+                        ul {
                             background-color: white;
                             border-top: none;
                             margin-right: 20px;
+
+                            li {
+                                margin: 10px 10px;
+                            }
                         }
                     }
                 }
-                li:hover{
-                    .sub-menu-container{
-                        max-height: 500px;
+
+                li:hover {
+                    .sub-menu-container {
+                        padding-top: 20px;
+                        max-height: 100vh;
                     }
                 }
             }
@@ -229,7 +262,7 @@ nav {
 
         .main-nav.opened {
             height: auto;
-            max-height: 500px;
+            max-height: 100vh;
         }
     }
 }
@@ -247,8 +280,9 @@ nav {
         visibility: visible;
     }
 }
+
 .hide_top {
-    display: none!important;
+    display: none !important;
 }
 
 .slideDown {
@@ -260,6 +294,7 @@ nav {
     from {
         transform: translateY(-100px);
     }
+
     to {
         transform: (0);
     }
