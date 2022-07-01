@@ -223,7 +223,7 @@ export class SectorsComponent implements OnInit {
             name: "icon",
             controlType: ControlTypes.LocalFilePicker,
             width: "100%",
-            value: item && item.image ? item.image.path : undefined
+            value: item && item.image ? item.icon.path : undefined
           },
 
 
