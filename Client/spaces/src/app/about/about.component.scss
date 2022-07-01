@@ -17,11 +17,13 @@
         margin-bottom: 20px;
         text-transform: uppercase;
     }
-    .link{
+
+    .link {
         cursor: pointer;
     }
-    .link.active{
-        color:  $accent-color;
+
+    .link.active {
+        color: $accent-color;
         font-size: 18px;
     }
 
@@ -34,7 +36,7 @@
     justify-content: center;
     width: 100%;
     position: relative;
-    min-height: 100vh;
+    padding: 40px 0px;
     height: auto;
 
     .bg-area {
@@ -104,6 +106,7 @@
     background-color: $primary-color;
     color: white;
     display: flex;
+    flex-wrap: wrap;
 
     .section {
         flex: 1;
@@ -113,6 +116,7 @@
         text-align: justify;
         padding: 20px;
         position: relative;
+        min-width: 300px;
 
 
         .icon-container {
@@ -171,6 +175,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    text-align: center;
 
     .title {
         font-size: 35px;
@@ -244,11 +249,13 @@
 
 .objectives-section {
     width: 100%;
-    height: 110vh;
+    height: fit-content;
+    min-height: 110vh;
     display: flex;
+    overflow: hidden;
 
     .bg-img {
-        height: 100%;
+        height: auto;
         flex: 1;
         background-image: url("/assets/temp/images/obj-bg.jpg");
         background-size: cover;
@@ -257,7 +264,7 @@
     .content {
         flex: 1;
         background-color: $accent-color;
-        height: 100%;
+        height: auto;
         color: white;
         position: relative;
 
@@ -295,7 +302,8 @@
 
             .objective {
                 display: flex;
-                width: 300px;
+                flex: 1;
+                min-width: 300px;
                 margin: 10px;
 
                 .number {
@@ -324,15 +332,17 @@
 .team-section {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
     position: relative;
     min-height: 80vh;
     height: auto;
+    flex-wrap: wrap;
+    padding: 40px 0px;
 
     .intro {
-        flex: 1;
         margin: 15px 25px;
+        width: 44%;
 
         .pattern {
             height: 400px;
@@ -365,19 +375,12 @@
         }
     }
 
-
-}
-
-.team {
-    flex: 1;
-    margin: 15px 25px;
-    display: flex;
-    justify-content: space-between;
     .team-card {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 0px 22px;
+        margin: 15px 10px;
+        min-width: 300px;
 
         .image {
             height: 290px;
@@ -428,7 +431,10 @@
         }
     }
 
+
 }
+
+
 
 .act-button {
     height: 50px;
@@ -441,4 +447,50 @@
     background-color: $primary-color;
     font-size: 16px;
     cursor: pointer;
+}
+@media screen and (max-width:1050px) {
+    .team-section{
+        .intro{
+            width: 58%;
+        }
+    }
+}
+@media screen and (max-width:880px) {
+    .team-section{
+        .intro{
+            width: 90%;
+        }
+    }
+}
+@media screen and (max-width:850px) {
+    .intro-section {
+        .images-section {
+            width: 55%;
+        }
+    }
+
+    .objectives-section {
+        flex-direction: column;
+
+        .bg-img {
+            min-height: 80vh;
+        }
+    }
+}
+
+@media screen and (max-width:750px) {
+    .intro-section {
+        flex-direction: column;
+
+        .images-section,
+        .content-section {
+            width: 90%;
+            margin: 25px 0px
+        }
+
+        .images-section {
+            display: flex;
+            justify-content: center;
+        }
+    }
 }

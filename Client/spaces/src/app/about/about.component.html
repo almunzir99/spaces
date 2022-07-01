@@ -2,7 +2,8 @@
 <div class="page-header">
     <div class="content">
         <h1 class="title">About Spaces</h1>
-        <h5 class="nav-link"><span class="link active" [routerLink]="['/','en','home']">Home</span><span> >> </span><span>About
+        <h5 class="nav-link"><span class="link active" [routerLink]="['/','en','home']">Home</span><span> >>
+            </span><span>About
                 Spaces</span></h5>
     </div>
 </div>
@@ -78,7 +79,7 @@
     <div class="values">
         <div *ngFor="let value of values; let i = index" class="value">
             <div class="title-container">
-                <div class="bg-number">0{{i}}</div>
+                <div class="bg-number">0{{i+1}}</div>
                 <h2>
                     {{value.title}}
                 </h2>
@@ -103,7 +104,7 @@
         <div class="objectives">
             <div *ngFor="let obj of objectives;let i = index" class="objective">
                 <div class="number">
-                    {{i}}
+                    {{i+1}}
                 </div>
                 <div class="content-text">
                     {{obj}}
@@ -125,35 +126,30 @@
             reprehenderit quod corporis tempora nulla quibusdam aut id iusto itaque illum saepe recusandae et, inventore
             maiores deserunt. Ducimus.</div>
     </div>
-    <div style="margin: 0px 35px;" class="team">
-        <div class="team-card">
-            <div style="background-image: url('/assets/images/team/team-1.jpg');background-size:cover" class="image">
-                <div class="socials">
-                    <i class="cib-facebook-f"></i>
-                    <i class="cib-twitter"></i>
-                    <i class="cib-linkedin"></i>
-                    <i class="cib-instagram"></i>
-                </div>
+    <div class="team-card">
+        <div style="background-image: url('/assets/images/team/team-1.jpg');background-size:cover" class="image">
+            <div class="socials">
+                <i class="cib-facebook-f"></i>
+                <i class="cib-twitter"></i>
+                <i class="cib-linkedin"></i>
+                <i class="cib-instagram"></i>
             </div>
-            <div class="name">Salah Omer</div>
-            <div class="pos">CEO & CO-Founder</div>
         </div>
-        <div class="team-card">
-            <div style="background-image: url('/assets/images/team/team-2.jpg');background-size:cover" class="image">
-                <div class="socials">
-                    <i class="cib-facebook-f"></i>
-                    <i class="cib-twitter"></i>
-                    <i class="cib-linkedin"></i>
-                    <i class="cib-instagram"></i>
-                </div>
-            </div>
-            <div class="name">Salah Omer</div>
-            <div class="pos">CEO & CO-Founder</div>
-        </div>
+        <div class="name">Salah Omer</div>
+        <div class="pos">CEO & CO-Founder</div>
     </div>
-
-</div>
-<div class="team">
+    <div class="team-card">
+        <div style="background-image: url('/assets/images/team/team-2.jpg');background-size:cover" class="image">
+            <div class="socials">
+                <i class="cib-facebook-f"></i>
+                <i class="cib-twitter"></i>
+                <i class="cib-linkedin"></i>
+                <i class="cib-instagram"></i>
+            </div>
+        </div>
+        <div class="name">Salah Omer</div>
+        <div class="pos">CEO & CO-Founder</div>
+    </div>
     <div class="team-card">
         <div style="background-image: url('/assets/images/team/team-3.jpg');background-size:cover" class="image">
             <div class="socials">
@@ -166,7 +162,7 @@
         <div class="name">Salah Omer</div>
         <div class="pos">CEO & CO-Founder</div>
     </div>
-     <div class="team-card">
+    <div class="team-card">
         <div style="background-image: url('/assets/images/team/team-4.jpg');background-size:cover" class="image">
             <div class="socials">
                 <i class="cib-facebook-f"></i>
@@ -203,4 +199,6 @@
         <div class="pos">CEO & CO-Founder</div>
     </div>
 </div>
+
+
 <br><br><br>
