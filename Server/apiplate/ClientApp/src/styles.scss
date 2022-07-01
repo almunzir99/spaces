@@ -9,10 +9,16 @@
 @font-face {
     src: url("assets/fonts/poppins.ttf");
     font-family: "poppins";
+    unicode-range:  U+0000-007F;
+}
+@font-face {
+    src: url("assets/fonts/noto.ttf");
+    font-family: "poppins";
+    unicode-range: U+0600-06FF;
 }
 
 * {
-    font-family: "poppins";
+    font-family: "poppins","noto";
     outline: none;
     box-sizing: border-box;
 }
