@@ -238,7 +238,7 @@ export class RegionsComponent implements OnInit {
     ];
     this.modalService.open(new FormBuilderModal(
       {
-        title: item ? "Update User Info" : "New User",
+        title: item ? "Update Region Info" : "New Region",
         controlGroups: form
       }
     )).onApprove((result) => {

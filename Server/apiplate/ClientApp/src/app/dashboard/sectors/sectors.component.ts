@@ -232,7 +232,7 @@ export class SectorsComponent implements OnInit {
     ];
     this.modalService.open(new FormBuilderModal(
       {
-        title: item ? "Update User Info" : "New User",
+        title: item ? "Update Sector Info" : "New Sector",
         controlGroups: form
       }
     )).onApprove((result) => {

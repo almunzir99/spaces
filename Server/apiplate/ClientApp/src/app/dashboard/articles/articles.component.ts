@@ -262,7 +262,7 @@ export class ArticlesComponent implements OnInit {
       ];
       this.modalService.open(new FormBuilderModal(
         {
-          title: item ? "Update User Info" : "New User",
+          title: item ? "Update Article Info" : "New Article",
           controlGroups: form
         }
       )).onApprove((result) => {
