@@ -29,6 +29,7 @@ namespace apiplate.Mapping
             CreateMap<RegionResource, Region>().ReverseMap();
             CreateMap<RegionRequestResource, Region>().ReverseMap();
             CreateMap<SliderResource, Slider>().ReverseMap();
+            CreateMap<SliderRequestResource, Slider>().ReverseMap();
             CreateMap<TeamRequestResource, Team>().ReverseMap();
             CreateMap<TeamResource, Team>().ReverseMap();
             CreateMap<TeamRequestResource, Team>().ReverseMap();

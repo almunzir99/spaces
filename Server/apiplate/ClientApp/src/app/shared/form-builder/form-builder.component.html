@@ -41,7 +41,7 @@
                             <div class="ui label">
                                 <i [attr.class]="control.icon"></i>
                             </div>
-                            <input [formControlName]="control.name" [attr.name]="control.name" [(ngModel)]="resultObject[control.name]" type="url" placeholder="image link">
+                            <input [formControlName]="control.name" [attr.name]="control.name" [(ngModel)]="resultObject[control.name]" type="url" [attr.placeholder]="control.title">
                         </div>
                     </div>
                     <!-- 5. Local File Picker -->

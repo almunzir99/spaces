@@ -5,7 +5,7 @@ import { Translation } from "./translation.model";
 export class Slider extends Base {
     title:Translation;
     subtitle:Translation;
-    descriptions:Translation;
-    Image:Image;
+    description:Translation;
+    image:Image;
     url:string;
 }
