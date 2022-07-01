@@ -11,28 +11,42 @@ SwiperCore.use([Autoplay])
 export class HomeComponent implements OnInit {
   currentIndex = 0;
   swiper?: SwiperComponent;
+  newsSliderBreakpoints = {
+    1040: {
+      slidesPerView: 4,
+      spaceBetween: 10
+    },
+    950: {
+      slidesPerView: 3,
+      spaceBetween: 10
+    },
+    650: {
+      slidesPerView: 2,
+      spaceBetween: 20,
+      }
+  };
   config: SwiperOptions = {
     slidesPerView: 1,
-      autoplay: {
-      delay: 3000,
+    autoplay: {
+      delay: 4000,
       disableOnInteraction: false,
     },
-    loop:true,
+    loop: true,
     pagination: { clickable: true },
     scrollbar: { draggable: true },
   };
-  onSwiper(swiper:SwiperComponent) {
+  onSwiper(swiper: SwiperComponent) {
     this.swiper = swiper;
   }
 
-  onSlideChange([swiper]:Swiper[]) {
+  onSlideChange([swiper]: Swiper[]) {
     this.currentIndex = swiper.activeIndex;
   }
   constructor() { }
-  
+
   ngOnInit(): void {
   }
-  ngAfterViewInit(){
+  ngAfterViewInit() {
   }
 
 }

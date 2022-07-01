@@ -32,7 +32,9 @@
     </div>
     <div [class.opened]="opened" class="main-nav">
         <div class="logo">
-            <img src="assets/logo.svg">
+            <img class="image" src="assets/logo.svg">
+            <img class="icon" src="assets/icon.svg">
+
         </div>
         <div class="navbar-list">
             <ul class="main-list">
@@ -51,8 +53,13 @@
             <div (click)="opened = !opened" class="act-button icon basic">
                 <i class="cil-menu"></i>
             </div>
-            <div class="act-button">Donate Now</div>
-            <div class="act-button accent">Get Involved</div>
+            <div class="act-button">
+                <i class="las la-donate icon"></i>
+                <span class="text">Donate</span></div>
+            <div class="act-button accent">
+                <i class="las la-handshake icon"></i>
+                <span class="text">Get Involved</span>
+            </div>
         </div>
     </div>
     

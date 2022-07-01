@@ -72,10 +72,16 @@ nav {
         transition: 1s max-height ease;
 
         .logo {
-            margin: 0px 20px;
+            margin: 5px 20px;
+            display: flex;
+            align-items: center;
+            height: fit-content;
 
             img {
                 width: 215px;
+            }
+            img.icon{
+                display: none;
             }
         }
 
@@ -140,8 +146,7 @@ nav {
             align-items: center;
 
             .act-button {
-                height: 40px;
-                width: 100px;
+                 
                 color: white;
                 display: flex;
                 align-items: center;
@@ -150,6 +155,12 @@ nav {
                 background-color: $primary-color;
                 margin: 0px 10px;
                 font-size: 14px;
+                padding: 10px;
+                i.icon{
+                    font-size: 25px;
+                    margin: 0px 8px;
+                    display: none;
+                }
             }
 
             .act-button.accent {
@@ -158,8 +169,7 @@ nav {
 
             .act-button.icon.basic {
                 color: $primary-color;
-                width: 38px;
-                height: 38px;
+                padding: 8px;
                 font-size: 22px;
                 background-color: white;
                 border: 2px solid $primary-color;
@@ -207,7 +217,31 @@ nav {
         }
     }
 }
-
+@media screen and (max-width:550px) {
+    nav{
+        .main-nav{
+            .logo{
+                img.image{
+                    display: none;
+                }
+                img.icon{
+                    width: 70px;
+                    display: block;
+                }
+            }
+            .act-buttons{
+                .act-button{
+                    i.icon{
+                        display: initial;
+                    }
+                    .text{
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
 @media screen and (max-width:920px) {
     nav {
         .main-nav {

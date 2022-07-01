@@ -1,4 +1,4 @@
-<swiper [config]="config" #swiper (swiper)="onSwiper($event)" (slideChange)="onSlideChange($event)">
+<swiper class="hero-swiper" [config]="config" #swiper (swiper)="onSwiper($event)" (slideChange)="onSlideChange($event)">
     <ng-template swiperSlide>
         <div class="hero">
             <img class="hero-img" src="assets/temp/images/hero-banner.jpg" alt="">
@@ -158,38 +158,26 @@
             maiores deserunt. Ducimus.</div>
     </div>
     <div class="logos-section">
-        <table>
-            <tbody>
-                <tr>
-                    <td>
-                        <img src="assets/temp/images/client-1.png" alt="">
-
-                    </td>
-                    <td>
-                        <img src="assets/temp/images/client-2.png" alt="">
-
-                    </td>
-                    <td>
-                        <img src="assets/temp/images/client-3.png" alt="">
-
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="assets/temp/images/client-4.png" alt="">
-
-                    </td>
-                    <td>
-                        <img src="assets/temp/images/client-5.png" alt="">
-
-                    </td>
-                    <td>
-                        <img src="assets/temp/images/client-6.png" alt="">
-
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+       <div class="logos">
+        <div class="logo-container">
+            <img src="assets/temp/images/client-1.png" alt="">
+        </div>
+        <div class="logo-container">
+            <img src="assets/temp/images/client-2.png" alt="">
+        </div>
+        <div class="logo-container">
+            <img src="assets/temp/images/client-3.png" alt="">
+        </div>
+        <div class="logo-container">
+            <img src="assets/temp/images/client-4.png" alt="">
+        </div>
+        <div class="logo-container">
+            <img src="assets/temp/images/client-5.png" alt="">
+        </div>
+        <div class="logo-container">
+            <img src="assets/temp/images/client-6.png" alt="">
+        </div>
+       </div>
     </div>
 
 </div>
@@ -232,7 +220,7 @@
     <h1 class="title">Testimonials</h1>
     <hr class="sep">
     <h3>WHAT PEOPLE SAY ABOUT US</h3>
-    <swiper [autoplay]="{delay:1000}" [slidesPerView]="1">
+    <swiper [autoplay]="{delay:1000}" [slidesPerView]="1" >
         <ng-template swiperSlide>
             <div class="testimonial">
                 <p class="content">
@@ -293,11 +281,11 @@
         </div>
     </div>
     <div class="news">
-        <swiper [slidesPerView]="3" [autoplay]="{delay:2000}">
+        <swiper  [autoplay]="{delay:3000}" [breakpoints]="newsSliderBreakpoints">
             <ng-template swiperSlide>
                 <div class="new-card">
                     <img src="assets/temp/images/portfolio-1.jpg" alt="">
-                    <div class="content">
+                    <div class="content"> 
                         <div class="author">
                             <i class="cil-user"></i>
                             By Almunzir Alhassan

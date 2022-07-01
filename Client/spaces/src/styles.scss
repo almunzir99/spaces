@@ -40,3 +40,10 @@
     padding: 0px;
     margin: 0px;
 }
+/********************** global news slide *******************/
+.news-section{
+    .swiper-slide{
+        display: flex;
+        justify-content: center;
+    }
+}
