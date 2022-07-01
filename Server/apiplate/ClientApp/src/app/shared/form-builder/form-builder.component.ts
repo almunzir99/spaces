@@ -50,7 +50,7 @@ export class FormBuilderComponent implements OnInit {
     this.submitEventEmitter.emit(this.resultObject);
   }
   onCancel() {
-    console.log(this.resultObject);
+    console.log(this.formGroup);
     this.cancelEventEmitter.emit();
   }
   editorChange(controlName: string, content) {

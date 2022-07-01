@@ -98,7 +98,8 @@ namespace apiplate.Services
             return _context.Projects.Include(c => c.Author)
             .Include(c => c.Title).Include(c => c.Subtitle).Include(c => c.Image)
             .Include(c => c.Content).Include(c => c.Tags)
-            .ThenInclude(c => c.Translation).Include(c => c.Sector).Include(c => c.Region);
+            .ThenInclude(c => c.Translation)
+            .Include(c => c.Sector).ThenInclude(c => c.Title).Include(c => c.Region).ThenInclude(c => c.Title);
 
 
         }

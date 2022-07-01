@@ -20,7 +20,7 @@
                 <!-- 2.Multi-selection -->
                 <div *ngIf="control.controlType == controlTypes.MultiSelection" class="field">
                     <label>{{control.title}}</label>
-                    <fui-multi-select [(ngModel)]="resultObject[control.name]" class="selection" [placeholder]="control.title">
+                    <fui-multi-select  [(ngModel)]="resultObject[control.name]" class="selection" [placeholder]="control.title">
                         <fui-select-option *ngFor="let item of control.data" [value]="item"></fui-select-option>
                     </fui-multi-select>
                 </div>
