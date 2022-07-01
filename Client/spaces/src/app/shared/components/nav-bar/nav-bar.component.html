@@ -39,7 +39,7 @@
         <div class="navbar-list">
             <ul class="main-list">
                 <li class="main-menu-item" [routerLink]="item.children != undefined ? undefined : ['/','en',item.route]" *ngFor="let item of navList"><p>{{item.title}}</p>
-                    <div   class="sub-menu-container">
+                    <div  *ngIf="item.children?.length! > 0"   class="sub-menu-container">
                         <ul>
                             <li [routerLink]="['/','en',item.route,subItem.route]" class="submenu-item" *ngFor="let subItem of item.children">
                                 {{subItem.title}}

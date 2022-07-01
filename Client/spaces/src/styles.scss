@@ -47,3 +47,34 @@
         justify-content: center;
     }
 }
+/******************************** input style ******************************/
+.input-container {
+    padding: 15px;
+    background-color: #f0eeee;
+    margin: 10px;
+    border: 1px solid transparent;
+
+
+    input,
+    textarea,select {
+        border: none;
+        background-color: transparent;
+        color: black;
+        font-size: 16px;
+        outline: none;
+        width: 100%;
+    }
+}
+.input-container:focus-within{
+    border: 1px solid $primary-color;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+
+    .input-container {
+        flex: 1;
+        min-width: 250px;
+    }
+}
