@@ -150,6 +150,9 @@ code {
     color: red;
     background-color: rgba(255, 146, 146, 0.288);
 }
+.ui.button.accent,.ui.yellow.button{
+    background-color: $accent-color!important;
+}
 
 .ui.primary.button,
 .ui.primary.buttons .button {
