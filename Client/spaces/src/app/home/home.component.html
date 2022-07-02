@@ -62,7 +62,7 @@
                 <div [textContent]="currentLang == 'ar' ? sector.title?.ar : sector.title?.en" class="card-title"></div>
             </div>
         </div>
-         
+
     </div>
 </div>
 <!-- Partners Area -->
@@ -84,7 +84,7 @@
             <a [attr.href]="partner.url" *ngFor="let partner of partners" class="logo-container">
                 <img [src]="partner.logo?.path" alt="">
             </a>
-             
+
         </div>
     </div>
 
@@ -130,20 +130,23 @@
     <h3>WHAT PEOPLE SAY ABOUT US</h3>
     <swiper [autoplay]="{delay:3000}" [slidesPerView]="1">
         <ng-template *ngFor="let testimonial of testimonials" swiperSlide>
-            <div  class="testimonial">
-                <p  [textContent]="currentLang == 'ar' ? testimonial.content?.ar : testimonial.content?.en" class="content">
-                  
+            <div class="testimonial">
+                <p [textContent]="currentLang == 'ar' ? testimonial.content?.ar : testimonial.content?.en"
+                    class="content">
+
                 </p>
                 <div class="author">
                     <img [src]="testimonial.image?.path" alt="">
                     <div>
-                        <div [textContent]="currentLang == 'ar' ? testimonial.author?.ar : testimonial.author?.en" class="name"></div>
-                        <div [textContent]="currentLang == 'ar' ? testimonial.job?.ar : testimonial.job?.en" class="pos">Journalist, Khartoum</div>
+                        <div [textContent]="currentLang == 'ar' ? testimonial.author?.ar : testimonial.author?.en"
+                            class="name"></div>
+                        <div [textContent]="currentLang == 'ar' ? testimonial.job?.ar : testimonial.job?.en"
+                            class="pos">Journalist, Khartoum</div>
                     </div>
                 </div>
             </div>
         </ng-template>
-        
+
     </swiper>
 </div>
 <div *ngIf="articles.length > 0" class="news-section">
@@ -159,25 +162,45 @@
         </div>
     </div>
     <div class="news">
-        <swiper [autoplay]="{delay:1000}" [breakpoints]="newsSliderBreakpoints">
+        <swiper [autoplay]="{delay:1000}">
             <ng-template *ngFor="let article of articles" swiperSlide>
                 <div class="new-card">
-                    <img [src]="article.image?.path" alt="">
-                    <div class="content">
-                        <div class="author">
-                            <i class="cil-user"></i>
-                            By <span [textContent]="currentLang == 'ar' ? article.author?.username : article.author?.username"></span>
-                        </div>
-                        <h3 [textContent]="currentLang == 'ar' ? article.title?.ar : article.title?.en"></h3>
-                        <p [textContent]="currentLang == 'ar' ? article.subtitle?.ar : article.subtitle?.en"></p>
-                        <div class="view-more">
-                            <i class="cil-arrow-right"></i>
-                            View More
+                    <div class="main-section">
+                        <img [src]="article.image?.path">
+                        <div class="overlay">
+                            <div [textContent]="currentLang == 'ar' ? article.subtitle?.ar : article.subtitle?.en"
+                                class="subtitle">
+                            </div>
+                            <h3 [textContent]="currentLang == 'ar' ? article.title?.ar : article.title?.en"
+                                class="title">
+                            </h3>
+                            <div class="date-container">
+                                <div class="date">
+                                    <div class="day">21</div>
+                                    <div class="month">July</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="extra-section">
+                        <div class="author info">
+                            <i class="las la-user-tie"></i>
+                            By: <span> {{article.author?.username}}</span>
+                        </div>
+                        <div class="info">
+                            <i class="las la-comments"></i>
+                            <span>{{article.comments?.length}} Comments</span> 
+                        </div>
+                        <div class="sep"></div>
+                        <div class="readmore">
+                            Read More
+                            <i class="las la-arrow-right"></i>
+                        </div>
+                    </div>
+
                 </div>
             </ng-template>
-             
+
         </swiper>
     </div>
 </div>

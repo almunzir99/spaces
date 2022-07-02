@@ -10,7 +10,7 @@ export class Article extends Base {
     content?: Translation;
     comment?: Translation;
     tags?: Tag[];
-    comments?:Comment[];
+    comments?:Comment[] = [];
     image?:Image;
     authorId?:number;
     author?:User;

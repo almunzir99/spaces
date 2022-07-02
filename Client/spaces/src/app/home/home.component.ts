@@ -21,10 +21,7 @@ export class HomeComponent implements OnInit {
   swiper?: SwiperComponent;
   pageLoading = false;
   newsSliderBreakpoints = {
-    1040: {
-      slidesPerView: 4,
-      spaceBetween: 10
-    },
+    
     950: {
       slidesPerView: 3,
       spaceBetween: 10
@@ -91,7 +88,7 @@ export class HomeComponent implements OnInit {
     })
   }
   configureNewsSliderBreakpoints(){
-    this.newsSliderBreakpoints[1040].slidesPerView = this.articles.length < 4 ? this.articles.length : 4;
+    // this.newsSliderBreakpoints[1040].slidesPerView = this.articles.length < 4 ? this.articles.length : 4;
     this.newsSliderBreakpoints[950].slidesPerView = this.articles.length < 3 ? this.articles.length : 3;
     this.newsSliderBreakpoints[650].slidesPerView = this.articles.length < 3 ? this.articles.length : 2;
   }
