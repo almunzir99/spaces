@@ -1,52 +1,21 @@
-<swiper class="hero-swiper" [config]="config" #swiper (swiper)="onSwiper($event)" (slideChange)="onSlideChange($event)">
-    <ng-template swiperSlide>
+<swiper *ngIf="sliders.length > 0" class="hero-swiper" [config]="config" #swiper (swiper)="onSwiper($event)"
+    (slideChange)="onSlideChange($event)">
+    <ng-template *ngFor="let slider of sliders ; let i = index;" swiperSlide>
         <div class="hero">
-            <img class="hero-img" src="assets/temp/images/hero-banner.jpg" alt="">
-            <div *ngIf="currentIndex == 1 || currentIndex == 4" class="hero-content">
+            <img class="hero-img" [src]="slider.image?.path" alt="">
+            <div *ngIf="currentIndex == i+1 || currentIndex == sliders.length+1" class="hero-content">
                 <div class="content">
-                    <div class="subtitle">Banner heading Subtitle</div>
-                    <div class="title">Banner Big Title</div>
-                    <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, magnam? At nemo
-                        sint, nisi quo </div>
-                    <div class="act-button">Read More</div>
+                    <div [textContent]="currentLang == 'ar' ? slider.subtitle?.ar : slider.subtitle?.en"
+                        class="subtitle"></div>
+                    <div [textContent]="currentLang == 'ar' ? slider.title?.ar : slider.title?.en" class="title"></div>
+                    <div [textContent]="currentLang == 'ar' ? slider.description?.ar : slider.description?.en"
+                        class="content"> </div>
+                    <div [routerLink]="slider.url" class="act-button">Read More</div>
 
                 </div>
             </div>
         </div>
     </ng-template>
-    <ng-template swiperSlide>
-        <div class="hero">
-
-            <img class="hero-img" src="assets/temp/images/hero-banner3.jpg" alt="">
-            <div *ngIf="currentIndex == 2" class="hero-content">
-                <div class="content">
-                    <div class="subtitle">Banner heading Subtitle</div>
-                    <div class="title">Banner Big Title</div>
-                    <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, magnam? At nemo
-                        sint, nisi quo </div>
-                    <div class="act-button">Read More</div>
-
-                </div>
-
-            </div>
-        </div>
-    </ng-template>
-    <ng-template swiperSlide>
-        <div class="hero">
-            <img class="hero-img" src="assets/temp/images/hero-banner2.jpg" alt="">
-            <div *ngIf="currentIndex == 3" class="hero-content">
-                <div class="content">
-                    <div class="subtitle">Banner heading Subtitle</div>
-                    <div class="title">Banner Big Title</div>
-                    <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, magnam? At nemo
-                        sint, nisi quo </div>
-                    <div class="act-button">Read More</div>
-
-                </div>
-            </div>
-        </div>
-    </ng-template>
-
 </swiper>
 <!-- intro section -->
 <div class="intro-section">
@@ -85,62 +54,15 @@
     <hr class="sep">
     <h3>Discover More About Spaces Focus Sectors</h3>
     <div class="sectors-cards">
-        <div class="sector-card-container">
+        <div *ngFor="let sector of sectors" class="sector-card-container">
             <div class="sector-card">
                 <div class="icon-container">
-                    <svg-icon class="icon" src="assets/icons/fsl.svg" [applyClass]="true"></svg-icon>
+                    <svg-icon class="icon" [src]="sector.icon?.path!" [applyClass]="true"></svg-icon>
                 </div>
-                <div class="card-title">FSL & Narration</div>
+                <div [textContent]="currentLang == 'ar' ? sector.title?.ar : sector.title?.en" class="card-title"></div>
             </div>
         </div>
-        <div class="sector-card-container">
-            <div class="sector-card">
-                <div class="icon-container">
-                    <svg-icon class="icon" src="assets/icons/water.svg" [applyClass]="true"></svg-icon>
-                </div>
-                <div class="card-title">WASH</div>
-            </div>
-        </div>
-        <div class="sector-card-container">
-            <div class="sector-card">
-                <div class="icon-container">
-                    <svg-icon class="icon" src="assets/icons/medicine.svg" [applyClass]="true"></svg-icon>
-                </div>
-                <div class="card-title">Health</div>
-            </div>
-        </div>
-        <div class="sector-card-container">
-            <div class="sector-card">
-                <div class="icon-container">
-                    <svg-icon class="icon" src="assets/icons/shield.svg" [applyClass]="true"></svg-icon>
-                </div>
-                <div class="card-title">Protection</div>
-            </div>
-        </div>
-        <div class="sector-card-container">
-            <div class="sector-card">
-                <div class="icon-container">
-                    <svg-icon class="icon" src="assets/icons/education.svg" [applyClass]="true"></svg-icon>
-                </div>
-                <div class="card-title">Education</div>
-            </div>
-        </div>
-        <div class="sector-card-container">
-            <div class="sector-card">
-                <div class="icon-container">
-                    <svg-icon class="icon" src="assets/icons/handshake.svg" [applyClass]="true"></svg-icon>
-                </div>
-                <div class="card-title">Peace Building</div>
-            </div>
-        </div>
-        <div class="sector-card-container">
-            <div class="sector-card">
-                <div class="icon-container">
-                    <svg-icon class="icon" src="assets/icons/emergency.svg" [applyClass]="true"></svg-icon>
-                </div>
-                <div class="card-title">Emergency</div>
-            </div>
-        </div>
+         
     </div>
 </div>
 <!-- Partners Area -->
@@ -158,26 +80,12 @@
             maiores deserunt. Ducimus.</div>
     </div>
     <div class="logos-section">
-       <div class="logos">
-        <div class="logo-container">
-            <img src="assets/temp/images/client-1.png" alt="">
+        <div class="logos">
+            <a [attr.href]="partner.url" *ngFor="let partner of partners" class="logo-container">
+                <img [src]="partner.logo?.path" alt="">
+            </a>
+             
         </div>
-        <div class="logo-container">
-            <img src="assets/temp/images/client-2.png" alt="">
-        </div>
-        <div class="logo-container">
-            <img src="assets/temp/images/client-3.png" alt="">
-        </div>
-        <div class="logo-container">
-            <img src="assets/temp/images/client-4.png" alt="">
-        </div>
-        <div class="logo-container">
-            <img src="assets/temp/images/client-5.png" alt="">
-        </div>
-        <div class="logo-container">
-            <img src="assets/temp/images/client-6.png" alt="">
-        </div>
-       </div>
     </div>
 
 </div>
@@ -216,59 +124,29 @@
         </swiper>
     </div>
 </div>
-<div class="testimonial-section">
+<div *ngIf="testimonials.length > 0" class="testimonial-section">
     <h1 class="title">Testimonials</h1>
     <hr class="sep">
     <h3>WHAT PEOPLE SAY ABOUT US</h3>
-    <swiper [autoplay]="{delay:1000}" [slidesPerView]="1" >
-        <ng-template swiperSlide>
-            <div class="testimonial">
-                <p class="content">
-                    The legal definition of a charitable organization (and of charity) varies between countries and in
-                    some instances regions of the country. The regulation, the tax treatment.
+    <swiper [autoplay]="{delay:3000}" [slidesPerView]="1">
+        <ng-template *ngFor="let testimonial of testimonials" swiperSlide>
+            <div  class="testimonial">
+                <p  [textContent]="currentLang == 'ar' ? testimonial.content?.ar : testimonial.content?.en" class="content">
+                  
                 </p>
                 <div class="author">
-                    <img src="assets/temp/images/bio1-150x150.jpg" alt="">
+                    <img [src]="testimonial.image?.path" alt="">
                     <div>
-                        <div class="name">Ahmed Khalid</div>
-                        <div class="pos">Journalist, Khartoum</div>
+                        <div [textContent]="currentLang == 'ar' ? testimonial.author?.ar : testimonial.author?.en" class="name"></div>
+                        <div [textContent]="currentLang == 'ar' ? testimonial.job?.ar : testimonial.job?.en" class="pos">Journalist, Khartoum</div>
                     </div>
                 </div>
             </div>
         </ng-template>
-        <ng-template swiperSlide>
-            <div class="testimonial">
-                <p class="content">
-                    The legal definition of a charitable organization (and of charity) varies between countries and in
-                    some instances regions of the country. The regulation, the tax treatment.
-                </p>
-                <div class="author">
-                    <img src="assets/temp/images/bio2-150x150.jpg" alt="">
-                    <div>
-                        <div class="name">Ahmed Khalid</div>
-                        <div class="pos">Journalist, Khartoum</div>
-                    </div>
-                </div>
-            </div>
-        </ng-template>
-        <ng-template swiperSlide>
-            <div class="testimonial">
-                <p class="content">
-                    The legal definition of a charitable organization (and of charity) varies between countries and in
-                    some instances regions of the country. The regulation, the tax treatment.
-                </p>
-                <div class="author">
-                    <img src="assets/temp/images/bio1-150x150.jpg" alt="">
-                    <div>
-                        <div class="name">Ahmed Khalid</div>
-                        <div class="pos">Journalist, Khartoum</div>
-                    </div>
-                </div>
-            </div>
-        </ng-template>
+        
     </swiper>
 </div>
-<div class="news-section">
+<div *ngIf="articles.length > 0" class="news-section">
     <div class="intro-sec">
         <div class="content">
             <h4 class="subtitle">
@@ -281,34 +159,17 @@
         </div>
     </div>
     <div class="news">
-        <swiper  [autoplay]="{delay:3000}" [breakpoints]="newsSliderBreakpoints">
-            <ng-template swiperSlide>
+        <swiper [autoplay]="{delay:1000}" [breakpoints]="newsSliderBreakpoints">
+            <ng-template *ngFor="let article of articles" swiperSlide>
                 <div class="new-card">
-                    <img src="assets/temp/images/portfolio-1.jpg" alt="">
-                    <div class="content"> 
-                        <div class="author">
-                            <i class="cil-user"></i>
-                            By Almunzir Alhassan
-                        </div>
-                        <h3>Article Heading 1</h3>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex a porro  </p>
-                        <div class="view-more">
-                            <i class="cil-arrow-right"></i>
-                            View More
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
-            <ng-template swiperSlide>
-                <div class="new-card">
-                    <img src="assets/temp/images/portfolio-2.jpg" alt="">
+                    <img [src]="article.image?.path" alt="">
                     <div class="content">
                         <div class="author">
                             <i class="cil-user"></i>
-                            By Almunzir Alhassan
+                            By <span [textContent]="currentLang == 'ar' ? article.author?.username : article.author?.username"></span>
                         </div>
-                        <h3>Article Heading 1</h3>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex a porro  </p>
+                        <h3 [textContent]="currentLang == 'ar' ? article.title?.ar : article.title?.en"></h3>
+                        <p [textContent]="currentLang == 'ar' ? article.subtitle?.ar : article.subtitle?.en"></p>
                         <div class="view-more">
                             <i class="cil-arrow-right"></i>
                             View More
@@ -316,41 +177,8 @@
                     </div>
                 </div>
             </ng-template>
-            <ng-template swiperSlide>
-                <div class="new-card">
-                    <img src="assets/temp/images/portfolio-3.jpg" alt="">
-                    <div class="content">
-                        <div class="author">
-                            <i class="cil-user"></i>
-                            By Almunzir Alhassan
-                        </div>
-                        <h3>Article Heading 1</h3>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex a porro  </p>
-                        <div class="view-more">
-                            <i class="cil-arrow-right"></i>
-                            View More
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
-            <ng-template swiperSlide>
-                <div class="new-card">
-                    <img src="assets/temp/images/portfolio-4.jpg" alt="">
-                    <div class="content">
-                        <div class="author">
-                            <i class="cil-user"></i>
-                            By Almunzir Alhassan
-                        </div>
-                        <h3>Article Heading 1</h3>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex a porro  </p>
-                        <div class="view-more">
-                            <i class="cil-arrow-right"></i>
-                            View More
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
+             
         </swiper>
     </div>
 </div>
- <app-preloader></app-preloader>
+<app-preloader [closed]="!pageLoading"></app-preloader>

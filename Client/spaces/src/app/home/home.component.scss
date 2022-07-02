@@ -15,6 +15,7 @@
         justify-content: center;
         align-items: center;
         color: white;
+        background-color: rgba(0, 0, 0, 0.432);
 
         .content {
             width: 70%;
@@ -502,7 +503,6 @@
         height: 65%;
         display: flex;
         justify-content: center;
-
         // swiper {
         //     width: 85%;
         // }
@@ -512,6 +512,8 @@
             width: 300px;
             background-color: whitesmoke;
             cursor: pointer;
+            margin: 0px 15px;
+
 
             img {
                 height: 55%;
@@ -561,6 +563,7 @@
 .act-button.accent {
     background-color: $accent-color;
 }
+
 @media screen and (max-width:695px) {
     .hero {
         .hero-content {
@@ -591,6 +594,7 @@
         }
     }
 }
+
 @media screen and (max-width:850px) {
     .intro-section {
         .images-section {
@@ -615,6 +619,7 @@
         }
     }
 }
+
 @media screen and (max-width:878px) {
     .partners-section {
         flex-direction: column;
@@ -626,6 +631,7 @@
         }
     }
 }
+
 @media screen and (max-width:870px) {
     .media-section {
         .video-section {
@@ -658,6 +664,7 @@
         }
     }
 }
+
 @media screen and (max-width:550px) {
     .testimonial-section {
         swiper {
