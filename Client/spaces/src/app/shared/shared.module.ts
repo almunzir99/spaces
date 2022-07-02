@@ -3,13 +3,17 @@ import { CommonModule } from '@angular/common';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
+import { PreloaderComponent } from './components/preloader/preloader.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 
 
 @NgModule({
   declarations: [
     NavBarComponent,
-    FooterComponent
+    FooterComponent,
+    PreloaderComponent,
+    SpinnerComponent,
   ],
   imports: [
     CommonModule,
@@ -17,7 +21,9 @@ import { RouterModule } from '@angular/router';
   ],
   exports:[
     NavBarComponent,
-    FooterComponent
+    FooterComponent,
+    PreloaderComponent,
+
   ]
 })
 export class SharedModule { }

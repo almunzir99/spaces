@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { SwiperModule } from 'swiper/angular';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomeRoutingModule,
     SwiperModule,
     HttpClientModule,
+    SharedModule,
     AngularSvgIconModule.forRoot()
   ]
 })
