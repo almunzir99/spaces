@@ -4,6 +4,7 @@ import { WhereWeWorkComponent } from './where-we-work.component';
 import { WhereWeWorkRoutingModule } from './where-we-work-routing.module';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -15,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     WhereWeWorkRoutingModule,
     HttpClientModule,
+    SharedModule,
     AngularSvgIconModule.forRoot()
   ]
 })
