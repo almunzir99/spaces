@@ -91,6 +91,12 @@ export class MessagesComponent implements OnInit {
         sortable: true
       },
       {
+        title: "subject",
+        prop: "subject",
+        show: true,
+        sortable: true
+      },
+      {
         title: "Content",
         prop: "content",
         show: true,

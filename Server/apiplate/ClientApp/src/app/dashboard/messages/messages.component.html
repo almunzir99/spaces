@@ -18,13 +18,13 @@
     <data-table (sortChange)="onSortChange($event)" [(pageIndex)]="pageIndex" [total-items]="totalRecords" [page-size]="pageSize" (pageIndexChanged)="pageIndexChanged($event)" [cell-template]="cellTemplate" [loading]="isDataLoading" [cols]="cols" [rows]="data">
         <ng-template #cellTemplate let-rowData="rowData" let-data="cellData" let-col="colIndex" let-row="rowIndex">
             <ng-container [ngSwitch]="col">
-                <ng-container *ngSwitchCase="4">
+                <ng-container *ngSwitchCase="5">
                     <div style="max-width: 200px;">
-                        {{data.substr(0,300)}}
+                        {{data?.substr(0,300)}}
                     </div>
 
                 </ng-container>
-                <ng-container *ngSwitchCase="6">
+                <ng-container *ngSwitchCase="7">
                     <div class="actions">
 
                         <div style="margin: 5px;" class="ui yellow tiny icon button">
