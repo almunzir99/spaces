@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
     ]).pipe(map(([sliders, sectors, partners, articles,testimonials]) => {
       return { sliders, sectors, partners, articles,testimonials }
     }));
-    obs.subscribe({
+   var sub = obs.subscribe({
       next: (res) => {
         this.pageLoading = false;
         this.sliders = res.sliders.data!;
@@ -86,6 +86,7 @@ export class HomeComponent implements OnInit {
         console.log(err);
       }
     })
+    this.subscription.add(sub);
   }
   configureNewsSliderBreakpoints(){
     // this.newsSliderBreakpoints[1040].slidesPerView = this.articles.length < 4 ? this.articles.length : 4;
@@ -97,6 +98,9 @@ export class HomeComponent implements OnInit {
     this.loadData();
   }
   ngAfterViewInit() {
+  }
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
 }

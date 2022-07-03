@@ -162,7 +162,7 @@
         </div>
     </div>
     <div class="news">
-        <swiper [autoplay]="{delay:1000}">
+        <swiper [autoplay]="{delay:1000}" [breakpoints]="newsSliderBreakpoints">
             <ng-template *ngFor="let article of articles" swiperSlide>
                 <div class="new-card">
                     <div class="main-section">

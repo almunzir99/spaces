@@ -113,7 +113,7 @@
         </div>
     </div>
 </div>
-<div class="team-section">
+<div *ngIf="team.length > 0" class="team-section">
     <div class="intro">
         <div class="pattern pattern-diagonal-lines-sm gray-light"></div>
         <div class="subtitle">
@@ -126,8 +126,8 @@
             reprehenderit quod corporis tempora nulla quibusdam aut id iusto itaque illum saepe recusandae et, inventore
             maiores deserunt. Ducimus.</div>
     </div>
-    <div class="team-card">
-        <div style="background-image: url('/assets/images/team/team-1.jpg');background-size:cover" class="image">
+    <div *ngFor="let member of team" class="team-card">
+        <div [style.background-image]="'url(' + member.image?.path + ')'" style="background-size:cover" class="image">
             <div class="socials">
                 <i class="cib-facebook-f"></i>
                 <i class="cib-twitter"></i>
@@ -135,70 +135,12 @@
                 <i class="cib-instagram"></i>
             </div>
         </div>
-        <div class="name">Salah Omer</div>
-        <div class="pos">CEO & CO-Founder</div>
+        <div [textContent]="currentLang == 'ar' ? member.name?.ar : member.name?.en" class="name"></div>
+        <div  [textContent]="currentLang == 'ar' ? member.position?.ar : member.position?.en"class="pos"></div>
     </div>
-    <div class="team-card">
-        <div style="background-image: url('/assets/images/team/team-2.jpg');background-size:cover" class="image">
-            <div class="socials">
-                <i class="cib-facebook-f"></i>
-                <i class="cib-twitter"></i>
-                <i class="cib-linkedin"></i>
-                <i class="cib-instagram"></i>
-            </div>
-        </div>
-        <div class="name">Salah Omer</div>
-        <div class="pos">CEO & CO-Founder</div>
-    </div>
-    <div class="team-card">
-        <div style="background-image: url('/assets/images/team/team-3.jpg');background-size:cover" class="image">
-            <div class="socials">
-                <i class="cib-facebook-f"></i>
-                <i class="cib-twitter"></i>
-                <i class="cib-linkedin"></i>
-                <i class="cib-instagram"></i>
-            </div>
-        </div>
-        <div class="name">Salah Omer</div>
-        <div class="pos">CEO & CO-Founder</div>
-    </div>
-    <div class="team-card">
-        <div style="background-image: url('/assets/images/team/team-4.jpg');background-size:cover" class="image">
-            <div class="socials">
-                <i class="cib-facebook-f"></i>
-                <i class="cib-twitter"></i>
-                <i class="cib-linkedin"></i>
-                <i class="cib-instagram"></i>
-            </div>
-        </div>
-        <div class="name">Salah Omer</div>
-        <div class="pos">CEO & CO-Founder</div>
-    </div>
-    <div class="team-card">
-        <div style="background-image: url('/assets/images/team/team-5.jpg');background-size:cover" class="image">
-            <div class="socials">
-                <i class="cib-facebook-f"></i>
-                <i class="cib-twitter"></i>
-                <i class="cib-linkedin"></i>
-                <i class="cib-instagram"></i>
-            </div>
-        </div>
-        <div class="name">Salah Omer</div>
-        <div class="pos">CEO & CO-Founder</div>
-    </div>
-    <div class="team-card">
-        <div style="background-image: url('/assets/images/team/team-6.jpg');background-size:cover" class="image">
-            <div class="socials">
-                <i class="cib-facebook-f"></i>
-                <i class="cib-twitter"></i>
-                <i class="cib-linkedin"></i>
-                <i class="cib-instagram"></i>
-            </div>
-        </div>
-        <div class="name">Salah Omer</div>
-        <div class="pos">CEO & CO-Founder</div>
-    </div>
+    
 </div>
 
 
 <br><br><br>
+<app-preloader [closed]="!pageLoading"></app-preloader>

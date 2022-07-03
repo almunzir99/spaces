@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { forkJoin, map, Subscription } from 'rxjs';
+import { Team } from '../core/models/team.model';
+import { AboutService } from '../core/services/about.service';
+import { TranslationService } from '../core/services/translation.service';
 
 @Component({
   selector: 'app-about',
@@ -44,9 +48,37 @@ export class AboutComponent implements OnInit {
     "Create networks with local, regional and international partners.",
     "Empower refugees & IDPs skills through vocational schools",
   ];
-  constructor() { }
+  team: Team[] = [];
+  pageLoading = false;
+  subscription = new Subscription();
+  currentLang = "en";
+  constructor(private _service: AboutService, private _translationService: TranslationService) { }
+  loadData() {
+    this.pageLoading = true;
+    var obs = forkJoin([
+      this._service.getTeam(),
 
-  ngOnInit(): void {
+    ]).pipe(map(([team]) => {
+      return { team }
+    }));
+    var sub = obs.subscribe({
+      next: (res) => {
+        this.pageLoading = false;
+        this.team = res.team.data!;
+
+      },
+      error: (err) => {
+        this.pageLoading = false;
+        console.log(err);
+      }
+    })
+    this.subscription.add(sub);
   }
-
+  ngOnInit(): void {
+    this.currentLang = this._translationService.currentLang;
+    this.loadData();
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }
