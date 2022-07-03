@@ -38,30 +38,30 @@
     </div>
     <div class="contact-form">
         <h1>Drop Us A Message</h1>
-        <form>
+        <form #contactForm="ngForm">
             <div class="row">
                 <div class="input-container">
-                    <input type="text" placeholder="Your Name">
+                    <input required [(ngModel)]="message.fullName" name="fullname" type="text" placeholder="Your Name">
                 </div>
                 <div class="input-container">
-                    <input type="text" placeholder="Email">
+                    <input required [(ngModel)]="message.email" name="email" type="text" placeholder="Email">
                 </div>
             </div>
             <div class="row">
                 <div class="input-container">
-                    <input type="text" placeholder="Phone Number">
+                    <input required [(ngModel)]="message.phone" name="phone" type="text" placeholder="Phone Number">
                 </div>
                 <div class="input-container">
-                    <input type="text" placeholder="Subject">
+                    <input required [(ngModel)]="message.subject" name="subject" type="text" placeholder="Subject">
                 </div>
             </div>
             <div class="row">
                 <div class="input-container">
-                    <textarea name="message" placeholder="Your Message..." cols="30" rows="10"></textarea>
+                    <textarea required [(ngModel)]="message.content" name="content" name="message" placeholder="Your Message..." cols="30" rows="10"></textarea>
                 </div>
-            </div>
+            </div> 
+            <input (click)="sendMessage()"  type="submit" class="act-button" [value]=" isLoading ? 'Loading ...' : 'Send'">
         </form>
-        <div class="act-button">Submit</div>
         <br><br><br>
     </div>
     <div class="map-container">
