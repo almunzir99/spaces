@@ -14,14 +14,26 @@ namespace apiplate.Controllers
     public class MessagesController : BaseController<Message, MessageResource,MessageRequestResource, IMessagesService>
     {
         private readonly IRolesService _roleService;
-        public MessagesController(IMessagesService service, IUriService uriSerivce, IRolesService roleService) : base(service, uriSerivce)
+        private readonly INotificationService _notificationService;
+
+        public MessagesController(IMessagesService service, IUriService uriSerivce, IRolesService roleService, INotificationService notificationService) : base(service, uriSerivce)
         {
             _roleService = roleService;
+            _notificationService = notificationService;
         }
 
         [AllowAnonymous]
         [HttpPost]
         public override async Task<IActionResult> PostAsync([FromBody] MessageRequestResource body){
+             // Push Notifications
+                var notification = new NotificationResource(){
+                    Title = "New Message",
+                    Message ="There is a new Message submitted, please check messages page",
+                    Module = "MESSAGES",
+                    Action = "CREATE",
+                    Url = "/dashboard/messages"
+                };
+                await _notificationService.BroadCastNotification(notification,"admin");
             return await base.PostAsync(body);
         }
         protected async override Task<Permission> GetPermission(string title)

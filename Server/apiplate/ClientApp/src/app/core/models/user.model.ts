@@ -1,4 +1,5 @@
 import { Activity } from "./activity.model";
+import { ApiNotification } from "./api-notification.model";
 import { Base } from "./base.model";
 import { Role } from "./role.model";
 
@@ -13,5 +14,5 @@ export class User extends Base{
     role:Role;
     token:string;
     isManager:boolean;
-    
+    notification:ApiNotification[]
 }

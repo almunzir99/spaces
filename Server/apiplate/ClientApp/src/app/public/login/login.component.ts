@@ -10,31 +10,37 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private _authService:AuthService,private router:Router) { }
+  constructor(private _authService: AuthService, private router: Router) { }
   isLoading = false;
   error = true;
   subscription = new Subscription();
   ngOnInit(): void {
   }
-  submit(email:string,password:string){
+  submit(email: string, password: string) {
     this.isLoading = true;
-      var sub = this._authService.login(email,password).subscribe(res => {
+    var sub = this._authService.login(email, password).subscribe(res => {
+      console.log(res);
+      this._authService.saveToken(res.data.token, res.data.id);
+      this._authService.$currentUser.next(res.data);
+      this.isLoading = false;
+      this._authService.getNotifications().subscribe(res => {
         console.log(res);
-        this._authService.saveToken(res.data.token,res.data.id);
-        this._authService.$currentUser.next(res.data);
-
         this.isLoading = false;
-        this.router.navigate(['dashboard']);
-      },err => {
-        console.log(err);
-        this.isLoading = false;
-        
+        this._authService.$notifications.next(res.data);
+      }, err => {
+        throw err;
+      });
+      this.router.navigate(['dashboard']);
+    }, err => {
+      console.log(err);
+      this.isLoading = false;
 
-      })
-      this.subscription.add(sub);
+
+    })
+    this.subscription.add(sub);
   }
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-  
+
 }

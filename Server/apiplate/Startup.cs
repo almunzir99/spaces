@@ -85,7 +85,7 @@ namespace apiplate
             services.AddControllersWithViews().AddNewtonsoftJson(opts =>
             {
                 opts.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
-                opts.SerializerSettings.DateFormatString = "yyyy'-'MM'-'dd' T 'HH':'mm':'ss";
+                opts.SerializerSettings.DateFormatString = "yyyy'-'MM'-'dd'  'HH':'mm':'ss";
             });
             services.AddDbContext<ApiplateDbContext>(option =>
             {

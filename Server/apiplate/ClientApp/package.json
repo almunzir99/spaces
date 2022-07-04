@@ -43,7 +43,9 @@
         "zone.js": "0.9.1",
         "@agm/core": "^1.1.0",
         "@swimlane/ngx-charts": "^19.0.0",
-        "@types/d3-shape": "^3.0.2"
+        "@types/d3-shape": "^3.0.2",
+        "moment": "^2.29.1",
+        "ngx-moment": "^5.0.0"
 
     },
     "devDependencies": {
