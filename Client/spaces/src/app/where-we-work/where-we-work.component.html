@@ -91,7 +91,7 @@
             <div *ngIf="!selectedItem" class="title">Geographical Areas of Operation</div>
             <ng-container *ngIf="selectedItem">
                 <div class="title"
-                    [textContent]="currentLang ==  'ar' ? selectedItem!.title?.en : selectedItem!.title?.en "></div>
+                    [textContent]="currentLang ==  'ar' ? selectedItem!.title?.ar : selectedItem!.title?.en "></div>
             </ng-container>
             <div *ngIf="!selectedItem" class="text-content">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Ipsa quibusdam perferendis

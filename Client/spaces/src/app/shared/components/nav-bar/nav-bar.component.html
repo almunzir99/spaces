@@ -3,31 +3,36 @@
         <div class="contacts-info">
             <div class="contact-info">
                 <div class="icon-container">
-                <i class="cil-envelope-open"></i>
+                    <i class="cil-envelope-open"></i>
                 </div>
                 spaces@spaces.com
 
             </div>
             <div class="contact-info">
                 <div class="icon-container">
-                <i class="cil-phone"></i>
+                    <i class="cil-phone"></i>
                 </div>
                 +249-128-6470-19
             </div>
             <div class="contact-info">
                 <div class="icon-container">
-                <i class="cil-map"></i>
+                    <i class="cil-map"></i>
                 </div>
                 khartoum,Arkwit, square 15
             </div>
-           
+
         </div>
-        <div class="socials">
-            <div class="icon-container"><i class="cib-facebook"></i></div>
-            <div class="icon-container"><i class="cib-twitter"></i></div>
-            <div class="icon-container"><i class="cib-instagram"></i></div>
-
-
+        <div style="display: flex;align-items:center">
+            <div class="socials">
+                <div class="icon-container"><i class="cib-facebook"></i></div>
+                <div class="icon-container"><i class="cib-twitter"></i></div>
+                <div class="icon-container"><i class="cib-instagram"></i></div>
+            </div>
+            <div class="langs">
+                <div (click)="changeLang('en')" [class.active]="currentLang == 'en'" class="lang">EN</div>
+                <span class="sep">/</span>
+                <div  (click)="changeLang('ar')"[class.active]="currentLang == 'ar'" class="lang"> AR</div>
+            </div>
         </div>
     </div>
     <div [class.opened]="opened" class="main-nav">
@@ -38,10 +43,13 @@
         </div>
         <div class="navbar-list">
             <ul class="main-list">
-                <li class="main-menu-item" [routerLink]="item.children != undefined ? undefined : ['/','en',item.route]" *ngFor="let item of navList"><p>{{item.title}}</p>
-                    <div  *ngIf="item.children?.length! > 0"   class="sub-menu-container">
+                <li class="main-menu-item" [routerLink]="item.children != undefined ? undefined : ['/','en',item.route]"
+                    *ngFor="let item of navList">
+                    <p>{{item.title}}</p>
+                    <div *ngIf="item.children?.length! > 0" class="sub-menu-container">
                         <ul>
-                            <li [routerLink]="['/','en',item.route,subItem.route]" class="submenu-item" *ngFor="let subItem of item.children">
+                            <li [routerLink]="['/','en',item.route,subItem.route]" class="submenu-item"
+                                *ngFor="let subItem of item.children">
                                 {{subItem.title}}
                             </li>
                         </ul>
@@ -55,12 +63,13 @@
             </div>
             <div class="act-button">
                 <i class="las la-donate icon"></i>
-                <span class="text">Donate</span></div>
+                <span class="text">Donate</span>
+            </div>
             <div class="act-button accent">
                 <i class="las la-handshake icon"></i>
                 <span class="text">Get Involved</span>
             </div>
         </div>
     </div>
-    
+
 </nav>

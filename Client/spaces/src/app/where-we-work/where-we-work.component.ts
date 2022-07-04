@@ -44,6 +44,9 @@ export class WhereWeWorkComponent implements OnInit {
   ngOnInit(): void {
     this.currentLang = this._translationService.currentLang;
     this.loadData();
+    this._translationService.subscribe({next: (res) =>{
+      this.currentLang = res;
+  }})
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

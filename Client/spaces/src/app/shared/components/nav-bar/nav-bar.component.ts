@@ -1,4 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { TranslationService } from 'src/app/core/services/translation.service';
 import { navBarList } from './navbar-list';
 
 @Component({
@@ -11,12 +13,20 @@ export class NavBarComponent implements OnInit {
   opened = false;
   top_nav: Element = undefined!;
   bottom_nav: Element = undefined!;
-  
-  constructor() { }
+  currentLang = "en";
+  constructor(private translationService:TranslationService,private translate:TranslateService) { 
+    this.currentLang =  translationService.currentLang;
+  }
   ngAfterContentInit() {
     this.top_nav = document.querySelector(".top-nav")!;
     this.bottom_nav = document.querySelector(".main-nav")!;
 
+  }
+  changeLang(lang:string)
+  {
+    this.translationService.changeLang(lang);
+    this.currentLang =  this.translationService.currentLang;
+    this.translate.currentLang = this.currentLang;
   }
   @HostListener('window:scroll', ['$event']) onScrollEvent($event: any) {
     if (window.pageYOffset > 80) {

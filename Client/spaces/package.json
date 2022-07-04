@@ -19,6 +19,8 @@
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
     "@coreui/icons": "^3.0.0-alpha.0",
+    "@ngx-translate/core": "^14.0.0",
+    "@ngx-translate/http-loader": "^7.0.0",
     "angular-svg-icon": "^13.0.0",
     "ngx-toastr": "14.3.0",
     "pattern.css": "^1.0.0",

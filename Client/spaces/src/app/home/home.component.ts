@@ -56,7 +56,9 @@ export class HomeComponent implements OnInit {
   testimonials: Testimonial[] = [];
   subscription = new Subscription();
   currentLang:string = "en";
-  constructor(private _service: HomeService,private _translationService:TranslationService) { }
+  constructor(private _service: HomeService,private _translationService:TranslationService) { 
+  
+  }
   loadData() {
     this.pageLoading = true;
     var obs = forkJoin([
@@ -96,6 +98,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.currentLang = this._translationService.currentLang;
     this.loadData();
+    this._translationService.subscribe({next: (res) =>{
+      this.currentLang = res;
+  }})
   }
   ngAfterViewInit() {
   }

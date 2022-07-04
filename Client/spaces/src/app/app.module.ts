@@ -1,7 +1,9 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ToastrModule } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 
@@ -19,7 +21,18 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    SharedModule
+    SharedModule,
+    TranslateModule.forRoot(
+      {
+        loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient],
+      },
+      defaultLanguage:"en"
+      }
+    )
+
   ],
   providers: [
     {
@@ -30,3 +43,6 @@ import { SharedModule } from './shared/shared.module';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}

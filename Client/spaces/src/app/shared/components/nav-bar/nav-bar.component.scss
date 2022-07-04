@@ -59,6 +59,32 @@ nav {
                 }
             }
         }
+        .langs{
+            display: inline-flex;
+            align-items: center;
+            font-size: 14px;
+            margin: 0px 25px;
+            .sep{
+                margin: 0px 15px;
+            }
+            .lang{
+                height: 30px;
+                width: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+            .lang.active{
+                background-color: $accent-color;
+            }
+            .lang:hover{
+                background-color: #00000044;
+            }
+            .lang.active:hover{
+                background-color: $accent-color;
+            }
+        }
     }
 
     .main-nav {
