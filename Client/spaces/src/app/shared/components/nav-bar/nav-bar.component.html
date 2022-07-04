@@ -5,24 +5,24 @@
                 <div class="icon-container">
                     <i class="cil-envelope-open"></i>
                 </div>
-                spaces@spaces.com
+                <span [innerHTML]="'nav_bar.email' | translate"></span>
 
             </div>
             <div class="contact-info">
                 <div class="icon-container">
                     <i class="cil-phone"></i>
                 </div>
-                +249-128-6470-19
+                <span [innerHTML]="'nav_bar.phone' | translate"></span>
             </div>
             <div class="contact-info">
                 <div class="icon-container">
                     <i class="cil-map"></i>
                 </div>
-                khartoum,Arkwit, square 15
+                <span [innerHTML]="'nav_bar.location' | translate"></span>
             </div>
 
         </div>
-        <div style="display: flex;align-items:center">
+        <div class="end-section" style="display: flex;align-items:center">
             <div class="socials">
                 <div class="icon-container"><i class="cib-facebook"></i></div>
                 <div class="icon-container"><i class="cib-twitter"></i></div>
@@ -43,31 +43,31 @@
         </div>
         <div class="navbar-list">
             <ul class="main-list">
-                <li class="main-menu-item" [routerLink]="item.children != undefined ? undefined : ['/','en',item.route]"
+                <li class="main-menu-item" [routerLink]="item.children != undefined ? undefined : ['/',currentLang,item.route]"
                     *ngFor="let item of navList">
-                    <p>{{item.title}}</p>
+                    <p [innerHTML]="'nav_bar.'+item.title!.toLowerCase() | translate"></p>
                     <div *ngIf="item.children?.length! > 0" class="sub-menu-container">
                         <ul>
-                            <li [routerLink]="['/','en',item.route,subItem.route]" class="submenu-item"
+                            <li [innerHTML]="subItem.title!.toLowerCase() | translate" [routerLink]="['/',currentLang,item.route,subItem.route]" class="submenu-item"
                                 *ngFor="let subItem of item.children">
-                                {{subItem.title}}
+                                
                             </li>
                         </ul>
                     </div>
                 </li>
             </ul>
         </div>
-        <div class="act-buttons">
+        <div [class.ar]="currentLang == 'ar'" class="act-buttons">
             <div (click)="opened = !opened" class="act-button icon basic">
                 <i class="cil-menu"></i>
             </div>
             <div class="act-button">
                 <i class="las la-donate icon"></i>
-                <span class="text">Donate</span>
+                <span [innerHTML]="'nav_bar.donate' | translate" class="text"></span>
             </div>
             <div class="act-button accent">
                 <i class="las la-handshake icon"></i>
-                <span class="text">Get Involved</span>
+                <span [innerHTML]="'nav_bar.get_involved' | translate" class="text"></span>
             </div>
         </div>
     </div>

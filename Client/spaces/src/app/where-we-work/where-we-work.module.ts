@@ -5,6 +5,7 @@ import { WhereWeWorkRoutingModule } from './where-we-work-routing.module';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -17,6 +18,7 @@ import { SharedModule } from '../shared/shared.module';
     WhereWeWorkRoutingModule,
     HttpClientModule,
     SharedModule,
+    TranslateModule,
     AngularSvgIconModule.forRoot()
   ]
 })

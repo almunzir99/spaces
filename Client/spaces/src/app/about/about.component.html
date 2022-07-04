@@ -1,10 +1,10 @@
 <!-- Page Header -->
 <div class="page-header">
     <div class="content">
-        <h1 class="title">About Spaces</h1>
-        <h5 class="nav-link"><span class="link active" [routerLink]="['/','en','home']">Home</span><span> >>
-            </span><span>About
-                Spaces</span></h5>
+        <h1 [innerHTML]="'nav_bar.about' | translate" class="title"></h1>
+        <h5  class="nav-link"><span [innerHTML]="'nav_bar.home' | translate" class="link active"
+                [routerLink]="['/','en','home']">Home</span><span> >>
+            </span><span [innerHTML]="'nav_bar.about'| translate"> </span></h5>
     </div>
 </div>
 <div class="intro-section">
@@ -17,20 +17,11 @@
         </div>
     </div>
     <div class="content-section">
-        <div class="subtitle">
-            What's Spaces?
+        <div [innerHTML]="'About.intro_section_subtitle' | translate" class="subtitle">
         </div>
-        <div class="title">
-            Welcome To Spaces For Peace and Development
+        <div [innerHTML]="'About.intro_section_title' | translate" class="title">
         </div>
-        <div class="content">
-            Spaces for peace and development organization is a non- governmental
-            non – profit nonpolitical national organization founded and registered with
-            the Humanitarian Aid Commission (HAC) in Sudan 2020; and aims on
-            promoting the interest of the local communities to achieve universal and
-            equal access to safe, affordable drinking water (IWRM), quality education,
-            ٌSustainable and resilient cities, clean energy and management of local
-            consumption and production.
+        <div [innerHTML]="'About.intro_section_content' | translate" class="content">
         </div>
     </div>
 </div>
@@ -40,10 +31,9 @@
             <svg-icon [applyClass]="true" class="icon eye" src="assets/icons/eye.svg"></svg-icon>
         </div>
         <hr class="sep">
-        <h1>Our Vision</h1>
-        <div class="content">
-            Enabling the communities to make a positive change and to be the compass
-            for positive change for those working in the humanitarian field.
+        <h1 [innerHTML]="'About.vision_title' | translate"></h1>
+        <div [innerHTML]="'About.vision' | translate" class="content">
+
         </div>
     </div>
     <div class="section">
@@ -51,12 +41,9 @@
             <svg-icon [applyClass]="true" class="icon " src="assets/icons/target.svg"></svg-icon>
         </div>
         <hr class="sep">
-        <h1>Our Mission</h1>
-        <div class="content">
-            We exist to be the first responders to every crisis, providing humanitarian
-            interventions in the best way possible and to sharpen the skills of our
-            community in handling difficult situations through professional training and
-            capacity building.
+        <h1 [innerHTML]="'About.mission_title' | translate"></h1>
+        <div [innerHTML]="'About.mission' | translate" class="content">
+
         </div>
     </div>
     <div class="section light">
@@ -65,27 +52,25 @@
         </div>
         <hr class="sep">
 
-        <h1>Our Strategy</h1>
-        <div class="content">
-            Spaces organization strategy to create and enabling environment, enhance
-            local capabilities and strengthen and empower communities and civil society.
+        <h1 [innerHTML]="'About.strategy_title' | translate"></h1>
+        <div [innerHTML]="'About.strategy' | translate" class="content">
+
         </div>
     </div>
 </div>
 <div class="values-section">
-    <h1 class="title">Our Core Values</h1>
+    <h1 [innerHTML]="'About.values_title' | translate" class="title"></h1>
     <hr class="sep">
-    <h3>Spaces adopted the common humanitarian values</h3>
+    <h3 [innerHTML]="'About.values_subtitle' | translate"></h3>
     <div class="values">
         <div *ngFor="let value of values; let i = index" class="value">
             <div class="title-container">
                 <div class="bg-number">0{{i+1}}</div>
-                <h2>
-                    {{value.title}}
+                <h2 [innerHTML]="'About.'+value.title!.toLowerCase()+'_title' | translate">
+
                 </h2>
             </div>
-            <div class="content">
-                {{value.content}}
+            <div [innerHTML]="'About.'+value.title!.toLowerCase()+'_content' | translate" class="content">
             </div>
         </div>
     </div>
@@ -97,17 +82,17 @@
     <div class="content">
         <div class="pattern pattern-dots-lg"></div>
         <div style="margin:30px;">
-            <h4>Learn more about Spaces Objectives</h4>
-            <h1>Our Objectives</h1>
+            <h4 [innerHTML]="'About.objectives_subtitle' | translate"></h4>
+            <h1 [innerHTML]="'About.objective_title' | translate">Our Objectives</h1>
             <hr class="sep">
         </div>
         <div class="objectives">
-            <div *ngFor="let obj of objectives;let i = index" class="objective">
+            <div *ngFor="let i of [1,2,3,4,5,6,7,8]" class="objective">
                 <div class="number">
-                    {{i+1}}
+                    {{i}}
                 </div>
-                <div class="content-text">
-                    {{obj}}
+                <div [innerHTML]="'About.obj_'+i | translate" class="content-text">
+
                 </div>
             </div>
         </div>
@@ -115,16 +100,14 @@
 </div>
 <div *ngIf="team.length > 0" class="team-section">
     <div class="intro">
-        <div class="pattern pattern-diagonal-lines-sm gray-light"></div>
-        <div class="subtitle">
-            Spaces Team
+        <div style="z-index: -1;" class="pattern pattern-diagonal-lines-sm gray-light"></div>
+        <div [innerHTML]="'About.team_subtitle' | translate" class="subtitle">
+
         </div>
-        <div class="title">
-            Meet The Amazing People Behind Our Success
+        <div [innerHTML]="'About.team_title' | translate" class="title">
+
         </div>
-        <div class="content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum nam voluptatem consectetur
-            reprehenderit quod corporis tempora nulla quibusdam aut id iusto itaque illum saepe recusandae et, inventore
-            maiores deserunt. Ducimus.</div>
+        <div [innerHTML]="'About.team_description' | translate" class="content"> </div>
     </div>
     <div *ngFor="let member of team" class="team-card">
         <div [style.background-image]="'url(' + member.image?.path + ')'" style="background-size:cover" class="image">
@@ -136,9 +119,9 @@
             </div>
         </div>
         <div [textContent]="currentLang == 'ar' ? member.name?.ar : member.name?.en" class="name"></div>
-        <div  [textContent]="currentLang == 'ar' ? member.position?.ar : member.position?.en"class="pos"></div>
+        <div [textContent]="currentLang == 'ar' ? member.position?.ar : member.position?.en" class="pos"></div>
     </div>
-    
+
 </div>
 
 

@@ -1,34 +1,34 @@
 <!-- Page Header -->
 <div class="page-header">
     <div  class="content">
-        <h1 class="title">Contact Us</h1>
-        <h5 class="nav-link"><span class="link active" [routerLink]="['/','en','home']">Home</span><span> >> </span><span>Contact Us</span>
+        <h1 [innerHTML]="'nav_bar.contact_us'| translate" class="title">Contact Us</h1>
+        <h5 class="nav-link"><span class="link active" [innerHTML]="'nav_bar.home'| translate" [routerLink]="['/','en','home']"></span><span> >> </span><span [innerHTML]="'nav_bar.contact_us'| translate"></span>
         </h5>
     </div>
 </div>
 <div class="page">
     <div class="background"></div>
     <div class="info">
-        <h1>CONTACT TO SUPPORT TEAM</h1>
+        <h1 [innerHTML]="'contact_us.contacts_title'| translate"></h1>
         <div class="info-cards">
             <div class="info-card">
                 <i class="cil-phone"></i>
-                <div class="title">Call Us</div>
-                <div class="content">+249-128-6470-19</div>
+                <div [innerHTML]="'contact_us.call_us'| translate" class="title"></div>
+                <div class="content" [innerHTML]="'nav_bar.phone'| translate"></div>
             </div>
             <div class="info-card">
                 <i class="cil-envelope-closed"></i>
-                <div class="title">Mail Us</div>
-                <div class="content">Spaces@Spaces.com</div>
+                <div [innerHTML]="'contact_us.mail_us'| translate" class="title"></div>
+                <div class="content" [innerHTML]="'nav_bar.email'| translate"></div>
             </div>
             <div class="info-card">
                 <i class="cil-map"></i>
-                <div class="title">Visit Us</div>
-                <div class="content">khartoum,Arkwit, square 15</div>
+                <div [innerHTML]="'contact_us.visit_us'| translate" class="title"></div>
+                <div class="content" [innerHTML]="'nav_bar.location'| translate"></div>
             </div>
             <div class="info-card">
                 <i class="cil-braille"></i>
-                <div class="title">Follow Us</div>
+                <div [innerHTML]="'contact_us.follow_us'| translate" class="title">Follow Us</div>
                 <div class="content">
                     <span class="link">Facebook</span>,<span class="link">Twitter</span>,<span
                         class="link">Instagram</span>
@@ -37,30 +37,30 @@
         </div>
     </div>
     <div class="contact-form">
-        <h1>Drop Us A Message</h1>
+        <h1 [innerHTML]="'contact_us.message_title'| translate"></h1>
         <form #contactForm="ngForm">
             <div class="row">
                 <div class="input-container">
-                    <input required [(ngModel)]="message.fullName" name="fullname" type="text" placeholder="Your Name">
+                    <input required [(ngModel)]="message.fullName" name="fullname" type="text" [placeholder]="'contact_us.name' | translate">
                 </div>
                 <div class="input-container">
-                    <input required [(ngModel)]="message.email" name="email" type="text" placeholder="Email">
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-container">
-                    <input required [(ngModel)]="message.phone" name="phone" type="text" placeholder="Phone Number">
-                </div>
-                <div class="input-container">
-                    <input required [(ngModel)]="message.subject" name="subject" type="text" placeholder="Subject">
+                    <input required [(ngModel)]="message.email" name="email" type="text" [placeholder]="'contact_us.email' | translate">
                 </div>
             </div>
             <div class="row">
                 <div class="input-container">
-                    <textarea required [(ngModel)]="message.content" name="content" name="message" placeholder="Your Message..." cols="30" rows="10"></textarea>
+                    <input required [(ngModel)]="message.phone" name="phone" type="text" [placeholder]="'contact_us.phone' | translate">
+                </div>
+                <div class="input-container">
+                    <input required [(ngModel)]="message.subject" name="subject" type="text" [placeholder]="'contact_us.subject' | translate">
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-container">
+                    <textarea required [(ngModel)]="message.content" name="content" name="message" [placeholder]="'contact_us.message' | translate" cols="30" rows="10"></textarea>
                 </div>
             </div> 
-            <input (click)="sendMessage()"  type="submit" class="act-button" [value]=" isLoading ? 'Loading ...' : 'Send'">
+            <input (click)="sendMessage()"  type="submit" class="act-button" [value]=" isLoading ? 'Loading ...' : 'contact_us.send' | translate">
         </form>
         <br><br><br>
     </div>

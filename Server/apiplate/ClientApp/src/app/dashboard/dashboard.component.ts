@@ -34,7 +34,6 @@ export class DashboardComponent implements OnInit {
       })
     });
   }
-  
   menuItemChange(event){
     setTimeout(() => {
     this.currentMenuItem = event;

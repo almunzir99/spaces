@@ -6,11 +6,11 @@ export const  navBarList:NavBarItem[] = [
         route:"home"
     },
     {
-        title:"Who We Are",
+        title:"About",
         route:"about"
     },
     {
-        title:"What We Do",
+        title:"Sectors",
         route:"what-we-do",
         children:[
             {
@@ -45,11 +45,11 @@ export const  navBarList:NavBarItem[] = [
         ]
     },
     {
-        title:"Where We Work",
+        title:"Regions",
         route:"where-we-work"
     },
     {
-        title:"Contact Us",
+        title:"Contact_Us",
         route:"contact-us"
     }
 ];

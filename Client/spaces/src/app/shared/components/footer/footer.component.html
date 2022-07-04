@@ -2,10 +2,8 @@
     <div class="section">
         <div class="intro-container">
             <img class="logo" src="assets/logo-white.svg" alt="">
-            <div class="intro-content">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel, incidunt. Error amet consequatur dolores
-                et aperiam. Inventore doloremque at ducimus deserunt quibusdam ea maiores odio, aperiam est eos porro
-                delectus.
+            <div [innerHTML]="'Footer.org_intro' | translate" class="intro-content">
+               
             </div>
             <div class="socials">
                 <div class="icon-container"><i class="cib-facebook"></i></div>
@@ -16,15 +14,15 @@
     </div>
     <div class="section">
         <div class="quick-links">
-            <div class="title">Explore Links</div>
+            <div [innerHTML]="'Footer.explore_links' | translate" class="title"></div>
             <ul class="links">
-                <li *ngFor="let link of links">{{link.title}}</li>
+                <li [innerHTML]="'nav_bar.'+link.title!.toLowerCase() | translate" *ngFor="let link of links"></li>
             </ul>
         </div>
     </div>
     <div class="section">
         <div class="gallery-area">
-            <div class="title">Gallery</div>
+            <div [innerHTML]="'Footer.gallery' | translate" class="title"></div>
             <div class="images">
                 <img src="assets/temp/images/portfolio-1.jpg" alt="">
                 <img src="assets/temp/images/portfolio-2.jpg" alt="">
@@ -41,8 +39,8 @@
             <div class="icon-container">
                 <i class="cil-chat-bubble"></i>
             </div>
-            <div class="title">
-                Get In Touch
+            <div [innerHTML]="'Footer.get_in_touch' | translate" class="title">
+                
             </div>
         </div>
         <div class="contacts-info">
@@ -51,9 +49,9 @@
                     <i class="cil-phone"></i>
                 </div>
                 <div>
-                    <div class="title">Phone</div>
-                    <div class="content">
-                        +249-128-6470-19
+                    <div [innerHTML]="'Footer.phone_title' | translate" class="title"> </div>
+                    <div [innerHTML]="'Footer.phone' | translate" class="content">
+                        
                     </div>
                 </div>
             </div>
@@ -62,9 +60,9 @@
                     <i class="cil-envelope-open"></i>
                 </div>
                 <div>
-                    <div class="title">Email</div>
-                    <div class="content">
-                        Spaces@spaces.com
+                    <div [innerHTML]="'Footer.email_title' | translate" class="title"> </div>
+                    <div [innerHTML]="'Footer.email' | translate" class="content">
+                        
                     </div>
                 </div>
             </div>
@@ -73,15 +71,15 @@
                     <i class="cil-map"></i>
                 </div>
                 <div>
-                    <div class="title">Location</div>
-                    <div class="content">
-                        khartoum,Arkwit, square 15
+                    <div [innerHTML]="'Footer.location_title' | translate" class="title"> </div>
+                    <div [innerHTML]="'Footer.location' | translate" class="content">
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="copy-right-area">
-        © All Copyright are reserved by Spaces Organization
+    <div [innerHTML]="'Footer.copyright' | translate" class="copy-right-area">
+        
     </div>
 </footer>

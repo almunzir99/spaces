@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
   subscription = new Subscription();
   currentLang:string = "en";
   constructor(private _service: HomeService,private _translationService:TranslationService) { 
-  
+    
   }
   loadData() {
     this.pageLoading = true;

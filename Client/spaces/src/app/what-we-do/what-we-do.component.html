@@ -1,8 +1,8 @@
 <div class="page-header">
     <div class="content">
-        <h1 class="title">{{section}}</h1>
-        <h5 class="nav-link"><span class="link active" [routerLink]="['/','en','home']">Home</span><span> >>
-            </span><span>{{section}}
+        <h1 [innerHTML]="'nav_bar.sectors'| translate" class="title"></h1>
+        <h5 class="nav-link"><span class="link active" [innerHTML]="'nav_bar.home'| translate" [routerLink]="['/','en','home']"></span><span> >>
+            </span><span [innerHTML]="'nav_bar.sectors'| translate">
             </span></h5>
     </div>
 </div>
@@ -15,8 +15,8 @@
         </div>
     </div>
     <div class="content-section">
-        <div class="subtitle">
-            Spaces Major Sectors
+        <div [innerHTML]="'what_we_do.sector_subtitle'| translate" class="subtitle">
+            
         </div>
         <div class="title">
             {{section}}
@@ -46,8 +46,8 @@
     </div>
 </div>
 <div class="projects-section">
-    <div class="subtitle">
-        Check all we have done in {{section}}
+    <div style="text-align: center;" class="subtitle">
+        <span  [innerHTML]="'what_we_do.project_subtitle'| translate"></span> <span>{{section}}</span>
     </div>
     <div class="title">
         {{section}} Projects

@@ -6,6 +6,7 @@ import { SwiperModule } from 'swiper/angular';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { SharedModule } from '../shared/shared.module';
     SwiperModule,
     HttpClientModule,
     SharedModule,
+    TranslateModule,
     AngularSvgIconModule.forRoot()
   ]
 })

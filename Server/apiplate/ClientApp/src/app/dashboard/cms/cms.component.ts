@@ -30,6 +30,12 @@ export class CmsComponent implements OnInit {
   constructor(private _service: CmsService, private modalService: FuiModalService) {
     this.getsLangs();
   }
+  ngAfterViewInit(): void {
+    document.addEventListener("keypress",($event) =>{
+      if($event.code == "KeyQ"  && $event.ctrlKey == true)
+      this.onApply();
+    });
+  }
 
   getsLangs() {
     this.isLoading = true;
@@ -147,9 +153,14 @@ export class CmsComponent implements OnInit {
         this._service.CreateNode(this.currentNode.parent, this.currentNodeValue, this.currentNode.key, this.currentLang) :
         this._service.editNode(this.currentNode.parent, this.currentNodeValue, this.currentNode.key, this.currentLang)).subscribe(res => {
           this.getObj();
-          this.currentNode.value = this.currentNodeValue;
+          if (this.editingMode == 0) {
+            this.currentNode.value = "";
+            this.currentNode.key = "";
+          }
+          else
+            this.currentNode.value = this.currentNodeValue;
           this.DimLoading = false;
-          this.editingMode = 1;
+
         }, err => {
           this.DimLoading = false;
           this.editingMode = 1;
@@ -228,7 +239,7 @@ export class CmsComponent implements OnInit {
     });
     return result;
   }
-  ngOnDestroy() { 
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
