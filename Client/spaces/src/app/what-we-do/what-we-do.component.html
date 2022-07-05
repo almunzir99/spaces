@@ -1,7 +1,8 @@
 <div class="page-header">
     <div class="content">
         <h1 [innerHTML]="'nav_bar.sectors'| translate" class="title"></h1>
-        <h5 class="nav-link"><span class="link active" [innerHTML]="'nav_bar.home'| translate" [routerLink]="['/','en','home']"></span><span> >>
+        <h5 class="nav-link"><span class="link active" [innerHTML]="'nav_bar.home'| translate"
+                [routerLink]="['/','en','home']"></span><span> >>
             </span><span [innerHTML]="'nav_bar.sectors'| translate">
             </span></h5>
     </div>
@@ -16,19 +17,18 @@
     </div>
     <div class="content-section">
         <div [innerHTML]="'what_we_do.sector_subtitle'| translate" class="subtitle">
-            
+
         </div>
-        <div class="title">
-            {{section}}
+        <div [textContent]="currentLang == 'ar' ? sector!.title!.ar : sector!.title!.en" class="title">
+
         </div>
-        <div class="content">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, incidunt possimus? Odit aperiam recusandae
-            quaerat ad, odio voluptatem minima labore eligendi rem enim, libero unde magni saepe quis eaque vitae?
+        <div [innerHTML]="currentLang == 'ar' ? sector!.description!.ar : sector!.description!.en" class="content">
+
         </div>
         <br><br>
         <div class="stats">
             <div class="stat">
-                <svg-icon src="assets/icons/project.svg" [applyClass]="true" class="icon"></svg-icon>
+                <svg-icon [src]="sector?.image?.path!" [applyClass]="true" class="icon"></svg-icon>
                 <div>
                     <h1 class="number">34</h1>
                     <h5>Projects</h5>
@@ -47,27 +47,43 @@
 </div>
 <div class="projects-section">
     <div style="text-align: center;" class="subtitle">
-        <span  [innerHTML]="'what_we_do.project_subtitle'| translate"></span> <span>{{section}}</span>
+        <span [innerHTML]="'what_we_do.project_subtitle'| translate"></span> <span
+            [textContent]="currentLang == 'ar' ? sector!.title!.ar : sector!.title!.en"></span>
     </div>
-    <div class="title">
-        {{section}} Projects
+    <div [textContent]="currentLang == 'ar' ?  ' مشاريع ' + sector!.title!.ar : sector!.title!.en + ' Projects ' "
+        class="title">
+
     </div>
     <br><br>
     <div class="projects">
-        <div *ngFor="let i of [1,2,3,4,5,6]" class="project-card-container">
-            <div class="project-card">
-                <h5>Blue Nile State</h5>
-                <h3>Lead Heading for Project Title {{i}}</h3>
-                <p class="content">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium impedit numquam ut? Minima,
-                    excepturi error
-                </p>
-                <img [src]="'assets/temp/images/portfolio-'+ i +'.jpg'" alt="">
+            <div *ngFor="let project of projects" class="project-card">
+                <div class="state-info">
+                    <i [textContent]="currentLang == 'ar' ? project.region!.title?.ar : project.region!.title?.en" class="las la-map"></i>
+                    
+                </div>
+                <div class="img-container">
+                    <img src="assets/temp/images/portfolio-1.jpg" alt="">
+                    <div class="card-overlay"></div> 
+                    <div class="date">
+                        <div class="day">21</div>
+                        <div class="month">MAY</div>
+                    </div>
+                </div>
+                <div class="content">
+                    <br>
+                    <h4 [textContent]="currentLang == 'ar' ? project.title?.ar : project.title?.en"></h4>
+                    <div class="bottom-section">
+                        <div class="info">
+                            <i class="las la-user"></i>
+                            <span [textContent]="project.author?.username"></span>
+                        </div>
+                        <div class="info">
+                            <i class="las la-comments"></i>
+                            10 Comments
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="date">
-                <div class="day">21</div>
-                <div class="month">JULY</div>
-            </div>
-        </div>
     </div>
 </div>
+<app-preloader [closed]="!pageLoading"></app-preloader>

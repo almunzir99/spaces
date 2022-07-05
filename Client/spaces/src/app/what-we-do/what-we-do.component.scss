@@ -130,83 +130,129 @@
     align-items: center;
     padding: 45px 0px;
     background-color: whitesmoke;
-    
+
     .projects {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
 
-        .project-card-container {
+        .project-card {
+            height: auto;
             width: 330px;
-            height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 10px;
+            overflow: hidden;
             position: relative;
-            margin: 30px;
+            cursor: pointer;
 
-            .date {
+            .state-info {
                 position: absolute;
-                top: -20px;
-                left: 15px;
+                padding: 5px 10px;
                 background-color: $primary-color;
-                .day,
-                .month {
-                    height: 40px;
-                    width: 50px;
-                    color: white;
+                color: white;
+                font-weight: bold;
+                z-index: 10;
+                top: 55%;
+                right: 0px;
+                font-size: 13px;
+
+                i {
+                    font-size: 22px;
+                }
+            }
+
+            .img-container {
+                height: 250px;
+                overflow: hidden;
+                position: relative;
+                width: 100%;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    transition: 0.5s all ease;
+
+                }
+
+                .card-overlay {
+                    position: absolute;
+                    background-color: #0000006b;
+                    height: 100%;
+                    width: 100%;
+                    top: 0;
+                }
+
+                .date {
+                    height: 80px;
+                    width: 80px;
+                    border-bottom-left-radius: 15px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    font-size: 16px;
+                    color: $accent-color;
+                    background-color: white;
+                    flex-direction: column;
                     font-weight: bold;
+                    text-transform: uppercase;
+                    position: absolute;
+                    top: -10px;
                 }
 
-                .month {
-                    background-color: darken($color: $primary-color, $amount: 10%);
-                }
             }
 
-            .project-card {
-                width: 100%;
-                height: fit-content;
-                margin-top: 20px;
-                padding: 15px;
+            .content {
+                border: 1px solid #dddcdc96;
+                border-top: none;
                 background-color: white;
-                transition: 0.5s all ease;
-                cursor: pointer;
-                h5{
-                    margin-top: 40px;
-                    margin-bottom: 5px;
-                    color: white;
-                    padding: 5px 10px;
-                    background-color: $accent-color;
-                    width: fit-content;
-                }
-                h3 {
-                    color: $primary-color;
-                    margin-bottom: 15px;
-                    width: 100%;
+                margin-top: 0px;
+                overflow: hidden;
+                width: 100%;
 
+                h4 {
+                    margin: 15px 10px;
+                    transition: .5s all ease;
                 }
 
-                .content {
-                    text-align: justify;
-                    font-size: 13px;
-                    margin-bottom: 25px;
-                    width: 100%;
+                .bottom-section {
+                    border-top: 1px solid #dddcdc96;
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 12px;
 
+                    .info {
+                        display: flex;
+                        align-items: center;
+                        margin: 20px 05px;
+
+                        i {
+                            font-size: 22px;
+                            margin: 0px 5px;
+                        }
+                    }
                 }
-
-                img {
-                    height: 270px;
-                    width: 100%;
-
-                }
-
             }
-            .project-card:hover{
-                transform: translateY(-10px);
+        }
+
+        .project-card:hover {
+            .img-container {
+                img {
+                    transform: scale(1.3);
+                }
+            }
+
+            .content {
+                h4 {
+                    text-decoration: underline;
+                    color: $primary-color ;
+                }
             }
         }
     }
 }
+
 @media screen and (max-width:850px) {
     .intro-section {
         .images-section {
@@ -214,7 +260,7 @@
         }
     }
 
-     
+
 }
 
 @media screen and (max-width:750px) {

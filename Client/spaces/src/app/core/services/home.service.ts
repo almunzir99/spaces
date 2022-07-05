@@ -19,15 +19,15 @@ export class HomeService {
     return this.http.get(`${this.baseUrl}api/sliders?pageIndex=${pageIndex}&pageSize=${pageSize}&title=${title}&orderBy=${orderBy}&ascending=${ascending}`) as Observable<PagedResponse<Slider[]>>;
   }
   getSectors(pageIndex = 1, pageSize = 10,title="",orderBy="lastUpdate",ascending = false): Observable<PagedResponse<Sector[]>> {
-    return this.http.get(`${this.baseUrl}api/sectors?pageIndex=${pageIndex}&pageSize=${pageSize}&title=${title}&orderBy=${orderBy}&ascending=${ascending}`) as Observable<PagedResponse<Slider[]>>;
+    return this.http.get(`${this.baseUrl}api/sectors?pageIndex=${pageIndex}&pageSize=${pageSize}&title=${title}&orderBy=${orderBy}&ascending=${ascending}`) as Observable<PagedResponse<Sector[]>>;
   }
   getPartners(pageIndex = 1, pageSize = 10,title="",orderBy="lastUpdate",ascending = false): Observable<PagedResponse<Partners[]>> {
-    return this.http.get(`${this.baseUrl}api/Partners?pageIndex=${pageIndex}&pageSize=${pageSize}&title=${title}&orderBy=${orderBy}&ascending=${ascending}`) as Observable<PagedResponse<Slider[]>>;
+    return this.http.get(`${this.baseUrl}api/Partners?pageIndex=${pageIndex}&pageSize=${pageSize}&title=${title}&orderBy=${orderBy}&ascending=${ascending}`) as Observable<PagedResponse<Partners[]>>;
   }
   getArticles(pageIndex = 1, pageSize = 10,title="",orderBy="lastUpdate",ascending = false): Observable<PagedResponse<Article[]>> {
-    return this.http.get(`${this.baseUrl}api/articles?pageIndex=${pageIndex}&pageSize=${pageSize}&title=${title}&orderBy=${orderBy}&ascending=${ascending}`) as Observable<PagedResponse<Slider[]>>;
+    return this.http.get(`${this.baseUrl}api/articles?pageIndex=${pageIndex}&pageSize=${pageSize}&title=${title}&orderBy=${orderBy}&ascending=${ascending}`) as Observable<PagedResponse<Article[]>>;
   }
   getTestimonials(pageIndex = 1, pageSize = 10,title="",orderBy="lastUpdate",ascending = false): Observable<PagedResponse<Testimonial[]>> {
-    return this.http.get(`${this.baseUrl}api/testimonials?pageIndex=${pageIndex}&pageSize=${pageSize}&title=${title}&orderBy=${orderBy}&ascending=${ascending}`) as Observable<PagedResponse<Slider[]>>;
+    return this.http.get(`${this.baseUrl}api/testimonials?pageIndex=${pageIndex}&pageSize=${pageSize}&title=${title}&orderBy=${orderBy}&ascending=${ascending}`) as Observable<PagedResponse<Testimonial[]>>;
   }
 }

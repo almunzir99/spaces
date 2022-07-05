@@ -1,6 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { Sector } from 'src/app/core/models/sector.model';
+import { GlobalService } from 'src/app/core/services/global.service';
 import { TranslationService } from 'src/app/core/services/translation.service';
 import { navBarList } from './navbar-list';
 
@@ -16,11 +18,14 @@ export class NavBarComponent implements OnInit {
   bottom_nav: Element = undefined!;
   urlSegments:string[] = [];
   currentLang = "en";
-  constructor(private translationService:TranslationService,private translate:TranslateService,private router:Router) {
+  sectors : Sector[] = [];
+  constructor(private translationService:TranslationService,private translate:TranslateService,private router:Router,private _globalService:GlobalService) {
     var segments = location.pathname.split('/'); 
     this.urlSegments = segments.slice(2,segments.length);
     this.currentLang =  segments[1];
     this.changeLang(this.currentLang);
+    this.sectors = this._globalService.$sectors.value;
+    console.log(this.sectors);
 
   }
   ngAfterContentInit() {

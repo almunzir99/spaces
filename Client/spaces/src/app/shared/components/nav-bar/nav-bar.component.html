@@ -46,10 +46,10 @@
                 <li class="main-menu-item" [routerLink]="item.children != undefined ? undefined : ['/',currentLang,item.route]"
                     *ngFor="let item of navList">
                     <p [innerHTML]="'nav_bar.'+item.title!.toLowerCase() | translate"></p>
-                    <div *ngIf="item.children?.length! > 0" class="sub-menu-container">
+                    <div *ngIf="sectors?.length! > 0 && item.title?.toLocaleLowerCase() == 'sectors'" class="sub-menu-container">
                         <ul>
-                            <li [innerHTML]="subItem.title!.toLowerCase() | translate" [routerLink]="['/',currentLang,item.route,subItem.route]" class="submenu-item"
-                                *ngFor="let subItem of item.children">
+                            <li [textContent]="currentLang == 'ar' ? sector.title!.ar : sector.title!.en" [routerLink]="['/',currentLang,item.route,sector.id]" class="submenu-item"
+                                *ngFor="let sector of sectors">
                                 
                             </li>
                         </ul>
