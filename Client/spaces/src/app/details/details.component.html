@@ -1,0 +1,105 @@
+<div class="page">
+    <div class="article-detail-page">
+        <div class="article-content-container">
+            <div class="article-content">
+                <h1 [textContent]="currentLang == 'ar' ? item?.title?.ar : item?.title?.en"></h1>
+                <div class="infos">
+                    <div class="article-info">
+                        <i class="las la-calendar-alt"></i>
+                        {{'details.date' | translate}} : {{getDate(item?.createdAt!)}}
+                    </div>
+                    <div class="article-info">
+                        <i class="las la-user-tie"></i>
+                        {{'details.by' | translate}} : <span [textContent]="item?.author?.username"></span>
+                    </div>
+                </div>
+                <img [src]="item?.image?.path" alt="">
+                <br>
+                <h3 [textContent]="currentLang == 'ar' ? item?.subtitle?.ar : item?.subtitle?.en"></h3>
+                <br>
+                <div [innerHTML]="currentLang == 'ar' ? item?.content?.ar : item?.content?.en" class="text-content">
+
+                </div>
+                <div class="share-section">
+                    <p> {{'details.share' | translate}} :</p>
+                    <div class="socials">
+                        <i class="lab la-facebook-f"></i>
+                        <i class="lab la-twitter"></i>
+                        <i class="lab la-linkedin-in"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="other-articles">
+            <h2>{{'details.other_articles' | translate}}</h2>
+
+            <div [routerLink]="['/',currentLang,base,otherItem.id]" *ngFor="let otherItem of items" class="article">
+                <img [src]="otherItem.image?.path" alt="">
+                <div>
+                    <h3 [textContent]="currentLang == 'ar' ? otherItem?.title?.ar : otherItem?.title?.en"></h3>
+                    <div class="date">
+                        <i class="las la-calendar-alt">
+
+                        </i>
+                        {{getDate(otherItem.createdAt!)}}
+                    </div>
+                    <div [textContent]="currentLang == 'ar' ? HTMLToText(otherItem?.content?.ar!).substr(0,50) : HTMLToText(otherItem?.content?.en!).substr(0,50)"
+                        class="text-content">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="comments-section">
+        <div class="comments-container">
+            <div class="new-comment">
+                <h2>{{'details.write_comment' | translate}}</h2>
+                <br>
+                <div class="row">
+                    <div class="input-container">
+                        <input #name type="text" [placeholder]="'details.name' | translate">
+                    </div>
+                    <div class="input-container">
+                        <input #email type="text" [placeholder]="'details.email' | translate">
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="row">
+                        <div class="input-container">
+                            <textarea #content required name="content" name="message"
+                                [placeholder]="'details.your_comment' | translate" rows="10"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div (click)="postComment(name.value,email.value,content.value)"
+                    [textContent]=" isButtonLoading ? 'Loading ...' : 'details.post' | translate" class="act-button">
+                </div>
+            </div>
+            <br>
+            <div class="comments">
+                <div *ngFor="let comment of comments" class="comment">
+                    <div class="avatar">
+                        <i class="las la-user"></i>
+                    </div>
+                    <div class="info">
+                        <div class="name">{{comment.name}}</div>
+                        <div class="date">
+                            <span>{{'details.date' | translate}} : </span> 
+                            <span>{{getDate(comment.createdAt!)}}</span>
+                        </div>
+                        <div class="comment-content">
+                            {{comment.content}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="filler"></div>
+    </div>
+    <br><br><br>
+    <app-preloader [closed]="!pageLoading"></app-preloader>
+
+</div>

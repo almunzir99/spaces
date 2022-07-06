@@ -127,9 +127,22 @@
 .row {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
 
     .input-container {
         flex: 1;
         min-width: 250px;
     }
+}
+.act-button {
+    height: 50px;
+    width: 130px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    background-color: $primary-color;
+    font-size: 16px;
+    cursor: pointer;
 }

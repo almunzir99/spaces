@@ -56,10 +56,10 @@
     </div>
     <br><br>
     <div class="projects">
-            <div *ngFor="let project of projects" class="project-card">
+            <div [routerLink]="['/',currentLang,'projects',project.id]" *ngFor="let project of projects" class="project-card">
                 <div class="state-info">
-                    <i [textContent]="currentLang == 'ar' ? project.region!.title?.ar : project.region!.title?.en" class="las la-map"></i>
-                    
+                    <i  class="las la-map"></i>
+                    <span [textContent]="currentLang == 'ar' ? project.region!.title?.ar : project.region!.title?.en"></span>
                 </div>
                 <div class="img-container">
                     <img src="assets/temp/images/portfolio-1.jpg" alt="">

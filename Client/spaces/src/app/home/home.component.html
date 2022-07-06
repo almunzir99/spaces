@@ -154,7 +154,7 @@
     <div class="news">
         <swiper dir="ltr" [autoplay]="{delay:1000}" [breakpoints]="newsSliderBreakpoints">
             <ng-template *ngFor="let article of articles" swiperSlide>
-                <div class="new-card">
+                <div [routerLink]="['/',currentLang,'articles',article.id]" class="new-card">
                     <div class="main-section">
                         <img [src]="article.image?.path">
                         <div class="overlay">

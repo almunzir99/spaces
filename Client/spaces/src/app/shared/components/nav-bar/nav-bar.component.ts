@@ -37,6 +37,8 @@ export class NavBarComponent implements OnInit {
     this.translationService.changeLang(lang);
     this.currentLang =  this.translationService.currentLang;
     this.translate.use(lang);
+    var segments = location.pathname.split('/'); 
+    this.urlSegments = segments.slice(2,segments.length);
     document.dir = lang == 'ar' ? 'rtl' : 'ltr';
     var segments = [...[this.currentLang],...this.urlSegments];
     this.router.navigate(segments)

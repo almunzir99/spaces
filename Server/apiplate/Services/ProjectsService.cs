@@ -65,7 +65,7 @@ namespace apiplate.Services
             var validFilter = (filter == null) ?
             new PaginationFilter()
             : new PaginationFilter(filter.PageIndex, filter.PageSize);
-            var target = await _context.Articles.Include(c => c.Comments).SingleOrDefaultAsync(c => c.Id == articleId);
+            var target = await _context.Projects.Include(c => c.Comments).SingleOrDefaultAsync(c => c.Id == articleId);
             if (target == null)
                 throw new Exception("the target article isn't available");
             var comments = target.Comments.Skip((validFilter.PageIndex - 1) * validFilter.PageSize)
@@ -76,7 +76,7 @@ namespace apiplate.Services
 
         public async Task<int> GetCommentsTotalAsync(int articleId)
         {
-            var target = await _context.Articles.Include(c => c.Comments).SingleOrDefaultAsync(c => c.Id == articleId);
+            var target = await _context.Projects.Include(c => c.Comments).SingleOrDefaultAsync(c => c.Id == articleId);
             if (target == null)
                 throw new Exception("the target article isn't available");
             return target.Comments.Count();

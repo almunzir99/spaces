@@ -20,17 +20,14 @@ export class WhatWeDoComponent implements OnInit {
   projects: Project[] = [];
   subscription = new Subscription();
   constructor(private _service: WhatWeDoService, private route: ActivatedRoute, private _globalService: GlobalService, private _translationService: TranslationService) {
-    route.params.subscribe(res => {
-      this.sector = this._globalService.$sectors.value.filter(c => c.id == res['id'])[0];
-      console.log(this.sector);
-    });
+    
 
   }
 
   loadData() {
     this.pageLoading = true;
     var obs = forkJoin([
-      this._service.getProjects(),
+      this._service.getProjects(this.sector?.id),
 
     ]).pipe(map(([projects]) => {
       return { projects }
@@ -48,8 +45,11 @@ export class WhatWeDoComponent implements OnInit {
     this.subscription.add(sub);
   }
   ngOnInit(): void {
+    this.route.params.subscribe(res => {
+      this.sector = this._globalService.$sectors.value.filter(c => c.id == res['id'])[0];
+      this.loadData();
+    });
     this.currentLang = this._translationService.currentLang;
-    this.loadData();
     this._translationService.subscribe({
       next: (res) => {
         this.currentLang = res;

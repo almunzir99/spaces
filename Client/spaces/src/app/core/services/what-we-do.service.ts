@@ -12,7 +12,7 @@ export class WhatWeDoService {
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
   }
-  getProjects(pageIndex = 1, pageSize = 9, title = "", orderBy = "lastUpdate", ascending = false, sectorId: number | null = null, regionId: number | null = null): Observable<PagedResponse<Project[]>> {
+  getProjects( sectorId: number | null = null, regionId: number | null = null,pageIndex = 1, pageSize = 9, title = "", orderBy = "lastUpdate", ascending = false): Observable<PagedResponse<Project[]>> {
     var params: any = {
       PageIndex: pageIndex,
       PageSize: pageSize,

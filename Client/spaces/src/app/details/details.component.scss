@@ -1,0 +1,180 @@
+@import "variables";
+
+.page {
+	background-color: whitesmoke;
+
+	.article-detail-page {
+		padding: 45px 20px;
+		display: flex;
+		align-items: flex-start;
+		flex-wrap: wrap;
+		background-color: whitesmoke;
+
+		.article-content-container {
+			flex: 2;
+			margin: 0px 15px;
+
+			.article-content {
+				padding: 30px;
+				background-color: white;
+				text-align: justify;
+
+				.infos {
+					display: flex;
+				}
+
+				.article-info {
+					font-size: 16px;
+					display: flex;
+					align-items: center;
+
+					i {
+						color: white;
+						height: 35px;
+						width: 35px;
+						border-radius: 50%;
+						background-color: $primary-color;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						font-size: 25px;
+						margin: 30px 20px;
+						margin-left: 15px;
+					}
+				}
+
+				img {
+					width: 100%;
+					height: auto;
+					margin-bottom: 30px;
+				}
+			}
+
+			.share-section {
+				display: flex;
+				padding: 20px 0px;
+				margin-top: 30px;
+				justify-content: space-between;
+				border-top: 1px solid #adadad28;
+				font-size: 16px;
+
+				i {
+					color: white;
+					background-color: $accent-color;
+					height: 35px;
+					width: 35px;
+					display: inline-flex;
+					align-items: center;
+					justify-content: center;
+					font-size: 25px;
+					margin: 0px 7px;
+					cursor: pointer;
+				}
+			}
+		}
+
+		.other-articles {
+			flex: 1;
+			margin: 0px 15px;
+			background-color: white;
+			padding: 20px;
+
+			h2 {
+				margin-top: 0;
+				padding: 0;
+				margin-bottom: 30px;
+			}
+
+			.article {
+				display: flex;
+				align-items: flex-start;
+				border-bottom: 1px solid #adadad28;
+				margin: 10px 0px;
+				padding-bottom: 15px;
+				cursor: pointer;
+
+				img {
+					height: 100px;
+					width: 100px;
+					margin: 0px 15px;
+				}
+			}
+
+			h3 {
+				margin-top: 0;
+				padding: 0;
+			}
+
+			.date {
+				margin: 05px 0px;
+			}
+		}
+	}
+
+	.comments-section {
+		display: flex;
+		padding: 10px 20px;
+
+		.comments-container {
+			flex: 2;
+			margin: 0px 15px;
+
+			.new-comment {
+				background-color: white;
+				padding: 30px;
+
+				.act-button {
+					margin: 10px;
+				}
+
+			}
+
+			.comments {
+				.comment {
+					padding: 30px;
+					margin: 20px 0px;
+					display: flex;
+					flex-wrap:wrap ;
+					background-color: white;
+					.avatar {
+						height: 70px;
+						width: 70px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						background-color: #cccbcb;
+						margin: 0px 15px;
+
+						i {
+							font-size: 50px;
+							color: #4b4a4a;
+
+						}
+					}
+
+					.info {
+						width: 80%;
+						margin: 0px 20px;
+						.name {
+							font-size: 18px;
+							font-weight: bold;
+							color: #333;
+						}
+						.date{
+							font-size: 14px;
+							margin-bottom: 10px;
+							color: gray;
+						}
+						.comment-content{
+							text-align: justify;
+						}
+					}
+				}
+			}
+		}
+
+		.filler {
+			flex: 1.2;
+		}
+	}
+}
