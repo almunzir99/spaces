@@ -48,8 +48,8 @@
     <hr class="sep">
     <h3 [innerHTML]="'Home.sector_subtitle' | translate"> </h3>
     <div class="sectors-cards">
-        <div *ngFor="let sector of sectors" class="sector-card-container">
-            <div class="sector-card">
+        <div [routerLink]="['/',currentLang,'what-we-do',sector.id]" *ngFor="let sector of sectors" class="sector-card-container">
+            <div  class="sector-card">
                 <div class="icon-container">
                     <svg-icon class="icon" [src]="sector.icon?.path!" [applyClass]="true"></svg-icon>
                 </div>
@@ -84,37 +84,27 @@
 </div>
 <!-- Media Area -->
 <div class="media-section">
-    <div (click)="showMediaViewer('video',['https://www.youtube.com/embed/AWtIRpbt4Oo'],0)" class="video-section">
-        <div class="content">
-            <div class="play-icon">
-                <i class="cil-media-play"></i>
+    <ng-container *ngIf="mainVideo">
+        <div [style.background-image]="'url('+ mainVideo.thumbnail?.path+')'"  (click)="showMediaViewer('video',[mainVideo.url!],0)" class="video-section">
+            <div class="content">
+                <div class="play-icon">
+                    <i class="cil-media-play"></i>
+                </div>
+                <h4 [innerHTML]="'Home.video_subtitle' | translate" class="subtitle">
+    
+                </h4>
+                <h1 [innerHTML]="'Home.video_title' | translate" class="bg-content">
+    
+                </h1>
             </div>
-            <h4 [innerHTML]="'Home.video_subtitle' | translate" class="subtitle">
-
-            </h4>
-            <h1 [innerHTML]="'Home.video_title' | translate" class="bg-content">
-
-            </h1>
         </div>
-    </div>
+    </ng-container>
     <div class="gallery-section">
-        <swiper dir="ltr" [autoplay]="{delay:1000}" [slidesPerView]="3.5">
-            <ng-template onclick="showMediaViewer('image',['assets/temp/images/portfolio-1.jpg','assets/temp/images/portfolio-2.jpg',
-        'assets/temp/images/portfolio-3.jpg'],0)" swiperSlide>
-                <img src="assets/temp/images/portfolio-1.jpg" alt="">
+        <swiper dir="ltr" [autoplay]="{delay:2000}" [loop]="true" [slidesPerView]="3.5">
+            <ng-template *ngFor="let image of gallery; let i = index;"  swiperSlide>
+                <img (click)="showGalleryInMediaViewer(i)" [src]="image.thumbnail?.path" alt="">
             </ng-template>
-            <ng-template swiperSlide>
-                <img src="assets/temp/images/portfolio-2.jpg" alt="">
-            </ng-template>
-            <ng-template swiperSlide>
-                <img src="assets/temp/images/portfolio-2.jpg" alt="">
-            </ng-template>
-            <ng-template swiperSlide>
-                <img src="assets/temp/images/portfolio-4.jpg" alt="">
-            </ng-template>
-            <ng-template swiperSlide>
-                <img src="assets/temp/images/portfolio-5.jpg" alt="">
-            </ng-template>
+             
         </swiper>
     </div>
 </div>
@@ -156,7 +146,7 @@
     <div class="news">
         <swiper dir="ltr" [autoplay]="{delay:1000}" [breakpoints]="newsSliderBreakpoints">
             <ng-template *ngFor="let article of articles" swiperSlide>
-                <div [routerLink]="['/',currentLang,'articles',article.id]" class="new-card">
+                <div [routerLink]="['/',currentLang,'articles',article.id]" [dir]="currentLang == 'ar' ? 'rtl': 'ltr'" class="new-card">
                     <div class="main-section">
                         <img [src]="article.image?.path">
                         <div class="overlay">
@@ -196,16 +186,16 @@
         </swiper>
     </div>
 </div>
-<div [class.active]="showMediaViewerActive" class="media-viewer">
-    <swiper [initialSlide]="selectedMediaIndex" [slidesPerView]="1">
+<div  [class.active]="showMediaViewerActive" class="media-viewer">
+    <swiper *ngIf="showMediaViewerActive" [initialSlide]="selectedMediaIndex" [slidesPerView]="1">
         <ng-template *ngFor="let item of media" swiperSlide>
             <div *ngIf="mediaType == 'video'" class="video-container">
-                <iframe *ngIf="media != null" [src]="_sanitizer.bypassSecurityTrustResourceUrl(item)" frameborder="0"
+                <iframe *ngIf="media != null" [src]="item" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
             </div>
-            <div *ngIf="mediaType == 'video'">
-                <img src="" alt="" srcset="">
+            <div class="image-container" *ngIf="mediaType == 'image'">
+                <img [src]="item">
             </div>
         </ng-template>
     </swiper>

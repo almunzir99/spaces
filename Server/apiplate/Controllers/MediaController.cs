@@ -53,6 +53,7 @@ namespace apiplate.Controllers
                 return BadRequest(response);
             }
         }
+        [AllowAnonymous]
         [HttpGet("main-video")]
         public async Task<IActionResult> getMainVideoAsync()
         {

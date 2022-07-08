@@ -1,17 +1,18 @@
-import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component, NgZone, OnInit, SecurityContext, ViewChild } from '@angular/core';
 import { SwiperComponent } from 'swiper/angular';
 import { Swiper, SwiperOptions } from 'swiper/types';
 import SwiperCore,  { Autoplay,Pagination,Navigation } from 'swiper';
 import { Slider } from '../core/models/slider.model';
 import { Sector } from '../core/models/sector.model';
 import { Partners } from '../core/models/partners.model';
-import { first, forkJoin, map, Subscription } from 'rxjs';
+import { forkJoin, map, Subscription } from 'rxjs';
 import { HomeService } from '../core/services/home.service';
 import { Article } from '../core/models/article.model';
 import { TranslationService } from '../core/services/translation.service';
 import { Testimonial } from '../core/models/testimonial.model';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { Media } from '../core/models/media.model';
 
 SwiperCore.use([Autoplay])
 
@@ -26,8 +27,9 @@ export class HomeComponent implements OnInit {
   pageLoading = false;
   showMediaViewerActive = false;
   mediaType?:string;
-  media!:string[];
+  media!:SafeUrl[];
   selectedMediaIndex = 0;
+  SecurityContext = SecurityContext;
   newsSliderBreakpoints = {
     
     950: {
@@ -64,8 +66,9 @@ export class HomeComponent implements OnInit {
   testimonials: Testimonial[] = [];
   subscription = new Subscription();
   currentLang:string = "en";
+  gallery:Media[] = [];
+  mainVideo?:Media;
   constructor(private _service: HomeService,private _translationService:TranslationService,public _sanitizer:DomSanitizer,private _ngZone:NgZone,private router:Router) { 
-
   }
   loadData() {
     this.pageLoading = true;
@@ -75,9 +78,13 @@ export class HomeComponent implements OnInit {
       this._service.getPartners(),
       this._service.getArticles(),
       this._service.getTestimonials(),
+      this._service.getMedia(),
+      this._service.getMainVideo(),
 
-    ]).pipe(map(([sliders, sectors, partners, articles,testimonials]) => {
-      return { sliders, sectors, partners, articles,testimonials }
+
+
+    ]).pipe(map(([sliders, sectors, partners, articles,testimonials,gallery,video]) => {
+      return { sliders, sectors, partners, articles,testimonials,gallery,video }
     }));
    var sub = obs.subscribe({
       next: (res) => {
@@ -87,6 +94,8 @@ export class HomeComponent implements OnInit {
         this.partners = res.partners.data!;
         this.articles = res.articles.data!;
         this.testimonials = res.testimonials.data!;
+        this.gallery = res.gallery.data?.filter(c => c.mediaType == 'image')!;
+        this.mainVideo = res.video.data!;
         this.configureNewsSliderBreakpoints();
         console.log(this.newsSliderBreakpoints)
         console.log(res)
@@ -106,9 +115,22 @@ export class HomeComponent implements OnInit {
   showMediaViewer(type:string,media:string[],selectMediaIndex:number = 0)
   {
     this.mediaType = type;
-    this.media = media;
+    this.media = media.map(m =>{
+      if(this.mediaType == 'video')
+        return this._sanitizer.bypassSecurityTrustResourceUrl(m);
+      else
+      return this._sanitizer.bypassSecurityTrustUrl(m);
+
+    });
     this.selectedMediaIndex = selectMediaIndex;
     this.showMediaViewerActive = true;
+  }
+  showGalleryInMediaViewer(selectMediaIndex:number)
+  {
+    var images = this.gallery.map(c => {
+      return c.url!;
+    });
+    this.showMediaViewer("image",images,selectMediaIndex); 
   }
   ngZonedNavigation(url:string){
     this._ngZone.run(() =>{
@@ -126,6 +148,7 @@ export class HomeComponent implements OnInit {
       this.currentLang = res;
   }})
   }
+   
   ngAfterViewInit() {
   }
   ngOnDestroy(){

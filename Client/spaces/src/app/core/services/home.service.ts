@@ -2,10 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Article } from '../models/article.model';
+import { Media } from '../models/media.model';
 import { Partners } from '../models/partners.model';
 import { Sector } from '../models/sector.model';
 import { Slider } from '../models/slider.model';
 import { Testimonial } from '../models/testimonial.model';
+import { ApiResponse } from '../models/wrappers/apiResponse.model';
 import { PagedResponse } from '../models/wrappers/PagedResponse.mode';
 
 @Injectable({
@@ -29,5 +31,11 @@ export class HomeService {
   }
   getTestimonials(pageIndex = 1, pageSize = 10,title="",orderBy="lastUpdate",ascending = false): Observable<PagedResponse<Testimonial[]>> {
     return this.http.get(`${this.baseUrl}api/testimonials?pageIndex=${pageIndex}&pageSize=${pageSize}&title=${title}&orderBy=${orderBy}&ascending=${ascending}`) as Observable<PagedResponse<Testimonial[]>>;
+  }
+  getMedia(pageIndex = 1, pageSize = 10,title="",orderBy="lastUpdate",ascending = false): Observable<PagedResponse<Media[]>> {
+    return this.http.get(`${this.baseUrl}api/media?pageIndex=${pageIndex}&pageSize=${pageSize}&title=${title}&orderBy=${orderBy}&ascending=${ascending}`) as Observable<PagedResponse<Media[]>>;
+  }
+  getMainVideo(): Observable<ApiResponse<Media>> {
+    return this.http.get(`${this.baseUrl}api/media/main-video`) as Observable<PagedResponse<Media>>;
   }
 }

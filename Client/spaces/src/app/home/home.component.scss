@@ -337,9 +337,8 @@
         height: 60vh;
         width: 100%;
         position: relative;
-        background-image: url("/assets/temp/images/bg-vid.jpg");
         cursor: pointer;
-
+        background-size: contain;
         .content {
             position: absolute;
             width: 100%;
@@ -349,7 +348,7 @@
             align-items: center;
             justify-content: center;
             color: white;
-
+            background-color: #00000071;
             .play-icon {
                 height: 80px;
                 width: 80px;
@@ -385,6 +384,7 @@
 
         img {
             width: 100%;
+            cursor: pointer;
         }
     }
 }
@@ -682,7 +682,11 @@
     overflow: hidden;
     transition: .6s all ease;
     height: 0px;
+    swiper{
+        height: 100%;
+        width: 100%;
 
+    }
     .video-container {
         height: 100%;
         width: 100%;
@@ -696,6 +700,18 @@
             min-height: 180px;
         }
     }
+    .image-container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 60vw;
+            min-width: 300px;
+            height: auto;
+        }
+    }
     .close-button {
         height: 40px;
         width: 40px;
@@ -706,6 +722,7 @@
         top: 30px;
         right: 30px;
         cursor: pointer;
+        z-index: 100;
         i{
             font-size: 25px;
             color: white;

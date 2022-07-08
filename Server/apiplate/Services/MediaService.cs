@@ -47,7 +47,7 @@ namespace apiplate.Services
         }
         public async Task<MediaResource> GetMainVideo()
         {
-            var mainVideo = await _dbSet.FirstOrDefaultAsync(c => c.MediaType == "video" && c.MainVideo == true);
+            var mainVideo = await GetDbSet().FirstOrDefaultAsync(c => c.MediaType == "video" && c.MainVideo == true);
             if (mainVideo == null)
                 throw new System.Exception("no main video add");
             var result = _mapper.Map<Media, MediaResource>(mainVideo);
