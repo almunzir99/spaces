@@ -81,6 +81,12 @@ export const MenuList: MenuGroup[] = [
                 route: "/dashboard/messages"
 
             },
+            {
+                title: "Media",
+                icon: "las la-photo-video",
+                route: "/dashboard/media"
+
+            },
         ]
     },
     {

@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { SwiperComponent } from 'swiper/angular';
 import { Swiper, SwiperOptions } from 'swiper/types';
-import SwiperCore, { Autoplay } from 'swiper';
+import SwiperCore,  { Autoplay,Pagination,Navigation } from 'swiper';
 import { Slider } from '../core/models/slider.model';
 import { Sector } from '../core/models/sector.model';
 import { Partners } from '../core/models/partners.model';
@@ -10,7 +10,11 @@ import { HomeService } from '../core/services/home.service';
 import { Article } from '../core/models/article.model';
 import { TranslationService } from '../core/services/translation.service';
 import { Testimonial } from '../core/models/testimonial.model';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+
 SwiperCore.use([Autoplay])
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,6 +24,10 @@ export class HomeComponent implements OnInit {
   currentIndex = 0;
   swiper?: SwiperComponent;
   pageLoading = false;
+  showMediaViewerActive = false;
+  mediaType?:string;
+  media!:string[];
+  selectedMediaIndex = 0;
   newsSliderBreakpoints = {
     
     950: {
@@ -56,8 +64,8 @@ export class HomeComponent implements OnInit {
   testimonials: Testimonial[] = [];
   subscription = new Subscription();
   currentLang:string = "en";
-  constructor(private _service: HomeService,private _translationService:TranslationService) { 
-    
+  constructor(private _service: HomeService,private _translationService:TranslationService,public _sanitizer:DomSanitizer,private _ngZone:NgZone,private router:Router) { 
+
   }
   loadData() {
     this.pageLoading = true;
@@ -94,6 +102,22 @@ export class HomeComponent implements OnInit {
     // this.newsSliderBreakpoints[1040].slidesPerView = this.articles.length < 4 ? this.articles.length : 4;
     this.newsSliderBreakpoints[950].slidesPerView = this.articles.length < 3 ? this.articles.length : 3;
     this.newsSliderBreakpoints[650].slidesPerView = this.articles.length < 3 ? this.articles.length : 2;
+  }
+  showMediaViewer(type:string,media:string[],selectMediaIndex:number = 0)
+  {
+    this.mediaType = type;
+    this.media = media;
+    this.selectedMediaIndex = selectMediaIndex;
+    this.showMediaViewerActive = true;
+  }
+  ngZonedNavigation(url:string){
+    this._ngZone.run(() =>{
+      this.router.navigate([url]);
+    })
+  }
+  closeMediaViewer()
+  {
+    this.showMediaViewerActive = false;
   }
   ngOnInit(): void {
     this.currentLang = this._translationService.currentLang;

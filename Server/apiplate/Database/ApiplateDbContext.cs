@@ -93,6 +93,8 @@ namespace apiplate.DataBase
         public DbSet<Partner> Partners { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Media> Media { get; set; }
+
 
 
 

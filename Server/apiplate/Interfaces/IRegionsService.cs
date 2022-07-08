@@ -4,10 +4,11 @@ using apiplate.Resources.Requests;
 
 namespace apiplate.Interfaces
 {
-    public interface IRegionsService : IBaseService<Region,RegionResource,RegionRequestResource>{
-            
-            
-        }
+    public interface IRegionsService : IBaseService<Region, RegionResource, RegionRequestResource>
+    {
 
-    
+
+    }
+
+
 }

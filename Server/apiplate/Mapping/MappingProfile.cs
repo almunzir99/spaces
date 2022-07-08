@@ -39,6 +39,10 @@ namespace apiplate.Mapping
             CreateMap<TestimonialRequestResource, Testimonial>().ReverseMap();
             CreateMap<ProjectResource, Project>().ReverseMap();
             CreateMap<ProjectRequestResource, Project>().ReverseMap();
+            CreateMap<MediaResource, Media>().ReverseMap();
+            CreateMap<MediaRequestResource, Media>().ReverseMap();
+
+
         }
 
 

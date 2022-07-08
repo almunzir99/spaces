@@ -10,7 +10,7 @@
                     <div [textContent]="currentLang == 'ar' ? slider.title?.ar : slider.title?.en" class="title"></div>
                     <div [textContent]="currentLang == 'ar' ? slider.description?.ar : slider.description?.en"
                         class="content"> </div>
-                    <div [routerLink]="slider.url" [innerHTML]="'Home.readmore' | translate" class="act-button"></div>
+                    <div (click)="ngZonedNavigation(slider.url!)" [innerHTML]="'Home.readmore' | translate" class="act-button"></div>
 
                 </div>
             </div>
@@ -30,13 +30,13 @@
     </div>
     <div class="content-section">
         <div [innerHTML]="'Home.intro_section_subtitle' | translate" class="subtitle">
-            
+
         </div>
         <div [innerHTML]="'Home.intro_section_title' | translate" class="title">
-            
+
         </div>
         <div [innerHTML]="'Home.intro_section_content' | translate" class="content">
-           
+
         </div>
         <div [innerHTML]="'Home.readmore' | translate" class="act-button accent">Read More</div>
 
@@ -63,13 +63,14 @@
 <div class="partners-section">
     <div class="content-section">
         <div style="z-index: -1;" class="pattern pattern-diagonal-lines-sm gray-light"></div>
-        <div  [innerHTML]="'Home.partner_subtitle' | translate" class="subtitle">
-            
+        <div [innerHTML]="'Home.partner_subtitle' | translate" class="subtitle">
+
         </div>
-        <div  [innerHTML]="'Home.partners_title' | translate" class="title">
+        <div [innerHTML]="'Home.partners_title' | translate" class="title">
         </div>
-        <div  [innerHTML]="'Home.partners_content' | translate" class="content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum nam voluptatem consectetur
-            </div>
+        <div [innerHTML]="'Home.partners_content' | translate" class="content">Lorem ipsum dolor sit, amet consectetur
+            adipisicing elit. Harum nam voluptatem consectetur
+        </div>
     </div>
     <div class="logos-section">
         <div class="logos">
@@ -83,22 +84,23 @@
 </div>
 <!-- Media Area -->
 <div class="media-section">
-    <div class="video-section">
+    <div (click)="showMediaViewer('video',['https://www.youtube.com/embed/AWtIRpbt4Oo'],0)" class="video-section">
         <div class="content">
             <div class="play-icon">
                 <i class="cil-media-play"></i>
             </div>
             <h4 [innerHTML]="'Home.video_subtitle' | translate" class="subtitle">
-                
+
             </h4>
             <h1 [innerHTML]="'Home.video_title' | translate" class="bg-content">
-                
+
             </h1>
         </div>
     </div>
     <div class="gallery-section">
         <swiper dir="ltr" [autoplay]="{delay:1000}" [slidesPerView]="3.5">
-            <ng-template swiperSlide>
+            <ng-template onclick="showMediaViewer('image',['assets/temp/images/portfolio-1.jpg','assets/temp/images/portfolio-2.jpg',
+        'assets/temp/images/portfolio-3.jpg'],0)" swiperSlide>
                 <img src="assets/temp/images/portfolio-1.jpg" alt="">
             </ng-template>
             <ng-template swiperSlide>
@@ -179,19 +181,36 @@
                         </div>
                         <div class="info">
                             <i class="las la-comments"></i>
-                            <span>{{article.comments?.length}} Comments</span> 
+                            <span>{{article.comments?.length}} Comments</span>
                         </div>
                         <div class="sep"></div>
                         <div [innerHTML]="'Home.readmore' | translate" class="readmore">
-                            
+
                             <i class="las la-arrow-right"></i>
                         </div>
                     </div>
 
                 </div>
             </ng-template>
-
+ 
         </swiper>
+    </div>
+</div>
+<div [class.active]="showMediaViewerActive" class="media-viewer">
+    <swiper [initialSlide]="selectedMediaIndex" [slidesPerView]="1">
+        <ng-template *ngFor="let item of media" swiperSlide>
+            <div *ngIf="mediaType == 'video'" class="video-container">
+                <iframe *ngIf="media != null" [src]="_sanitizer.bypassSecurityTrustResourceUrl(item)" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+            <div *ngIf="mediaType == 'video'">
+                <img src="" alt="" srcset="">
+            </div>
+        </ng-template>
+    </swiper>
+    <div (click)="closeMediaViewer()" class="close-button">
+        <i class="las la-times"></i>
     </div>
 </div>
 <app-preloader [closed]="!pageLoading"></app-preloader>
