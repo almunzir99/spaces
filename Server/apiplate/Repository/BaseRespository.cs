@@ -17,7 +17,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace apiplate.Repository
 {
-    public class BaseRepository<TModel, TResource,TRequest> : IRepository<TModel, TResource,TRequest>
+    public class BaseRepository<TModel, TResource, TRequest> : IRepository<TModel, TResource, TRequest>
      where TModel : BaseModel where TResource : BaseResource
     {
         protected readonly ApiplateDbContext _context;
@@ -152,16 +152,26 @@ namespace apiplate.Repository
 
         public virtual async Task<TResource> UpdateAsync(int id, TRequest newItem)
         {
-            var result = await _dbSet.SingleOrDefaultAsync(c => c.Id == id);
-            if (result == null)
-                throw new Exception("item is not found");
-            _mapper.Map<TRequest, TModel>(newItem, result);
-            result.LastUpdate = DateTime.Now;
-            var save = await _context.SaveChangesAsync();
-            if (save == -1)
-                throw new Exception("saving changes to database failed");
-            var mappedResult = _mapper.Map<TModel, TResource>(result);
-            return mappedResult;
+            try
+            {
+                var result = await GetDbSet().SingleOrDefaultAsync(c => c.Id == id);
+                if (result == null)
+                    throw new Exception("item is not found");
+                _mapper.Map<TRequest, TModel>(newItem, result);
+                result.LastUpdate = DateTime.Now;
+                var save = await _context.SaveChangesAsync();
+                var mappedResult = _mapper.Map<TModel, TResource>(result);
+                return mappedResult;
+            }
+            catch (DbUpdateException exception)
+            {
+                throw new System.Exception(exception.Decode());
+            }
+            catch (System.Exception e)
+            {
+
+                throw e;
+            }
         }
         public virtual async Task<TResource> UpdateAsync(int id, JsonPatchDocument<TModel> newItem)
         {

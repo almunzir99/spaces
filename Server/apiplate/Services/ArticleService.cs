@@ -82,6 +82,7 @@ namespace apiplate.Services
                 throw new Exception("the target article isn't available");
             return target.Comments.Count();
         }
+        
         public async override Task DeleteAsync(int id)
         {
             try
