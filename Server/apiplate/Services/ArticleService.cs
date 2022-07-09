@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using apiplate.DataBase;
+using apiplate.Extensions;
 using apiplate.Interfaces;
 using apiplate.Models;
 using apiplate.Resources;
@@ -81,12 +82,35 @@ namespace apiplate.Services
                 throw new Exception("the target article isn't available");
             return target.Comments.Count();
         }
+        public async override Task DeleteAsync(int id)
+        {
+            try
+            {
+                var target = await GetDbSet().SingleOrDefaultAsync(c => c.Id == id);
+                if (target == null)
+                    throw new System.Exception("The target Item doesn't Exist");
+                _context.Remove<Article>(target);
+                _context.Remove<Translation>(target.Title);
+                _context.Remove<Translation>(target.Subtitle);
+                _context.Remove<Translation>(target.Content);
+                _context.Remove<Image>(target.Image);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException exception)
+            {
+                throw new System.Exception(exception.Decode());
+            }
+            catch (System.Exception e)
+            {
 
+                throw e;
+            }
+        }
         protected override IQueryable<Article> GetDbSet()
         {
             return _context.Articles.Include(c => c.Author)
             .Include(c => c.Title).Include(c => c.Subtitle).Include(c => c.Image)
-            .Include(c => c.Content).Include(c => c.Tags).ThenInclude(c => c.Translation);
+            .Include(c => c.Content).Include(c => c.Tags).ThenInclude(c => c.Translation).Include(c => c.Comments);
 
 
         }

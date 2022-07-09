@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using apiplate.DataBase;
+using apiplate.Extensions;
 using apiplate.Interfaces;
 using apiplate.Models;
 using apiplate.Resources;
@@ -52,6 +53,26 @@ namespace apiplate.Services
                 throw new System.Exception("no main video add");
             var result = _mapper.Map<Media, MediaResource>(mainVideo);
             return result;
+        }
+         public async override Task DeleteAsync(int id)
+        {
+            try
+            {
+                var target = await GetDbSet().SingleOrDefaultAsync(c => c.Id == id);
+                if (target == null)
+                    throw new System.Exception("The target Item doesn't Exist");
+                _context.Remove<Image>(target.Thumbnail);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException exception)
+            {
+                throw new System.Exception(exception.Decode());
+            }
+            catch (System.Exception e)
+            {
+
+                throw e;
+            }
         }
         protected override IQueryable<Media> GetDbSet()
         {

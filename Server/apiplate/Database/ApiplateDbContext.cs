@@ -16,7 +16,7 @@ namespace apiplate.DataBase
         {
             foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {
-                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+                relationship.DeleteBehavior = DeleteBehavior.ClientCascade;
             }
             builder.Entity<Admin>().HasIndex(c => c.Email).IsUnique();
             builder.Entity<Admin>().HasData(GetManagerUser());
@@ -94,6 +94,7 @@ namespace apiplate.DataBase
         public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Media> Media { get; set; }
+        
 
 
 

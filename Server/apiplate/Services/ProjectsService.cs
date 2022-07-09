@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using apiplate.DataBase;
+using apiplate.Extensions;
 using apiplate.Interfaces;
 using apiplate.Models;
 using apiplate.Resources;
@@ -19,7 +20,30 @@ namespace apiplate.Services
         public ProjectsService(IMapper mapper, ApiplateDbContext context, IUriService uriService) : base(mapper, context, uriService)
         {
         }
+        public async override Task DeleteAsync(int id)
+        {
+            try
+            {
+                var target = await GetDbSet().SingleOrDefaultAsync(c => c.Id == id);
+                if (target == null)
+                    throw new System.Exception("The target Item doesn't Exist");
+                _context.Remove<Project>(target);
+                _context.Remove<Translation>(target.Title);
+                _context.Remove<Translation>(target.Subtitle);
+                _context.Remove<Translation>(target.Content);
+                _context.Remove<Image>(target.Image);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException exception)
+            {
+                throw new System.Exception(exception.Decode());
+            }
+            catch (System.Exception e)
+            {
 
+                throw e;
+            }
+        }
         public async Task<CommentResource> AddCommentAsync(int articleId, CommentResource comment)
         {
             try
@@ -83,13 +107,13 @@ namespace apiplate.Services
         }
 
         public async Task<IList<ProjectResource>> ListAsync(PaginationFilter filter, IList<Func<Project, bool>> conditions, string search = "", string orderBy = "LastUpdate", bool ascending = true, int? sectorId = null, int? regionId = null)
-        { 
-          if(sectorId != null)
-          conditions.Add(c => c.SectorId == sectorId.Value);
-          if(regionId != null)
-          conditions.Add(c => c.RegionId == regionId.Value);
-          var result = await base.ListAsync(filter,conditions,search,orderBy,ascending);
-          return result;
+        {
+            if (sectorId != null)
+                conditions.Add(c => c.SectorId == sectorId.Value);
+            if (regionId != null)
+                conditions.Add(c => c.RegionId == regionId.Value);
+            var result = await base.ListAsync(filter, conditions, search, orderBy, ascending);
+            return result;
 
         }
 

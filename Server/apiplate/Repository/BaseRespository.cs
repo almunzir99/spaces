@@ -65,7 +65,7 @@ namespace apiplate.Repository
                 var target = await GetDbSet().SingleOrDefaultAsync(c => c.Id == id);
                 if (target == null)
                     throw new System.Exception("The target Item doesn't Exist");
-                _dbSet.Remove(target);
+                _context.Remove<TModel>(target);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException exception)
