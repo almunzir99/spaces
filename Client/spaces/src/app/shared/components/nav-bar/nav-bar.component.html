@@ -65,7 +65,7 @@
                 <i class="las la-donate icon"></i>
                 <span [innerHTML]="'nav_bar.donate' | translate" class="text"></span>
             </div>
-            <div class="act-button accent">
+            <div [routerLink]="['/',currentLang,'volunteers']" class="act-button accent">
                 <i class="las la-handshake icon"></i>
                 <span [innerHTML]="'nav_bar.get_involved' | translate" class="text"></span>
             </div>

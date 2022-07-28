@@ -87,6 +87,12 @@ export const MenuList: MenuGroup[] = [
                 route: "/dashboard/media"
 
             },
+            {
+                title: "Volunteers Requests",
+                icon: "las la-users",
+                route: "/dashboard/volunteers"
+
+            },
         ]
     },
     {

@@ -94,6 +94,8 @@ namespace apiplate.DataBase
         public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Media> Media { get; set; }
+        public DbSet<Volunteer> volunteers { get; set; }
+
         
 
 

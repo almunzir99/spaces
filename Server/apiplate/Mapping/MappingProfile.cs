@@ -69,6 +69,10 @@ namespace apiplate.Mapping
             CreateMap<MediaResource, Media>().ReverseMap();
             CreateMap<MediaRequestResource, Media>()
             .ForMember(c => c.Thumbnail, opt => opt.Ignore());
+            CreateMap<VolunteerResource, Volunteer>().ReverseMap();
+            CreateMap<VolunteerRequestResource, Volunteer>().ReverseMap();
+
+
 
 
         }

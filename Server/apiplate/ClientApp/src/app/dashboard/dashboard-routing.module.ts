@@ -83,6 +83,10 @@ const routes: Routes = [
       {
         path:"media",
         loadChildren: () => import("./media/media.module").then(c => c.MediaModule)
+      },
+      {
+        path:"volunteers",
+        loadChildren: () => import("./volunteers/volunteers.module").then(c => c.VolunteersModule)
       }
     ]
   }

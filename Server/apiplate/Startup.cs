@@ -62,12 +62,7 @@ namespace apiplate
             services.AddScoped<ITestimonialsService, TestimonialsService>();
             services.AddScoped<IProjectsService, ProjectsService>();
             services.AddScoped<IMediaService, MediaService>();
-
-
-
-
-
-
+            services.AddScoped<IVolunteersService, VolunteersService>();
             services.AddCors(options =>
        {
            options.AddPolicy("CorsPolicy",

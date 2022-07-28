@@ -1,0 +1,72 @@
+<!-- Page Header -->
+<div class="page-header">
+    <div class="content">
+        <h1 class="title">Join as Volunteer</h1>
+        <h5 class="nav-link"><span class="link active" [innerHTML]="'nav_bar.home'| translate"
+                [routerLink]="['/','en','home']"></span><span> >> </span><span
+                [innerHTML]="'nav_bar.contact_us'| translate"></span>
+        </h5>
+    </div>
+</div>
+<div class="form">
+    <h1>Join as Volunteer</h1>
+    <form #contactForm="ngForm">
+        <div class="row">
+            <div class="input-container">
+                <input required [(ngModel)]="volunteer.firstName" name="firstName" type="text"
+                    [placeholder]="'First Name'">
+            </div>
+            <div class="input-container">
+                <input required [(ngModel)]="volunteer.lastName" name="lastName" type="text"
+                    [placeholder]="'Last Name'">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-container">
+                <input required [(ngModel)]="volunteer.email" name="email" type="text" [placeholder]="'Email'">
+            </div>
+            <div class="input-container">
+                <input required [(ngModel)]="volunteer.phone" name="phone" type="text" [placeholder]="'Phone'">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-container">
+                <select [(ngModel)]="volunteer.gender" name="gender" id="gender">
+                    <option selected disabled [value]="undefined">Select Gender</option>
+                    <option *ngFor="let gender of genders; let i = index" [value]="i">{{gender}}</option>
+                </select>
+            </div>
+            <div class="input-container">
+                <select [(ngModel)]="volunteer.educationLevel" name="educationLevel" id="educationLevel">
+                    <option selected disabled [value]="undefined">Select Education Level</option>
+                    <option *ngFor="let level of levels; let i = index" [value]="i">{{level}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-container">
+                <input required [(ngModel)]="volunteer.cVLink" name="cvLink" type="text"
+                    [placeholder]="'CV Link from google Drive or DropBox'">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-container">
+                <select [(ngModel)]="volunteer.sectorId" name="sectorId" id="sectorId">
+                    <option selected disabled [value]="undefined">Select a Sector You want to work on</option>
+                    <option *ngFor="let sector of sectors; let i = index" [value]="sector.id">{{sector.title?.en}}</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="input-container">
+                <textarea required [(ngModel)]="volunteer.reason" name="reason"
+                    [placeholder]="'Why you want to to become a volunteer at Spaces ? '" cols="30" rows="10"></textarea>
+            </div>
+        </div>
+        <br>
+        <input (click)="sendRequest()" type="submit" class="act-button"
+            [value]=" isLoading ? 'Loading ...' : 'contact_us.send' | translate">
+    </form>
+    <br><br><br>
+</div>

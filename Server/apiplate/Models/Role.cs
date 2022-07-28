@@ -15,6 +15,8 @@ namespace apiplate.Models
         public Permission TestimonialsPermissions { get; set; }
         public Permission ProjectsPermissions { get; set; }
         public Permission MediaPermissions { get; set; }
+        public Permission VolunteersPermissions { get; set; }
+
         
 
 
