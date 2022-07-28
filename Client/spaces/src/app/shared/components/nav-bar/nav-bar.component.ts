@@ -24,8 +24,9 @@ export class NavBarComponent implements OnInit {
     this.urlSegments = segments.slice(2,segments.length);
     this.currentLang =  segments[1];
     this.changeLang(this.currentLang);
-    this.sectors = this._globalService.$sectors.value;
-    console.log(this.sectors);
+    this._globalService.$sectors.subscribe(res => {
+      this.sectors = res;
+    })
 
   }
   ngAfterContentInit() {

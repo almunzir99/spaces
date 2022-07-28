@@ -9,6 +9,7 @@ export const  navBarList:NavBarItem[] = [
         title:"About",
         route:"about"
     },
+    
     {
         title:"Sectors",
         route:"what-we-do",
@@ -48,6 +49,11 @@ export const  navBarList:NavBarItem[] = [
         title:"Regions",
         route:"where-we-work"
     },
+    {
+        title:"careers",
+        route:"careers"
+    },
+    
     {
         title:"Contact_Us",
         route:"contact-us"

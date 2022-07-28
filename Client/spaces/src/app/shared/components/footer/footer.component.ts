@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { navBarList } from '../nav-bar/navbar-list';
 
 @Component({
@@ -8,7 +8,7 @@ import { navBarList } from '../nav-bar/navbar-list';
 })
 export class FooterComponent implements OnInit {
   links = navBarList;
-  constructor() { }
+  constructor(@Inject('BASE_URL') public baseUrl: string) { }
 
   ngOnInit(): void {
   }

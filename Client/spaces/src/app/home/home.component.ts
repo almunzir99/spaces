@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit, SecurityContext, ViewChild } from '@angular/core';
+import { Component, Inject, NgZone, OnInit, SecurityContext, ViewChild } from '@angular/core';
 import { SwiperComponent } from 'swiper/angular';
 import { Swiper, SwiperOptions } from 'swiper/types';
 import SwiperCore,  { Autoplay,Pagination,Navigation } from 'swiper';
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
   currentLang:string = "en";
   gallery:Media[] = [];
   mainVideo?:Media;
-  constructor(private _service: HomeService,private _translationService:TranslationService,public _sanitizer:DomSanitizer,private _ngZone:NgZone,private router:Router) { 
+  constructor(@Inject('BASE_URL') public baseUrl: string,private _service: HomeService,private _translationService:TranslationService,public _sanitizer:DomSanitizer,private _ngZone:NgZone,private router:Router) { 
   }
   loadData() {
     this.pageLoading = true;
