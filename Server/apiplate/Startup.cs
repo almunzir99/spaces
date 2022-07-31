@@ -20,6 +20,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using apiplate.StartupTasks;
+using apiplate.StartupTasks.Extensions;
 
 namespace apiplate
 {
@@ -63,6 +65,7 @@ namespace apiplate
             services.AddScoped<IProjectsService, ProjectsService>();
             services.AddScoped<IMediaService, MediaService>();
             services.AddScoped<IVolunteersService, VolunteersService>();
+            services.AddStartupTask<ImagesStartupTask>();
             services.AddCors(options =>
        {
            options.AddPolicy("CorsPolicy",
