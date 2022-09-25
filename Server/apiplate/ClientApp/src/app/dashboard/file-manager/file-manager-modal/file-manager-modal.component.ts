@@ -12,7 +12,7 @@ export interface IFileManagerModalContext{
 })
 export class FileManagerModalComponent implements OnInit {
 
-  constructor(private modal: FuiBaseModal<IFileManagerModalContext, any, void>) { }
+  constructor(public modal: FuiBaseModal<IFileManagerModalContext, any, void>) { }
 
   ngOnInit(): void {
   }

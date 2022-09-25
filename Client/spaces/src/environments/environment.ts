@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl:"https://localhost:5001/"
+  baseUrl:"http://spacess2022-001-site1.itempurl.com/"
 };
 
 /*

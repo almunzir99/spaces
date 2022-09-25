@@ -5,6 +5,7 @@ import { VolunteersRoutingModule } from './volunteers-routing.module';
 import { VolunteersComponent } from './volunteers.component';
 import { FomanticUIModule } from 'ngx-fomantic-ui';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     VolunteersRoutingModule,
     FomanticUIModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ]
 })
 export class VolunteersModule { }
