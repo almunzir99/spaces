@@ -60,6 +60,7 @@ export class RolesComponent implements OnInit {
   onManagePermissionClicked(role:Role){
     this.showPermissionsModal = true;
     this.selectedRole = role;
+    console.log(this.selectedRole);
   }
   PermissionModalDismissed(){
     this.showPermissionsModal = false;
@@ -69,6 +70,7 @@ export class RolesComponent implements OnInit {
     this.isLoading = true;
     this._service.get(this.pageIndex, this.pageSize, this.searchValue, this.orderBy, this.ascending).subscribe(res => {
       this.data = res.data;
+      console.log(this.data)
       this.totalRecords = res.totalRecords;
       this.totalPages = res.totalPages;
       this.isLoading = false;
@@ -138,6 +140,7 @@ export class RolesComponent implements OnInit {
 
   onApply(role: Role) {
     this.DimLoading = true;
+    this.showPermissionsModal = false;
     this._service.put(role).subscribe(res => {
       this.DimLoading = false;
       this.initData();
@@ -184,8 +187,19 @@ export class RolesComponent implements OnInit {
           rolesPermissions: defaultPermission,
           usersPermissions: defaultPermission,
           messagesPermissions: defaultPermission,
+          articlesPermissions:defaultPermission,
+          projectsPermissions:defaultPermission,
+          sectorsPermissions:defaultPermission,
+          regionsPermissions:defaultPermission,
+          volunteersPermissions:defaultPermission,
+          sliderPermissions:defaultPermission,
+          partnersPermissions:defaultPermission,
+          teamPermissions:defaultPermission,
+          testimonialsPermissions:defaultPermission,
+          mediaPermissions:defaultPermission
   
         }
+        
         this._service.post(role).subscribe(res => {
           this.DimLoading = false;
           this.initData();

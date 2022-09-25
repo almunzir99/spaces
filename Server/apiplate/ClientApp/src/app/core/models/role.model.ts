@@ -6,5 +6,17 @@ export class Role extends Base{
     messagesPermissions:Permission;
     rolesPermissions:Permission;
     usersPermissions:Permission;
+    articlesPermissions:Permission;
+    projectsPermissions:Permission;
+    sectorsPermissions:Permission;
+    regionsPermissions:Permission;
+    sliderPermissions:Permission;
+    teamPermissions:Permission;
+    partnersPermissions:Permission;
+    testimonialsPermissions:Permission;
+    mediaPermissions:Permission;
+    volunteersPermissions:Permission;
+
+    
 
 }

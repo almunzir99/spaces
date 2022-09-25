@@ -24,9 +24,20 @@ namespace apiplate.Services
 
         protected override IQueryable<Role> GetDbSet()
         {
-            return _context.Roles.Include(c => c.MessagesPermissions)
+            return _context.Roles
+            .Include(c => c.MessagesPermissions)
             .Include(c => c.AdminsPermissions)
-            .Include(c => c.RolesPermissions);
+            .Include(c => c.RolesPermissions)
+            .Include(c => c.ArticlesPermissions)
+            .Include(c => c.ProjectsPermissions)
+            .Include(c => c.RegionsPermissions)
+            .Include(c => c.SectorsPermissions)
+            .Include(c => c.SlidersPermissions)
+            .Include(c => c.MediaPermissions)
+            .Include(c => c.VolunteersPermissions)
+            .Include(c => c.PartnersPermissions)
+            .Include(c => c.TestimonialsPermissions)
+            .Include(c => c.TeamPermissions);
             
         }
 

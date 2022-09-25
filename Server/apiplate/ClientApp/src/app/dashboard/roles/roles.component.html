@@ -54,7 +54,7 @@
 </fui-dimmer>
 <fui-modal *ngIf="showPermissionsModal" [isClosable]="false" (dismissed)="PermissionModalDismissed()" #modal>
     <div class="header">Manage Permissions of {{selectedRole.title}}</div>
-    <div class="content">
+    <div style="max-height: 60vh;overflow:auto" class="content">
         <table class="ui celled table">
             <thead>
                 <tr>

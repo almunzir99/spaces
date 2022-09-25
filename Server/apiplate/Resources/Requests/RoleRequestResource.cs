@@ -6,9 +6,19 @@ namespace apiplate.Resources.Requests
     {
         [Required]
         public string Title { get; set; }
-        public PermissionResource MessagesPermissions { get; set; } = new PermissionResource(false, false, false, false);
+       public PermissionResource MessagesPermissions { get; set; } = new PermissionResource(false, false, false, false);
         public PermissionResource AdminsPermissions { get; set; } = new PermissionResource(false, false, false, false);
         public PermissionResource RolesPermissions { get; set; } = new PermissionResource(false, false, false, false);
+        public PermissionResource ArticlesPermissions { get; set; } = new PermissionResource(false, false, false, false);
+        public PermissionResource SectorsPermissions { get; set; } = new PermissionResource(false, false, false, false);
+        public PermissionResource RegionsPermissions { get; set; } = new PermissionResource(false, false, false, false);
+        public PermissionResource SlidersPermissions { get; set; } = new PermissionResource(false, false, false, false);
+        public PermissionResource TeamPermissions { get; set; } = new PermissionResource(false, false, false, false);
+        public PermissionResource PartnersPermissions { get; set; } = new PermissionResource(false, false, false, false);
+        public PermissionResource TestimonialsPermissions { get; set; } = new PermissionResource(false, false, false, false);
+        public PermissionResource ProjectsPermissions { get; set; } = new PermissionResource(false, false, false, false);
+        public PermissionResource MediaPermissions { get; set; } = new PermissionResource(false, false, false, false);
+        public PermissionResource VolunteersPermissions { get; set; } = new PermissionResource(false, false, false, false);
 
     }
 }
