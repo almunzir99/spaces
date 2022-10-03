@@ -20,8 +20,6 @@ namespace apiplate.Services
         }
         public async Task<IList<MediaResource>> UploadMultiImages(IList<ImageResource> images)
         {
-            try
-            {
                 var mediaFiles = images.Select(img => new Media()
                 {
                     Thumbnail = new Image()
@@ -39,12 +37,7 @@ namespace apiplate.Services
                 await _context.SaveChangesAsync();
                 var result = _mapper.Map<IList<Media>, IList<MediaResource>>(mediaFiles);
                 return result;
-            }
-            catch (System.Exception e)
-            {
-
-                throw e;
-            }
+             
         }
         public async Task<MediaResource> GetMainVideo()
         {
@@ -68,11 +61,7 @@ namespace apiplate.Services
             {
                 throw new System.Exception(exception.Decode());
             }
-            catch (System.Exception e)
-            {
-
-                throw e;
-            }
+        
         }
         protected override IQueryable<Media> GetDbSet()
         {

@@ -35,11 +35,7 @@ namespace apiplate.Services
             {
                 throw new System.Exception(exception.Decode());
             }
-            catch (System.Exception e)
-            {
-
-                throw e;
-            }
+        
         }
         protected override IQueryable<Slider> GetDbSet()
         {

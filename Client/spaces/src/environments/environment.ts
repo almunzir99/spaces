@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl:"http://spacess2022-001-site1.itempurl.com/"
+  baseUrl:"https://116.202.20.58:4400/"
 };
 
 /*

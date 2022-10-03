@@ -38,32 +38,18 @@ namespace apiplate.Services
             {
                 throw new System.Exception(exception.Decode());
             }
-            catch (System.Exception e)
-            {
 
-                throw e;
-            }
         }
         public async Task<CommentResource> AddCommentAsync(int articleId, CommentResource comment)
         {
-            try
-            {
-                var target = await _context.Projects.Include(c => c.Comments).SingleOrDefaultAsync(c => c.Id == articleId);
-                if (target == null)
-                    throw new Exception("the target article isn't available");
-                var mappedComment = _mapper.Map<CommentResource, Comment>(comment);
-                target.Comments.Add(mappedComment);
-                await _context.SaveChangesAsync();
-                var result = _mapper.Map<Comment, CommentResource>(mappedComment);
-                return result;
-
-            }
-            catch (Exception e)
-            {
-
-                throw e;
-            }
-
+            var target = await _context.Projects.Include(c => c.Comments).SingleOrDefaultAsync(c => c.Id == articleId);
+            if (target == null)
+                throw new Exception("the target article isn't available");
+            var mappedComment = _mapper.Map<CommentResource, Comment>(comment);
+            target.Comments.Add(mappedComment);
+            await _context.SaveChangesAsync();
+            var result = _mapper.Map<Comment, CommentResource>(mappedComment);
+            return result;
         }
 
         public async Task DeleteCommentAsync(int id)

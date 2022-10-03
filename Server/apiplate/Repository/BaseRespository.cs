@@ -49,11 +49,7 @@ namespace apiplate.Repository
             {
                 throw new System.Exception(exception.Decode());
             }
-            catch (System.Exception e)
-            {
-
-                throw e;
-            }
+        
 
 
         }
@@ -72,11 +68,7 @@ namespace apiplate.Repository
             {
                 throw new System.Exception(exception.Decode());
             }
-            catch (System.Exception e)
-            {
-
-                throw e;
-            }
+        
 
 
         }
@@ -167,11 +159,7 @@ namespace apiplate.Repository
             {
                 throw new System.Exception(exception.Decode());
             }
-            catch (System.Exception e)
-            {
-
-                throw e;
-            }
+        
         }
         public virtual async Task<TResource> UpdateAsync(int id, JsonPatchDocument<TModel> newItem)
         {
@@ -190,11 +178,7 @@ namespace apiplate.Repository
             {
                 throw new System.Exception(exception.Decode());
             }
-            catch (System.Exception e)
-            {
-
-                throw e;
-            }
+        
         }
         protected virtual IQueryable<TModel> GetDbSet()
         {

@@ -28,9 +28,6 @@ namespace apiplate.Services.ContentManagement
 
         public void ChangeNodeValue(string lang, string parentNode, string key, string value)
         {
-
-            try
-            {
                 var jsonFile = Path.Combine(path,$"{lang}.json");
                 var json = File.ReadAllText(jsonFile);
                 var jsonObj = JObject.Parse(json);
@@ -41,20 +38,10 @@ namespace apiplate.Services.ContentManagement
                     throw new System.Exception("Node isn't available");
                 parent[key] = value;
                 File.WriteAllText(jsonFile, jsonObj.ToString());
-
-
-            }
-            catch (System.Exception e)
-            {
-
-                throw e;
-            }
         }
 
         public void CreateNode(string lang, string parentNode, string key, string value)
         {
-            try
-            {
                 var jsonFile = Path.Combine(path,$"{lang}.json");
                 var json = File.ReadAllText(jsonFile);
                 var jsonObj = JObject.Parse(json);
@@ -63,14 +50,7 @@ namespace apiplate.Services.ContentManagement
                     throw new System.Exception("Parent Node isn't available");
                 parent[key] = value;
                 File.WriteAllText(jsonFile, jsonObj.ToString());
-
-
-            }
-            catch (System.Exception e)
-            {
-
-                throw e;
-            }
+             
         }
 
         public void CreateParentNode(string lang, string node)

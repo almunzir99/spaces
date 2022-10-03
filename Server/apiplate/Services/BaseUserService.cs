@@ -175,11 +175,7 @@ namespace apiplate.Services
                 throw new System.Exception(exception.Decode());
 
             }
-            catch (System.Exception e)
-            {
-
-                throw e;
-            }
+            
         }
         public async Task<TResource> UpdatePersonalInfo(int userId, JsonPatchDocument<TModel> patchDoc)
         {
@@ -205,11 +201,7 @@ namespace apiplate.Services
                 throw new System.Exception(exception.Decode());
 
             }
-            catch (System.Exception e)
-            {
-
-                throw e;
-            }
+           
         }
 
         public async Task ResetPassword(int id, string oldPassword, string newPassword)
@@ -266,11 +258,7 @@ namespace apiplate.Services
                 throw new System.Exception(exception.Decode());
 
             }
-            catch (System.Exception e)
-            {
-
-                throw e;
-            }
+            
 
         }
         protected override string GetSearchPropValue(TModel obj)

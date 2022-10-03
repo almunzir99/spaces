@@ -42,11 +42,7 @@ namespace apiplate.Services
             {
                 throw new System.Exception(exception.Decode());
             }
-            catch (System.Exception e)
-            {
-
-                throw e;
-            }
+        
         }
 
         public async Task DeleteNotificationAsync(int id)
@@ -64,11 +60,7 @@ namespace apiplate.Services
             {
                 throw new System.Exception(exception.Decode());
             }
-            catch (System.Exception e)
-            {
-
-                throw e;
-            }
+        
         }
 
         public async Task<IList<NotificationResource>> GetUnreadNotification(int userId, string userType, bool AutoRead)
@@ -110,11 +102,7 @@ namespace apiplate.Services
             {
                 throw new System.Exception(exception.Decode());
             }
-            catch (System.Exception e)
-            {
-
-                throw e;
-            }
+        
 
         }
         private async Task<BasicUserInformation> GetUser(int userId, string userType)
