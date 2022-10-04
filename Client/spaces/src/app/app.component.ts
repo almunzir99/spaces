@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin, map, Subscription } from 'rxjs';
 import { GlobalService } from './core/services/global.service';
@@ -16,7 +16,7 @@ export class AppComponent {
   pageLoading = false;
   subscription = new Subscription();
 
-  constructor(private translateService: TranslateService, private _service: GlobalService) {
+  constructor(private translateService: TranslateService, private _service: GlobalService,@Inject('BASE_URL') private baseUrl: string) {
    
   }
   ngOnInit(){
@@ -42,6 +42,7 @@ export class AppComponent {
         });
       },
       error: (err) => {
+        window.location.href = `${this.baseUrl}redirect`;
         this.pageLoading = false;
         console.log(err);
       }
