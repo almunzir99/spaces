@@ -62,7 +62,7 @@
 <!-- Partners Area -->
 <div class="partners-section">
     <div class="content-section">
-        <div style="z-index: -1;" class="pattern pattern-diagonal-lines-sm gray-light"></div>
+        <div [class.rtl]="currentLang == 'ar'" style="z-index: -1;" class="pattern pattern-diagonal-lines-sm gray-light"></div>
         <div [innerHTML]="'Home.partner_subtitle' | translate" class="subtitle">
 
         </div>
@@ -100,7 +100,7 @@
         </div>
     </ng-container>
     <div class="gallery-section">
-        <swiper dir="ltr" [autoplay]="{delay:2000}" [loop]="true" [slidesPerView]="3.5">
+        <swiper  [autoplay]="{delay:2000}" [loop]="true" [slidesPerView]="3.5">
             <ng-template *ngFor="let image of gallery; let i = index;"  swiperSlide>
                 <img (click)="showGalleryInMediaViewer(i)" [src]="image.thumbnail?.path" alt="">
             </ng-template>

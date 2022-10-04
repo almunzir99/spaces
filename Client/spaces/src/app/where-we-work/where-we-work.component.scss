@@ -30,15 +30,14 @@
 
 .map-section {
     min-height: 110vh;
-    width: 97%;
+    width: auto;
     background-color: whitesmoke;
     display: flex;
-    margin: 25px;
     display: flex;
     justify-content: space-between;
 
     .map {
-        width: 50%;
+        width: 45%;
 
         svg {
             height: 95%;
@@ -129,7 +128,7 @@
         align-items: center;
 
         .map{
-            width: 100%;
+            width: 88%;
         }
         .location-detail{
             width: 90%;
