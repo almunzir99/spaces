@@ -1,0 +1,1348 @@
+﻿IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+CREATE TABLE [Messages] (
+    [Id] int NOT NULL IDENTITY,
+    [FullName] nvarchar(max) NULL,
+    [Email] nvarchar(max) NULL,
+    [Content] nvarchar(max) NULL,
+    [Phone] nvarchar(max) NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [LastUpdate] datetime2 NOT NULL,
+    [CreatedBy] int NULL,
+    CONSTRAINT [PK_Messages] PRIMARY KEY ([Id])
+);
+GO
+
+CREATE TABLE [Permissions] (
+    [Id] int NOT NULL IDENTITY,
+    [Create] bit NOT NULL,
+    [Read] bit NOT NULL,
+    [Update] bit NOT NULL,
+    [Delete] bit NOT NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [LastUpdate] datetime2 NOT NULL,
+    [CreatedBy] int NULL,
+    CONSTRAINT [PK_Permissions] PRIMARY KEY ([Id])
+);
+GO
+
+CREATE TABLE [Roles] (
+    [Id] int NOT NULL IDENTITY,
+    [Title] nvarchar(450) NULL,
+    [MessagesPermissionsId] int NULL,
+    [UsersPermissionsId] int NULL,
+    [RolesPermissionsId] int NULL,
+    [EventsPermissionsId] int NULL,
+    [SlidesPermissionsId] int NULL,
+    [ProgramsPermissionsId] int NULL,
+    [NewsPermissionsId] int NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [LastUpdate] datetime2 NOT NULL,
+    [CreatedBy] int NULL,
+    CONSTRAINT [PK_Roles] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Roles_Permissions_EventsPermissionsId] FOREIGN KEY ([EventsPermissionsId]) REFERENCES [Permissions] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Roles_Permissions_MessagesPermissionsId] FOREIGN KEY ([MessagesPermissionsId]) REFERENCES [Permissions] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Roles_Permissions_NewsPermissionsId] FOREIGN KEY ([NewsPermissionsId]) REFERENCES [Permissions] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Roles_Permissions_ProgramsPermissionsId] FOREIGN KEY ([ProgramsPermissionsId]) REFERENCES [Permissions] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Roles_Permissions_RolesPermissionsId] FOREIGN KEY ([RolesPermissionsId]) REFERENCES [Permissions] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Roles_Permissions_SlidesPermissionsId] FOREIGN KEY ([SlidesPermissionsId]) REFERENCES [Permissions] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Roles_Permissions_UsersPermissionsId] FOREIGN KEY ([UsersPermissionsId]) REFERENCES [Permissions] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+CREATE TABLE [Users] (
+    [Id] int NOT NULL IDENTITY,
+    [IsManager] bit NOT NULL,
+    [Image] nvarchar(max) NULL,
+    [RoleId] int NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [LastUpdate] datetime2 NOT NULL,
+    [CreatedBy] int NULL,
+    [Username] nvarchar(30) NOT NULL,
+    [Email] nvarchar(max) NOT NULL,
+    [Phone] nvarchar(max) NOT NULL,
+    [PasswordHash] varbinary(max) NOT NULL,
+    [PasswordSalt] varbinary(max) NOT NULL,
+    [Photo] nvarchar(max) NULL,
+    CONSTRAINT [PK_Users] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Users_Roles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [Roles] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+CREATE TABLE [Activity] (
+    [Id] int NOT NULL IDENTITY,
+    [UserId] int NOT NULL,
+    [EffectedTable] nvarchar(max) NULL,
+    [EffectedRowId] int NOT NULL,
+    [Action] nvarchar(max) NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [AdminId] int NULL,
+    CONSTRAINT [PK_Activity] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Activity_Users_AdminId] FOREIGN KEY ([AdminId]) REFERENCES [Users] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+CREATE TABLE [Notification] (
+    [Id] int NOT NULL IDENTITY,
+    [Title] nvarchar(max) NULL,
+    [Message] nvarchar(max) NULL,
+    [Action] nvarchar(max) NULL,
+    [Module] nvarchar(max) NULL,
+    [Url] nvarchar(max) NULL,
+    [Read] bit NOT NULL,
+    [GroupedItem] int NULL,
+    [AdminId] int NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [LastUpdate] datetime2 NOT NULL,
+    [CreatedBy] int NULL,
+    CONSTRAINT [PK_Notification] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Notification_Users_AdminId] FOREIGN KEY ([AdminId]) REFERENCES [Users] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'CreatedAt', N'CreatedBy', N'Email', N'Image', N'IsManager', N'LastUpdate', N'PasswordHash', N'PasswordSalt', N'Phone', N'Photo', N'RoleId', N'Username') AND [object_id] = OBJECT_ID(N'[Users]'))
+    SET IDENTITY_INSERT [Users] ON;
+INSERT INTO [Users] ([Id], [CreatedAt], [CreatedBy], [Email], [Image], [IsManager], [LastUpdate], [PasswordHash], [PasswordSalt], [Phone], [Photo], [RoleId], [Username])
+VALUES (1, '2022-01-06T18:20:18.1103773+03:00', NULL, N'almunzir99', NULL, CAST(1 AS bit), '2022-01-06T18:20:18.1118221+03:00', 0xA5023753DFF5DEDFA46B419FED645206B4909C699BB16C5031ECDBFF56979FE034D2ED32462EDA131D17044FF14AB9ED04D40FA397A61F7868C76BC4F6E9159A, 0x3C1AE127FF4CBD26BD99E871E079A31035F17182CD919BDB325F3C1C86B4632BBF4395378E5888FF511A06E385EC39A45AA1C2ADCE9D205F677FD094C2608BF15FAD3B2A0C9FB80FE88380F4CD4D78C6D41B36BC61AAB17E232E0FACB72C0D0A37795F1287B9AB7520D2296500BE3F6B6F08127B7F5267424580BC05A9AE00D1, N'249128647019', NULL, NULL, N'almunzir99');
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'CreatedAt', N'CreatedBy', N'Email', N'Image', N'IsManager', N'LastUpdate', N'PasswordHash', N'PasswordSalt', N'Phone', N'Photo', N'RoleId', N'Username') AND [object_id] = OBJECT_ID(N'[Users]'))
+    SET IDENTITY_INSERT [Users] OFF;
+GO
+
+CREATE INDEX [IX_Activity_AdminId] ON [Activity] ([AdminId]);
+GO
+
+CREATE INDEX [IX_Notification_AdminId] ON [Notification] ([AdminId]);
+GO
+
+CREATE INDEX [IX_Roles_EventsPermissionsId] ON [Roles] ([EventsPermissionsId]);
+GO
+
+CREATE INDEX [IX_Roles_MessagesPermissionsId] ON [Roles] ([MessagesPermissionsId]);
+GO
+
+CREATE INDEX [IX_Roles_NewsPermissionsId] ON [Roles] ([NewsPermissionsId]);
+GO
+
+CREATE INDEX [IX_Roles_ProgramsPermissionsId] ON [Roles] ([ProgramsPermissionsId]);
+GO
+
+CREATE INDEX [IX_Roles_RolesPermissionsId] ON [Roles] ([RolesPermissionsId]);
+GO
+
+CREATE INDEX [IX_Roles_SlidesPermissionsId] ON [Roles] ([SlidesPermissionsId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Roles_Title] ON [Roles] ([Title]) WHERE [Title] IS NOT NULL;
+GO
+
+CREATE INDEX [IX_Roles_UsersPermissionsId] ON [Roles] ([UsersPermissionsId]);
+GO
+
+CREATE INDEX [IX_Users_RoleId] ON [Users] ([RoleId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Users_Username] ON [Users] ([Username]);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220106162018_initializeDb', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Roles] DROP CONSTRAINT [FK_Roles_Permissions_EventsPermissionsId];
+GO
+
+ALTER TABLE [Roles] DROP CONSTRAINT [FK_Roles_Permissions_NewsPermissionsId];
+GO
+
+ALTER TABLE [Roles] DROP CONSTRAINT [FK_Roles_Permissions_ProgramsPermissionsId];
+GO
+
+ALTER TABLE [Roles] DROP CONSTRAINT [FK_Roles_Permissions_SlidesPermissionsId];
+GO
+
+ALTER TABLE [Roles] DROP CONSTRAINT [FK_Roles_Permissions_UsersPermissionsId];
+GO
+
+DROP INDEX [IX_Roles_EventsPermissionsId] ON [Roles];
+GO
+
+DROP INDEX [IX_Roles_NewsPermissionsId] ON [Roles];
+GO
+
+DROP INDEX [IX_Roles_ProgramsPermissionsId] ON [Roles];
+GO
+
+DROP INDEX [IX_Roles_SlidesPermissionsId] ON [Roles];
+GO
+
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Roles]') AND [c].[name] = N'EventsPermissionsId');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Roles] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Roles] DROP COLUMN [EventsPermissionsId];
+GO
+
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Roles]') AND [c].[name] = N'NewsPermissionsId');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Roles] DROP CONSTRAINT [' + @var1 + '];');
+ALTER TABLE [Roles] DROP COLUMN [NewsPermissionsId];
+GO
+
+DECLARE @var2 sysname;
+SELECT @var2 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Roles]') AND [c].[name] = N'ProgramsPermissionsId');
+IF @var2 IS NOT NULL EXEC(N'ALTER TABLE [Roles] DROP CONSTRAINT [' + @var2 + '];');
+ALTER TABLE [Roles] DROP COLUMN [ProgramsPermissionsId];
+GO
+
+DECLARE @var3 sysname;
+SELECT @var3 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Roles]') AND [c].[name] = N'SlidesPermissionsId');
+IF @var3 IS NOT NULL EXEC(N'ALTER TABLE [Roles] DROP CONSTRAINT [' + @var3 + '];');
+ALTER TABLE [Roles] DROP COLUMN [SlidesPermissionsId];
+GO
+
+EXEC sp_rename N'[Roles].[UsersPermissionsId]', N'AdminsPermissionsId', N'COLUMN';
+GO
+
+EXEC sp_rename N'[Roles].[IX_Roles_UsersPermissionsId]', N'IX_Roles_AdminsPermissionsId', N'INDEX';
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-01-06T18:33:08.5673500+03:00', [LastUpdate] = '2022-01-06T18:33:08.5684075+03:00', [PasswordHash] = 0x41C68222B207CAAF8DA19EC05DD1E10BD18EA43EA2680761A96375BEDC6B2282994679F8831CED349B04648D70FEFEE9AFB7B896046FD0EB4317ABC373ED03A0, [PasswordSalt] = 0x194CDE1549F5C9244E999FD558B702AE724C9F29AD8AA711710670DFA87377B7ABFB87E833BC96C92C816B75041B1635E5086259BB609C95377B9F419F46B8E62C79147A2ECDF7E4D126B3DE69000161432F7DFC64A2D535674FACFD37030ACF92FB6535101B7AFB4E1E582B0F525D6519147662F58AD447AA47ABD3AA2B6122
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+ALTER TABLE [Roles] ADD CONSTRAINT [FK_Roles_Permissions_AdminsPermissionsId] FOREIGN KEY ([AdminsPermissionsId]) REFERENCES [Permissions] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220106163309_removeUnsedRolesAndReplaceUsersWithAdmins', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+DROP INDEX [IX_Users_Username] ON [Users];
+GO
+
+DECLARE @var4 sysname;
+SELECT @var4 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Users]') AND [c].[name] = N'Email');
+IF @var4 IS NOT NULL EXEC(N'ALTER TABLE [Users] DROP CONSTRAINT [' + @var4 + '];');
+ALTER TABLE [Users] ALTER COLUMN [Email] nvarchar(450) NOT NULL;
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-01-06T19:15:31.4051782+03:00', [Email] = N'almunzir99@gmail.com', [LastUpdate] = '2022-01-06T19:15:31.4062605+03:00', [PasswordHash] = 0x49DADA3E072D3DFDFFE01506E84C40440446FCF0BE4911E4D41DC38E39DABE5E8D891B61B1E0B77FFE4B490406C38457631D481EA0D5FECD694568B1794F9CFB, [PasswordSalt] = 0xAFA0445E4FD8415A5420C85230BCBD4CF79F98107184026545E7660F1CB62E4833C7C412D3363973431D9021BBA26D413747CE818EBC2D63ACA97160320040CB6B2621FCF440EDAD92F25765A3EE27A6225F38E5D65F2BE9C62F4E86F204AC81287B844DED89F3AE724DA2A895731A03950B4F82AE4B90E5028C6906A3FEED6D
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE UNIQUE INDEX [IX_Users_Email] ON [Users] ([Email]);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220106171532_changeIndexToEmailAndChangeEmail', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Notification] DROP CONSTRAINT [FK_Notification_Users_AdminId];
+GO
+
+ALTER TABLE [Notification] DROP CONSTRAINT [PK_Notification];
+GO
+
+EXEC sp_rename N'[Notification]', N'Notifications';
+GO
+
+EXEC sp_rename N'[Notifications].[IX_Notification_AdminId]', N'IX_Notifications_AdminId', N'INDEX';
+GO
+
+ALTER TABLE [Notifications] ADD CONSTRAINT [PK_Notifications] PRIMARY KEY ([Id]);
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-07T23:01:29.1712305+03:00', [LastUpdate] = '2022-06-07T23:01:29.1722586+03:00', [PasswordHash] = 0x9BED7646CAB0F66667C16BFA3B699E1C2F2F91A2D424548E064671D9A40FF45C1D674C4DB3C4BEAE3F5C6F9B12829CD15C012AB77392CAC33518EFD99F3DEC5A, [PasswordSalt] = 0x7F1ABE5352D82DBCC784A052CDDE40DC2274F99F4076935F213E243553759F45848E523FA0B0BD07F6C45A439E3F4E6DFD0562F9D5BB75A20941EE18C4C16B851E077EFE8601171C29A6623F5E3AF26BB710DB5C04AB673300AC8DE17A4FE2314978AC1EF66834E32459A4A6B22D8999C5D41E82236776114370256170466597
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+ALTER TABLE [Notifications] ADD CONSTRAINT [FK_Notifications_Users_AdminId] FOREIGN KEY ([AdminId]) REFERENCES [Users] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220607210130_createNotificationTable', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+CREATE TABLE [Translations] (
+    [Id] int NOT NULL IDENTITY,
+    [EN] nvarchar(max) NULL,
+    [AR] nvarchar(max) NULL,
+    CONSTRAINT [PK_Translations] PRIMARY KEY ([Id])
+);
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-29T21:26:15.5543377+03:00', [LastUpdate] = '2022-06-29T21:26:15.5554347+03:00', [PasswordHash] = 0xF0C82E47308C6D4E5EF96A25B75F206E6DE4CFFEF58F2EF2F20D6F20CFE6B90964168539BED2C36A599C3E759EE29F370AE7803BF8F558656CA92BEB98A498AE, [PasswordSalt] = 0xA0B5D8DFD4179BCC729DA14908B071C80A19CA4A243B88D1306B470B67BCC509E4BEBBFB5CD86CB8B0B5A43C44A79CD7253C1BE9DA208D8D174ED6C28D6CDA19A4E978FBC4C92AA1BF945732AEBA2D0056811FEF63BE54354F2C210C8D835F5B20528CC5DBCFC2CAD448737EE46652108591ABB3B39F57AC1ACAFFDC5B3AECA6
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220629192616_translationTable', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Translations] ADD [ArticleId] int NULL;
+GO
+
+CREATE TABLE [Articles] (
+    [Id] int NOT NULL IDENTITY,
+    [TitleId] int NULL,
+    [SubtitleId] int NULL,
+    [ContentId] int NULL,
+    [Image] nvarchar(max) NULL,
+    [AuthorId] int NOT NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [LastUpdate] datetime2 NOT NULL,
+    [CreatedBy] int NULL,
+    CONSTRAINT [PK_Articles] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Articles_Translations_ContentId] FOREIGN KEY ([ContentId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Articles_Translations_SubtitleId] FOREIGN KEY ([SubtitleId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Articles_Translations_TitleId] FOREIGN KEY ([TitleId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Articles_Users_AuthorId] FOREIGN KEY ([AuthorId]) REFERENCES [Users] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+CREATE TABLE [Comments] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    [Email] nvarchar(max) NULL,
+    [Content] nvarchar(max) NULL,
+    [ArticleId] int NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [LastUpdate] datetime2 NOT NULL,
+    [CreatedBy] int NULL,
+    CONSTRAINT [PK_Comments] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Comments_Articles_ArticleId] FOREIGN KEY ([ArticleId]) REFERENCES [Articles] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-29T21:41:34.0609002+03:00', [LastUpdate] = '2022-06-29T21:41:34.0619920+03:00', [PasswordHash] = 0x295A1E66B74CF927AB6CDEA946091EBDE2B291370560B9EE179BE1E9E4B3CE29A4637DEF70BC40396037DCFF629A779C0FB3D4A36A78158C20B027F3121E3E6E, [PasswordSalt] = 0x98C07274480ED3164B55C794C2107092F1275D905AF6FC1EA3CD7549771CC23442D9710FA0613C01B196276941BDA76D3E479E10920348B3D38DEF8EC378AEB6AEBA55FEFFC4D5F03CFD751C49DE8AA2AD88153466FB91E728478407C61F07463FD42811610ACA2099554ED28CE8FC24187F56201F029693AF28F06DDA6C9B93
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE INDEX [IX_Translations_ArticleId] ON [Translations] ([ArticleId]);
+GO
+
+CREATE INDEX [IX_Articles_AuthorId] ON [Articles] ([AuthorId]);
+GO
+
+CREATE INDEX [IX_Articles_ContentId] ON [Articles] ([ContentId]);
+GO
+
+CREATE INDEX [IX_Articles_SubtitleId] ON [Articles] ([SubtitleId]);
+GO
+
+CREATE INDEX [IX_Articles_TitleId] ON [Articles] ([TitleId]);
+GO
+
+CREATE INDEX [IX_Comments_ArticleId] ON [Comments] ([ArticleId]);
+GO
+
+ALTER TABLE [Translations] ADD CONSTRAINT [FK_Translations_Articles_ArticleId] FOREIGN KEY ([ArticleId]) REFERENCES [Articles] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220629194135_addArticlesAndCommentsTable', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Roles] ADD [ArticlesPermissionsId] int NULL;
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-29T22:51:53.4068075+03:00', [LastUpdate] = '2022-06-29T22:51:53.4079190+03:00', [PasswordHash] = 0x5C764D23CF3C0796DCE7A0D47BF3503CA276ECBD1007852E1327214B7F23809A4AA16A1883B389F0053E7754838F0B669DD6F60D45AEF11D6C116F5AF48D2BF5, [PasswordSalt] = 0x292BB8A57BF252851DE5638B1EB86B5F6624F69324956F17773DDA820FFB4F97235F347B01854D363AE4DCB2683B46F80F4A14D122D3DF0E5E48527101C56091C7A3388D4E7A1A15973591434B504C1D53EAD230F468C7BEBD40684D37F7B06F9ACF979273DA1B37A2256CD52FE1599BD0B55B84BD821165A75796030A6305E8
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE INDEX [IX_Roles_ArticlesPermissionsId] ON [Roles] ([ArticlesPermissionsId]);
+GO
+
+ALTER TABLE [Roles] ADD CONSTRAINT [FK_Roles_Permissions_ArticlesPermissionsId] FOREIGN KEY ([ArticlesPermissionsId]) REFERENCES [Permissions] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220629205154_addArticlePermissionsToRoles', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Translations] DROP CONSTRAINT [FK_Translations_Articles_ArticleId];
+GO
+
+DROP INDEX [IX_Translations_ArticleId] ON [Translations];
+GO
+
+DROP INDEX [IX_Articles_ContentId] ON [Articles];
+GO
+
+DROP INDEX [IX_Articles_SubtitleId] ON [Articles];
+GO
+
+DROP INDEX [IX_Articles_TitleId] ON [Articles];
+GO
+
+DECLARE @var5 sysname;
+SELECT @var5 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Translations]') AND [c].[name] = N'ArticleId');
+IF @var5 IS NOT NULL EXEC(N'ALTER TABLE [Translations] DROP CONSTRAINT [' + @var5 + '];');
+ALTER TABLE [Translations] DROP COLUMN [ArticleId];
+GO
+
+DECLARE @var6 sysname;
+SELECT @var6 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Articles]') AND [c].[name] = N'TitleId');
+IF @var6 IS NOT NULL EXEC(N'ALTER TABLE [Articles] DROP CONSTRAINT [' + @var6 + '];');
+ALTER TABLE [Articles] ALTER COLUMN [TitleId] int NOT NULL;
+ALTER TABLE [Articles] ADD DEFAULT 0 FOR [TitleId];
+GO
+
+DECLARE @var7 sysname;
+SELECT @var7 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Articles]') AND [c].[name] = N'SubtitleId');
+IF @var7 IS NOT NULL EXEC(N'ALTER TABLE [Articles] DROP CONSTRAINT [' + @var7 + '];');
+ALTER TABLE [Articles] ALTER COLUMN [SubtitleId] int NOT NULL;
+ALTER TABLE [Articles] ADD DEFAULT 0 FOR [SubtitleId];
+GO
+
+DECLARE @var8 sysname;
+SELECT @var8 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Articles]') AND [c].[name] = N'ContentId');
+IF @var8 IS NOT NULL EXEC(N'ALTER TABLE [Articles] DROP CONSTRAINT [' + @var8 + '];');
+ALTER TABLE [Articles] ALTER COLUMN [ContentId] int NOT NULL;
+ALTER TABLE [Articles] ADD DEFAULT 0 FOR [ContentId];
+GO
+
+CREATE TABLE [Tags] (
+    [Id] int NOT NULL IDENTITY,
+    [TranslationId] int NOT NULL,
+    [ArticleId] int NULL,
+    CONSTRAINT [PK_Tags] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Tags_Articles_ArticleId] FOREIGN KEY ([ArticleId]) REFERENCES [Articles] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Tags_Translations_TranslationId] FOREIGN KEY ([TranslationId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T00:39:50.4441781+03:00', [LastUpdate] = '2022-06-30T00:39:50.4454184+03:00', [PasswordHash] = 0x11CD5454ACFF769BE8D5AF07FC55A4877581358A92002954ABEA2E992EC95C99249805355AD361D40909A8E4ADD1C8C1D6B8BE3F3EE855DDCF25FC81AFD20612, [PasswordSalt] = 0x785696FAC077A5E3EDA19BE86DDD4E669A18F1DB7A7FBA2EB1058F855BB4DBD59FB6A620DEF6FE4993969B372298BE1BDE54E373A1EF11C7CF24ED516BF941E3FB1B68FA04250210379398136CAC4E1ADEE29492DC7A3E3D399B8C8AEDD1B607F21909B54DDBDBC9E2BBAF4D199ED74CB5FAB092B5D0ECAC535A8AA9923336B2
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE UNIQUE INDEX [IX_Articles_ContentId] ON [Articles] ([ContentId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Articles_SubtitleId] ON [Articles] ([SubtitleId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Articles_TitleId] ON [Articles] ([TitleId]);
+GO
+
+CREATE INDEX [IX_Tags_ArticleId] ON [Tags] ([ArticleId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Tags_TranslationId] ON [Tags] ([TranslationId]);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220629223951_fixArticleTranslationRelationShip', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+DECLARE @var9 sysname;
+SELECT @var9 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Articles]') AND [c].[name] = N'Image');
+IF @var9 IS NOT NULL EXEC(N'ALTER TABLE [Articles] DROP CONSTRAINT [' + @var9 + '];');
+ALTER TABLE [Articles] DROP COLUMN [Image];
+GO
+
+ALTER TABLE [Articles] ADD [ImageId] int NOT NULL DEFAULT 0;
+GO
+
+CREATE TABLE [Images] (
+    [Id] int NOT NULL IDENTITY,
+    [Path] nvarchar(max) NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    CONSTRAINT [PK_Images] PRIMARY KEY ([Id])
+);
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T00:48:31.8041983+03:00', [LastUpdate] = '2022-06-30T00:48:31.8054597+03:00', [PasswordHash] = 0xEE7AD111D43EEA32BF5C60CF9FA837A259D929D1C14C483DAEDE5B5FF09AD5746F7DC357CB46260AB756A8FE4DE2071E616139A2A47C4B0A989917FEEF765A1B, [PasswordSalt] = 0x42C727FB1883D99710CB9CE34427F1DB6A5EC623938F160EB62B3A59C3B5E8451F3E44F9DD780D7D25BC52418479F5F3114CEBCB8D67F93928E4EC2F83FB1B3E3889368EC2837624299563A25CC7D3AF898AE0557FE71B4DF56C8FE2750C002CC5C282559FC318D316CB257191E387DB0EFBD142207A24BA412A998F5442DD2D
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE UNIQUE INDEX [IX_Articles_ImageId] ON [Articles] ([ImageId]);
+GO
+
+ALTER TABLE [Articles] ADD CONSTRAINT [FK_Articles_Images_ImageId] FOREIGN KEY ([ImageId]) REFERENCES [Images] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220629224832_addImageTableAndReplaceInArticle', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+CREATE TABLE [Sectors] (
+    [Id] int NOT NULL IDENTITY,
+    [TitleId] int NOT NULL,
+    [DescriptionId] int NOT NULL,
+    [IconId] int NOT NULL,
+    [ImageId] int NOT NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [LastUpdate] datetime2 NOT NULL,
+    [CreatedBy] int NULL,
+    CONSTRAINT [PK_Sectors] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Sectors_Images_IconId] FOREIGN KEY ([IconId]) REFERENCES [Images] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Sectors_Images_ImageId] FOREIGN KEY ([ImageId]) REFERENCES [Images] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Sectors_Translations_DescriptionId] FOREIGN KEY ([DescriptionId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Sectors_Translations_TitleId] FOREIGN KEY ([TitleId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T01:18:56.1903672+03:00', [LastUpdate] = '2022-06-30T01:18:56.1915052+03:00', [PasswordHash] = 0x307E40B7C8A27553AF08F466B00F8A4351B1D4EDF9736CAEB963738D0F480B672BE8DB10718C54A54C252D3FF160D4999341DA8B271B33592CDF9BD6CE4E1AF3, [PasswordSalt] = 0xB6753598AFB6C445C55E22C2DEA0B120B3C46C94A7BF7C95898D355B9120EC198D9FB62A080F39E0E5CA20DDA01963993D843B0AFADAFC9181D4FCC753AC3566E3DE5FF3EEC21089EA56B69ABDF3E0EA51A2882DC2F5E688EE30FF43837E8330B650CE659EDBF02EA00C84C96CC8BB777C59FF599E0D331330015B60BBBA1C03
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE UNIQUE INDEX [IX_Sectors_DescriptionId] ON [Sectors] ([DescriptionId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Sectors_IconId] ON [Sectors] ([IconId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Sectors_ImageId] ON [Sectors] ([ImageId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Sectors_TitleId] ON [Sectors] ([TitleId]);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220629231857_addSectorsTable', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Roles] ADD [SectorsPermissionsId] int NULL;
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T01:28:16.1662606+03:00', [LastUpdate] = '2022-06-30T01:28:16.1679098+03:00', [PasswordHash] = 0x2F41EE50B6E93344B6B1D767A689D263105B67B1BE0F907DEA5888FC2F607A337FB78256D8224869B7A2D9E3C74F15E2D3DA7EE8FB188FBC8072A5645F919DBF, [PasswordSalt] = 0xCD61F42A6836A517D0A76E4FF31F2ADB4A52B601644CE9A53D9B5755716B1A32457AB56A826EF16A6DA7FDCBBEA8ADE74352BFBF25FB4168AF154B30E6C509205BFA426950B13A95B80C45AD018F525307BE57EB96FAD16F924F99879C07B97BC5E576FC268BADAC7C5A903A97DA64D34FC937969C8A5CECC86932907CF6A2DB
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE INDEX [IX_Roles_SectorsPermissionsId] ON [Roles] ([SectorsPermissionsId]);
+GO
+
+ALTER TABLE [Roles] ADD CONSTRAINT [FK_Roles_Permissions_SectorsPermissionsId] FOREIGN KEY ([SectorsPermissionsId]) REFERENCES [Permissions] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220629232817_addSectorPermissionToRoles', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+CREATE TABLE [Regions] (
+    [Id] int NOT NULL IDENTITY,
+    [Code] nvarchar(max) NULL,
+    [TitleId] int NOT NULL,
+    [DescriptionId] int NOT NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [LastUpdate] datetime2 NOT NULL,
+    [CreatedBy] int NULL,
+    CONSTRAINT [PK_Regions] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Regions_Translations_DescriptionId] FOREIGN KEY ([DescriptionId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Regions_Translations_TitleId] FOREIGN KEY ([TitleId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T08:43:23.0620692+03:00', [LastUpdate] = '2022-06-30T08:43:23.0632125+03:00', [PasswordHash] = 0x23C596F89C79A2DEA4C1B3BF2BAEBBA0F38D138CCB81655233C83DF6397E7ED03B430B2FBF6395F9093AE9ADB5F035A356BE3C5C8EF07769A9B8784B78ECEEFB, [PasswordSalt] = 0x323E5200D5AD1054B55ADB5BB52AAC49627D51DBB03E54B8693C9DBB78E6702A04FB962C7C5088FF39665E13299B6B869F3784558CC7A3CC612C529F61B21AD55EFB0160B5ABDA739F08530A77CC33ED902588246092F86F6C1CE0FA817F69FDDAF59136380E002010FB652976F2ABA85D48B6CB3A9353C605B144007ACE667A
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE UNIQUE INDEX [IX_Regions_DescriptionId] ON [Regions] ([DescriptionId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Regions_TitleId] ON [Regions] ([TitleId]);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220630064323_addRegionsTable', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Regions] ADD [ImageId] int NOT NULL DEFAULT 0;
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T08:47:36.4594971+03:00', [LastUpdate] = '2022-06-30T08:47:36.4605159+03:00', [PasswordHash] = 0x4827522410AEE79760FDF6A5B3ACE8DC76014D66BFEFF0A8BC25CDC6310DBAAAF27A678406B8CB28BA392FEF289BCE5066FE6B7F2C6EFFAA6B6DFC101568E961, [PasswordSalt] = 0xBFC7439D5FC5076AD68D497D28B99B881936DEE1644DBF974AE0D626DF7BAFAF006B41AEC105A0B335BBB97122D9664CADAEFD952BAA886C399EEC72311FF222C9E79350BE1119FAE90C78DD1E1E0486187462659CD07147ADB076229A7918AF28A3D8E6A1A0B846CC2D982DEBFE108D0FCE1481F5A73F84C3FEFAB28BF0790A
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE UNIQUE INDEX [IX_Regions_ImageId] ON [Regions] ([ImageId]);
+GO
+
+ALTER TABLE [Regions] ADD CONSTRAINT [FK_Regions_Images_ImageId] FOREIGN KEY ([ImageId]) REFERENCES [Images] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220630064737_addImageToRegionTable', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Roles] ADD [RegionsPermissionsId] int NULL;
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T08:58:16.7408977+03:00', [LastUpdate] = '2022-06-30T08:58:16.7428308+03:00', [PasswordHash] = 0x7535525E596F42415616FD9CD8292E35289F9404A61905CCD5DCD8E4017337BD013D0CD61C4DE707082846291DCA7AE573611678BBF44C3B8225C8A08A936EFD, [PasswordSalt] = 0x6E66AF3B0E8BC40D52A3A21E71534C63315D3BBE50833390D5E6F70625886A9D0C8C558C3F2213F25C85BE46474274744EF0AC3547F148B240B09EBD45553A997C828B9CB36D41FC9264826554F38C8FD8170A153DDCF40221577F239509154D2C9545C6CE2FD178CF475D0FB2A22F5586E0375B52E8117E5D4AF28DC529EEFC
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE INDEX [IX_Roles_RegionsPermissionsId] ON [Roles] ([RegionsPermissionsId]);
+GO
+
+ALTER TABLE [Roles] ADD CONSTRAINT [FK_Roles_Permissions_RegionsPermissionsId] FOREIGN KEY ([RegionsPermissionsId]) REFERENCES [Permissions] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220630065817_addRegionPermissionToRoles', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Roles] ADD [SlidersPermissionsId] int NULL;
+GO
+
+CREATE TABLE [Sliders] (
+    [Id] int NOT NULL IDENTITY,
+    [TitleId] int NOT NULL,
+    [SubtitleId] int NOT NULL,
+    [DescriptionId] int NOT NULL,
+    [ImageId] int NOT NULL,
+    [Url] nvarchar(max) NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [LastUpdate] datetime2 NOT NULL,
+    [CreatedBy] int NULL,
+    CONSTRAINT [PK_Sliders] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Sliders_Images_ImageId] FOREIGN KEY ([ImageId]) REFERENCES [Images] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Sliders_Translations_DescriptionId] FOREIGN KEY ([DescriptionId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Sliders_Translations_SubtitleId] FOREIGN KEY ([SubtitleId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Sliders_Translations_TitleId] FOREIGN KEY ([TitleId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T10:20:21.2680747+03:00', [LastUpdate] = '2022-06-30T10:20:21.2698323+03:00', [PasswordHash] = 0x5B9D069C6BBEA83A5E3B9C2C5EB5AD40DFAC5E509E2361011D269D47D5EC1A893E9E388FA5E3BB0931897D34DE74E458E3D439FEDBE2A2FE9BD1C45FEE194AB5, [PasswordSalt] = 0xDC8FE10DBCA9D09D56568FE79BC6C4E3B409F1BF7C65E943184004614831943078919DD1367276B827A91B4DA2196A32DA9FC72EDC2AB2EEFF20C0AE75611C0A57245D69C74EB72BDA6979BBC3A60A5C26CA33F4D3DE6F3800AF2A899057565FDCB312661DC07811420955EDB11C54E4114D1B3AC790FE6A53C6D6DD1D707434
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE INDEX [IX_Roles_SlidersPermissionsId] ON [Roles] ([SlidersPermissionsId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Sliders_DescriptionId] ON [Sliders] ([DescriptionId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Sliders_ImageId] ON [Sliders] ([ImageId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Sliders_SubtitleId] ON [Sliders] ([SubtitleId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Sliders_TitleId] ON [Sliders] ([TitleId]);
+GO
+
+ALTER TABLE [Roles] ADD CONSTRAINT [FK_Roles_Permissions_SlidersPermissionsId] FOREIGN KEY ([SlidersPermissionsId]) REFERENCES [Permissions] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220630082022_addSlidersTable', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+CREATE TABLE [Team] (
+    [Id] int NOT NULL IDENTITY,
+    [NameId] int NOT NULL,
+    [PositionId] int NOT NULL,
+    [ImageId] int NOT NULL,
+    [Facebook] nvarchar(max) NULL,
+    [Twitter] nvarchar(max) NULL,
+    [LinkedIn] nvarchar(max) NULL,
+    [Instgram] nvarchar(max) NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [LastUpdate] datetime2 NOT NULL,
+    [CreatedBy] int NULL,
+    CONSTRAINT [PK_Team] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Team_Images_ImageId] FOREIGN KEY ([ImageId]) REFERENCES [Images] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Team_Translations_NameId] FOREIGN KEY ([NameId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Team_Translations_PositionId] FOREIGN KEY ([PositionId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T11:03:16.0043232+03:00', [LastUpdate] = '2022-06-30T11:03:16.0053496+03:00', [PasswordHash] = 0xED4D89B838BA01156049FE662AC93B11045DF2682BA6FE4E4ABEBEBD4915A4258475863BDB7804C4DDC5372570F3D935F0BF561338E0FB1BF730E282F24B8A1F, [PasswordSalt] = 0xCAFE9E4425C79EBE3D9B562BD592326BD5E10BC803DBCE929DA70F044E86E1C99CF4450C6BA2FF36E2F701FF985B05156421E33CFCC6834036E466550FB095496761C6C9C94D95FAAA2A3F65B53600979FA1E6DAB1493243D9A208E931105A60346E4BBA8728B35C7383197AFD3CE67D16131A3134DE356EF594B4D6BCFCD9D8
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE UNIQUE INDEX [IX_Team_ImageId] ON [Team] ([ImageId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Team_NameId] ON [Team] ([NameId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Team_PositionId] ON [Team] ([PositionId]);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220630090317_addTeamTable', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Team] ADD [Priority] int NOT NULL DEFAULT 0;
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T11:12:44.6461659+03:00', [LastUpdate] = '2022-06-30T11:12:44.6480025+03:00', [PasswordHash] = 0x318D11DCA00ABCFE864164C72F01CC5B12F3D5AC4E1C6AEE3160B6FDA1959D618760EC1CB196540A4215BBC8A9B8B0ED260E301B40FB9AE5BA653C5D0442E7E2, [PasswordSalt] = 0xA08AD24BC48FCEB226937B2FA8943AD2CB290EEA0F585EF7BD55D51D466302DA61C17912CE2E58F0F2385E6E96446D1D95E8DAF95257806A464715FEF1C12CBB496F09793E35B4A838091030C941A762E72E44ADFCAB87FC01082C6EE596CF2B7128667921077DC7B79146BDA2E000F4729A2CE13ED5439A92F07E8FC29498A5
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220630091246_addPriorityToTeam', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Roles] ADD [TeamPermissionsId] int NULL;
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T11:14:14.4038252+03:00', [LastUpdate] = '2022-06-30T11:14:14.4052613+03:00', [PasswordHash] = 0xA0A2BF8A2DC2CD441FBA43FA700F51FFB93F55C1179C7372720FF99F08731756A8F130262B4882DD24C1CB2C6B825F9EB5FD594940843E6956CB4A14325C67F6, [PasswordSalt] = 0x0FD778CFD139FBAE852D265F3E4F8FD75659ED6176B2EF09B2E8AF0E63E9568EC8C9C59CF3D929A66A45804E708E7E83BEB197999133FE841659E996E0DA91F5CBB4CDDB103C91E399D222D700DA530A9DBF5EDA6ADD283E84EC51FD98A80759A84C06137331D1610D5CBED8349E1818CAE6188E2E744FE6B4414A6768F5E454
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE INDEX [IX_Roles_TeamPermissionsId] ON [Roles] ([TeamPermissionsId]);
+GO
+
+ALTER TABLE [Roles] ADD CONSTRAINT [FK_Roles_Permissions_TeamPermissionsId] FOREIGN KEY ([TeamPermissionsId]) REFERENCES [Permissions] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220630091415_addTeamPermissionToRoleTable', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Articles] DROP CONSTRAINT [FK_Articles_Users_AuthorId];
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T15:43:52.0190181+03:00', [LastUpdate] = '2022-06-30T15:43:52.0211516+03:00', [PasswordHash] = 0x4D25484E8E23F6762B6E33FA99B0A88232F6031E97ADD35108A9B258FEF559796D9F846ED329AEB6F2E73D71FC66CE12B8A879D3EBFABC3FA51469EC0921928D, [PasswordSalt] = 0x44F63BEBEF8DF949F3F89E0872A1CDACCB8237FDC15C0DC0D3F7DDAF11992E36737F9EC64C4184072A6C39049FD86FF96D28074F5AADF67527C96D4E79C4CB4BD2EF7B2F24954E7AD402E0F5DA27F3D301A4DFDDF763F0A49139E0539004D048D228654C4B9F5FEFE95DDA69A0B10CC9B41A88CF4098EB0C2EF23CF03276E77E
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+ALTER TABLE [Articles] ADD CONSTRAINT [FK_Articles_Users_AuthorId] FOREIGN KEY ([AuthorId]) REFERENCES [Users] ([Id]) ON DELETE CASCADE;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220630134352_addClientCascadeForAllTables', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Articles] DROP CONSTRAINT [FK_Articles_Users_AuthorId];
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T15:55:27.1880727+03:00', [LastUpdate] = '2022-06-30T15:55:27.1890957+03:00', [PasswordHash] = 0x16D856115D57DD2CF9E6AD2ECF4B67BEE64A24B17036530DC8FB8C9561AE62FE867F62869C173603C6F78B9B4C8994E0281194A4EF415B7A00DD345601328B11, [PasswordSalt] = 0x9F95E0975C9E31D85EA242F740D367852847585BB5B442B83FFE6307EC163A2C93A3E8DED3BC1B39DE1BE3A194544C04F02637B6972BF9957D39E3BE95449BBCB535E0D28A74CB6EB1FB5853CC58A23709008A83BBEB6DFB64D96B9441A0B0DEAD0460C1719EDB938D251AB54B97D46700B9EE64E23D8908A37FD7E6F40B7358
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+ALTER TABLE [Articles] ADD CONSTRAINT [FK_Articles_Users_AuthorId] FOREIGN KEY ([AuthorId]) REFERENCES [Users] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220630135528_addRestrictDeleteForTables', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+CREATE TABLE [Partners] (
+    [Id] int NOT NULL IDENTITY,
+    [NameId] int NOT NULL,
+    [LogoId] int NOT NULL,
+    [Url] nvarchar(max) NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [LastUpdate] datetime2 NOT NULL,
+    [CreatedBy] int NULL,
+    CONSTRAINT [PK_Partners] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Partners_Images_LogoId] FOREIGN KEY ([LogoId]) REFERENCES [Images] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Partners_Translations_NameId] FOREIGN KEY ([NameId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T16:03:33.6605548+03:00', [LastUpdate] = '2022-06-30T16:03:33.6621584+03:00', [PasswordHash] = 0x5870D3EBCBC9C0F3B38990175B23EA2FE95FAB36F6A70307FB6EF4C0B10FE45E06611167681A2C37D499F1127F7DC8D6989AC96AF601EF1C7A8F6A689A8BC22F, [PasswordSalt] = 0xC51BAC11141B04C602072954898649483B8CAC04AEF071F3BD0D764415FAD913BA6671B297A1281CE6FEF210F6ECFD6A33D13C94DAF7FDECA289F5ACF5101E71D3255732083434D7FC332AFDBB600C790A27B1D99ED16D5D630F1AC7A2F18552AF5FC1E9CE95ED2CE977183EDC2747EF0AF4E7D3A997F7E662BE86F478413625
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE UNIQUE INDEX [IX_Partners_LogoId] ON [Partners] ([LogoId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Partners_NameId] ON [Partners] ([NameId]);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220630140334_addPartnersTable', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Roles] ADD [PartnersPermissionsId] int NULL;
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T16:10:38.5406747+03:00', [LastUpdate] = '2022-06-30T16:10:38.5417210+03:00', [PasswordHash] = 0x4F3931D9DD230D1FABD0AB9D49233FE5BD955A34E3DF873A14900B597BADCF71366B4A0C7670AAFF4BEAD4D8216100D33A0E7776D98032256FC9956E2BA884D0, [PasswordSalt] = 0xC9301AD15B5F6B8998C6037292E6622DF957CBFAEF8D8E7AFAF855CAB7AA84EA676ABB0822B0D928C8D4CF0A873D7D7445939D8A41E23A140BA4DB8C4B2B771E33D34B4B7A2E6ECB854D0412B570434F95828B48BA2DBBFCB5F48AF457A3EA744BFEA176D6C18FA524B3694269E0C13AB5FB86F19824566975DC247C7A139E8D
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE INDEX [IX_Roles_PartnersPermissionsId] ON [Roles] ([PartnersPermissionsId]);
+GO
+
+ALTER TABLE [Roles] ADD CONSTRAINT [FK_Roles_Permissions_PartnersPermissionsId] FOREIGN KEY ([PartnersPermissionsId]) REFERENCES [Permissions] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220630141039_addPartnersPermissionsToRoles', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Roles] ADD [TestimonialsPermissionsId] int NULL;
+GO
+
+CREATE TABLE [Testimonials] (
+    [Id] int NOT NULL IDENTITY,
+    [ContentId] int NOT NULL,
+    [AuthorId] int NOT NULL,
+    [JobId] int NOT NULL,
+    [ImageId] int NOT NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [LastUpdate] datetime2 NOT NULL,
+    [CreatedBy] int NULL,
+    CONSTRAINT [PK_Testimonials] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Testimonials_Images_ImageId] FOREIGN KEY ([ImageId]) REFERENCES [Images] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Testimonials_Translations_AuthorId] FOREIGN KEY ([AuthorId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Testimonials_Translations_ContentId] FOREIGN KEY ([ContentId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Testimonials_Translations_JobId] FOREIGN KEY ([JobId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T16:38:24.9969994+03:00', [LastUpdate] = '2022-06-30T16:38:24.9980341+03:00', [PasswordHash] = 0x342666E88561D0F07ACA1162C52AC9EE9F3D2A50530330E410829610D556A6DEA14CFA0C4DC5162EF8490401AD7E8D8AA4CB241B82C414478AE25CC31E23217A, [PasswordSalt] = 0x061BD4AC41D69DAA611C3C9CF554654F90563C9B885D2B781777A303EC8350AFF7AD0B6A8783F797BD25AB84E3D075C48CAF7808A67B9332906BFB02F90085C9D6E1B8C038A00AD56900033BBB1B9C5DF4A657F4B02C4BDD038053B07BBF7E3218E8A22346D3D74CA0ECCC838965085D1A59214D808FD2C72290342FFE4CF3C3
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE INDEX [IX_Roles_TestimonialsPermissionsId] ON [Roles] ([TestimonialsPermissionsId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Testimonials_AuthorId] ON [Testimonials] ([AuthorId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Testimonials_ContentId] ON [Testimonials] ([ContentId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Testimonials_ImageId] ON [Testimonials] ([ImageId]);
+GO
+
+CREATE UNIQUE INDEX [IX_Testimonials_JobId] ON [Testimonials] ([JobId]);
+GO
+
+ALTER TABLE [Roles] ADD CONSTRAINT [FK_Roles_Permissions_TestimonialsPermissionsId] FOREIGN KEY ([TestimonialsPermissionsId]) REFERENCES [Permissions] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220630143825_addTestimonialTable', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Articles] ADD [Discriminator] nvarchar(max) NOT NULL DEFAULT N'';
+GO
+
+ALTER TABLE [Articles] ADD [RegionId] int NULL;
+GO
+
+ALTER TABLE [Articles] ADD [SectorId] int NULL;
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T17:10:31.1176230+03:00', [LastUpdate] = '2022-06-30T17:10:31.1187721+03:00', [PasswordHash] = 0x558C519384761D4087BB81C4B91DA2C72AD5F557CA6C66524D7F730AC411F1A806DC6C1AF8DD2F7F5AEFBCFBD9787095A57864B9D24118EEDA7BF640ED30FB54, [PasswordSalt] = 0x651764C58DE9C718FFB2F1BED9300BADB9D09B8C094C1100D37F89EF2B07F1AC048B5A924C03DE5524271AB2C8B1B895C2B754127AAC2FD28457422AC36903EC5E773BAE4291C21E275D5286A837E05BB3D1FBB21B6FEE94EBE87DC63237837A5D0333D0866F79DCCBA71C61999B96DB550AE0A7201CBD0D74AE37C97978BA67
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE INDEX [IX_Articles_RegionId] ON [Articles] ([RegionId]);
+GO
+
+CREATE INDEX [IX_Articles_SectorId] ON [Articles] ([SectorId]);
+GO
+
+ALTER TABLE [Articles] ADD CONSTRAINT [FK_Articles_Regions_RegionId] FOREIGN KEY ([RegionId]) REFERENCES [Regions] ([Id]) ON DELETE NO ACTION;
+GO
+
+ALTER TABLE [Articles] ADD CONSTRAINT [FK_Articles_Sectors_SectorId] FOREIGN KEY ([SectorId]) REFERENCES [Sectors] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220630151031_addProjectsTable', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Roles] ADD [ProjectsPermissionsId] int NULL;
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T17:24:08.1616556+03:00', [LastUpdate] = '2022-06-30T17:24:08.1626879+03:00', [PasswordHash] = 0xB3768EAFFF11815331655A148B902C142F36D0491E4BFBD03627B54C0BA047E0EA4DEEABA97EAA90B22519266E91EE7D44BA5BA105ED7A614A8ADD05F59C0851, [PasswordSalt] = 0x4259968AE78FFC6822B4870054D26A6C737A9083A109B2DB070D623EAE28157E1DFAD78590A3C46F26D192AA8529FE039BEA770E67B40C91F73048D28080BF818D90789CE765C2A18F9488A809FFA7AA537BD89B897420DCF3278147C10F443794E224C69B78C3A1F02D960563EDC89E57B26E5E0E1C8ED055BEF48809B9853E
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE INDEX [IX_Roles_ProjectsPermissionsId] ON [Roles] ([ProjectsPermissionsId]);
+GO
+
+ALTER TABLE [Roles] ADD CONSTRAINT [FK_Roles_Permissions_ProjectsPermissionsId] FOREIGN KEY ([ProjectsPermissionsId]) REFERENCES [Permissions] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220630152409_addProjectsPermissionsToRoles', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Articles] DROP CONSTRAINT [FK_Articles_Images_ImageId];
+GO
+
+ALTER TABLE [Articles] DROP CONSTRAINT [FK_Articles_Regions_RegionId];
+GO
+
+ALTER TABLE [Articles] DROP CONSTRAINT [FK_Articles_Sectors_SectorId];
+GO
+
+ALTER TABLE [Articles] DROP CONSTRAINT [FK_Articles_Translations_ContentId];
+GO
+
+ALTER TABLE [Articles] DROP CONSTRAINT [FK_Articles_Translations_SubtitleId];
+GO
+
+ALTER TABLE [Articles] DROP CONSTRAINT [FK_Articles_Translations_TitleId];
+GO
+
+ALTER TABLE [Articles] DROP CONSTRAINT [FK_Articles_Users_AuthorId];
+GO
+
+ALTER TABLE [Comments] DROP CONSTRAINT [FK_Comments_Articles_ArticleId];
+GO
+
+ALTER TABLE [Tags] DROP CONSTRAINT [FK_Tags_Articles_ArticleId];
+GO
+
+ALTER TABLE [Articles] DROP CONSTRAINT [PK_Articles];
+GO
+
+EXEC sp_rename N'[Articles]', N'ArticleBase';
+GO
+
+EXEC sp_rename N'[Tags].[ArticleId]', N'ArticleBaseId', N'COLUMN';
+GO
+
+EXEC sp_rename N'[Tags].[IX_Tags_ArticleId]', N'IX_Tags_ArticleBaseId', N'INDEX';
+GO
+
+EXEC sp_rename N'[Comments].[ArticleId]', N'ArticleBaseId', N'COLUMN';
+GO
+
+EXEC sp_rename N'[Comments].[IX_Comments_ArticleId]', N'IX_Comments_ArticleBaseId', N'INDEX';
+GO
+
+EXEC sp_rename N'[ArticleBase].[IX_Articles_TitleId]', N'IX_ArticleBase_TitleId', N'INDEX';
+GO
+
+EXEC sp_rename N'[ArticleBase].[IX_Articles_SubtitleId]', N'IX_ArticleBase_SubtitleId', N'INDEX';
+GO
+
+EXEC sp_rename N'[ArticleBase].[IX_Articles_SectorId]', N'IX_ArticleBase_SectorId', N'INDEX';
+GO
+
+EXEC sp_rename N'[ArticleBase].[IX_Articles_RegionId]', N'IX_ArticleBase_RegionId', N'INDEX';
+GO
+
+EXEC sp_rename N'[ArticleBase].[IX_Articles_ImageId]', N'IX_ArticleBase_ImageId', N'INDEX';
+GO
+
+EXEC sp_rename N'[ArticleBase].[IX_Articles_ContentId]', N'IX_ArticleBase_ContentId', N'INDEX';
+GO
+
+EXEC sp_rename N'[ArticleBase].[IX_Articles_AuthorId]', N'IX_ArticleBase_AuthorId', N'INDEX';
+GO
+
+ALTER TABLE [ArticleBase] ADD CONSTRAINT [PK_ArticleBase] PRIMARY KEY ([Id]);
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-06-30T22:53:40.1567370+03:00', [LastUpdate] = '2022-06-30T22:53:40.1577715+03:00', [PasswordHash] = 0x9BFBEFCEC7BFEF53506787C7C860BEFE2FD40237A905EEF841F51D0B5C30E5981B0FAA6783DE91C52B6724E9555CB62F3157F4DB6B8F6666BBFF3E3E2F7F15D6, [PasswordSalt] = 0x34A187CB111B19EFE633C119B3A6A70B638C2687C839962347338EB350D54C505251B828D4B74DB61AC90A76820B03338B80EE3AAB62A9637CB3EA7CCA9F86330CDB9D46FD79C37ECFF2A2A2E202E36902FC7F5A63D0416A200997EF075852BBD5D7E680FBD376C50031AC16A7E51EEBF5A579B4F85848C6375D5EA2CE4CD31A
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+ALTER TABLE [ArticleBase] ADD CONSTRAINT [FK_ArticleBase_Images_ImageId] FOREIGN KEY ([ImageId]) REFERENCES [Images] ([Id]) ON DELETE NO ACTION;
+GO
+
+ALTER TABLE [ArticleBase] ADD CONSTRAINT [FK_ArticleBase_Regions_RegionId] FOREIGN KEY ([RegionId]) REFERENCES [Regions] ([Id]) ON DELETE NO ACTION;
+GO
+
+ALTER TABLE [ArticleBase] ADD CONSTRAINT [FK_ArticleBase_Sectors_SectorId] FOREIGN KEY ([SectorId]) REFERENCES [Sectors] ([Id]) ON DELETE NO ACTION;
+GO
+
+ALTER TABLE [ArticleBase] ADD CONSTRAINT [FK_ArticleBase_Translations_ContentId] FOREIGN KEY ([ContentId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION;
+GO
+
+ALTER TABLE [ArticleBase] ADD CONSTRAINT [FK_ArticleBase_Translations_SubtitleId] FOREIGN KEY ([SubtitleId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION;
+GO
+
+ALTER TABLE [ArticleBase] ADD CONSTRAINT [FK_ArticleBase_Translations_TitleId] FOREIGN KEY ([TitleId]) REFERENCES [Translations] ([Id]) ON DELETE NO ACTION;
+GO
+
+ALTER TABLE [ArticleBase] ADD CONSTRAINT [FK_ArticleBase_Users_AuthorId] FOREIGN KEY ([AuthorId]) REFERENCES [Users] ([Id]) ON DELETE NO ACTION;
+GO
+
+ALTER TABLE [Comments] ADD CONSTRAINT [FK_Comments_ArticleBase_ArticleBaseId] FOREIGN KEY ([ArticleBaseId]) REFERENCES [ArticleBase] ([Id]) ON DELETE NO ACTION;
+GO
+
+ALTER TABLE [Tags] ADD CONSTRAINT [FK_Tags_ArticleBase_ArticleBaseId] FOREIGN KEY ([ArticleBaseId]) REFERENCES [ArticleBase] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220630205340_addBaseClassForArticlesAndProjects', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Messages] ADD [Subject] nvarchar(max) NULL;
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-07-03T17:33:38.5596920+03:00', [LastUpdate] = '2022-07-03T17:33:38.5607491+03:00', [PasswordHash] = 0x39AE829D7B6B621BAB98476C7463C610286A57CC42F1448A460FB281A4DA3B5C8E60ABE58CA78A85F7DA39AB87C4C35C495702DEB7625514407F09F23FFC5392, [PasswordSalt] = 0x0E21EB9E56B6DC8EF5CA99A751F359A091F180270F32B552BBE48BA07234926B4DBC05464D98243A2DE649F1805CC081098D235B06EFF36BD5A41FAB9F16E5089CD5E43AC382B63D2DD03AB0C34D42DA4057D4673E5DD28D78FFCED502B13B2DF6C61FC634EB202D197976C1BF6A6F8B64D7DBCB56BFD2FFEE95F4B4F8D7E72C
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220703153339_addSubjectColumnToMessage', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Roles] ADD [MediaPermissionsId] int NULL;
+GO
+
+CREATE TABLE [Media] (
+    [Id] int NOT NULL IDENTITY,
+    [ThumbnailId] int NULL,
+    [Url] nvarchar(max) NULL,
+    [MediaType] nvarchar(max) NULL,
+    [MainVideo] bit NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [LastUpdate] datetime2 NOT NULL,
+    [CreatedBy] int NULL,
+    CONSTRAINT [PK_Media] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Media_Images_ThumbnailId] FOREIGN KEY ([ThumbnailId]) REFERENCES [Images] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-07-08T21:23:01.9365629+03:00', [LastUpdate] = '2022-07-08T21:23:01.9386829+03:00', [PasswordHash] = 0x94538B69E6FF21ED66DE5F2C506CA76CF287B22B2E101077D5FFA2C49CBF3B137F01E851FB486E51F9F067538D0A551101AF9DDB4696F5807952DE0983F0CF23, [PasswordSalt] = 0x4286035FEF174C20B846D12FCBB430A71EE575D4B133F050052109DEB9A4F4F78680EE2862402792C45E1B64FFAE9382BDB3D69E5DD911E8F1EC285C45E8EA65B423A70ECDCAF7EC36770F23B878BE62AB09CE3BA898DFD5B1DC8A2D223B013EBF18D7899842E5AA5084C7CE9D07A761B881C08E499EE285B876FD99C7FCF398
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE INDEX [IX_Roles_MediaPermissionsId] ON [Roles] ([MediaPermissionsId]);
+GO
+
+CREATE INDEX [IX_Media_ThumbnailId] ON [Media] ([ThumbnailId]);
+GO
+
+ALTER TABLE [Roles] ADD CONSTRAINT [FK_Roles_Permissions_MediaPermissionsId] FOREIGN KEY ([MediaPermissionsId]) REFERENCES [Permissions] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220708192302_mediaTable', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-07-09T01:25:41.8484374+03:00', [LastUpdate] = '2022-07-09T01:25:41.8494784+03:00', [PasswordHash] = 0x4418D6A5C071805618A2E0BDB0362FD4F361A4945E8C2F1033A639A4FAFD8763A2EB853FBBBF74034C60A7735082C624167421EE441ABF3CED2BC60909A15341, [PasswordSalt] = 0x85FC23D0E2B4C2C7F2CBFBECF4160B3130E64F792C326AB0C869926AE543B250DAB8AE29DA6583FA9E70959D5C365CC529B0D40A00DBEDB349BA8F1BF79B358BFA89BF132B17AF578D67364AD6F30AFD2F49EA8CE71E6511E8241B4776554DE5D923EC86C7EC51E8E4F9EA25F58956CD5EDB91D3D04C38987B7D645EDB94D9C0
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220708232542_enableClientCascadeDelete', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+CREATE TABLE [volunteers] (
+    [Id] int NOT NULL IDENTITY,
+    [FirstName] nvarchar(max) NULL,
+    [LastName] nvarchar(max) NULL,
+    [Email] nvarchar(max) NULL,
+    [Phone] nvarchar(max) NULL,
+    [BirthDate] datetime2 NOT NULL,
+    [Gender] int NOT NULL,
+    [CVLink] nvarchar(max) NULL,
+    [Reason] nvarchar(max) NULL,
+    [EducationLevel] int NOT NULL,
+    [SectorId] int NOT NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [LastUpdate] datetime2 NOT NULL,
+    [CreatedBy] int NULL,
+    CONSTRAINT [PK_volunteers] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_volunteers_Sectors_SectorId] FOREIGN KEY ([SectorId]) REFERENCES [Sectors] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-07-27T21:25:36.0148159+03:00', [LastUpdate] = '2022-07-27T21:25:36.0157890+03:00', [PasswordHash] = 0x315050CEFC22617A755A3350B4348A8FDB27D78CD383FCD42A60B05A879D1F9B00ACFB8B9EA9DD34F9DD78E661DBC02562B19366F24A6521CD85A9907F5000D3, [PasswordSalt] = 0x1D2F0B126E37514AC063E9F564E72F0F0E6549ECBBA15F23979F9E1660AB6C059D9F71C208C54BE0BD771C1D76B25F527484FC6A72AB06ABF7F1F98CD7095CB12FD279663C133CA1A02877A36B61B8AB4B02FFA24C298E4FC9AAE95B5EABDF6518A3ED27C093FCCD5272C226B8793711817E5B19B1FE9128BE24635FBE34ACC9
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE INDEX [IX_volunteers_SectorId] ON [volunteers] ([SectorId]);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220727192537_addVolunteerTable', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [Roles] ADD [VolunteersPermissionsId] int NULL;
+GO
+
+UPDATE [Users] SET [CreatedAt] = '2022-07-27T21:31:42.3897173+03:00', [LastUpdate] = '2022-07-27T21:31:42.3912382+03:00', [PasswordHash] = 0xC73D6195ADE5CBDCBF80F97FA6CB84BF5211B16E1C6E50A3AE9CD09A4789B9DEFD81BFCD2B4E0FB71A150A8B8FB893D79F76B095ED8250E2112906C80A3EE2EB, [PasswordSalt] = 0x190B335CF0861F0621B35BD4488A99EF959686CF70982A9D24D912BCE98142F4FE572080CD304EA36BB5910E82318607D707DC62D36D0A32615B92C0D787B6250650D052F239FBE15A21DEA3853680C63C4277BEC41630D2EA88881E865DA8C0FAF90F1985E3C917CF2D5792EDB46CFAA3C4A28BD2DA4127CAA9CB79E94A5A5B
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+CREATE INDEX [IX_Roles_VolunteersPermissionsId] ON [Roles] ([VolunteersPermissionsId]);
+GO
+
+ALTER TABLE [Roles] ADD CONSTRAINT [FK_Roles_Permissions_VolunteersPermissionsId] FOREIGN KEY ([VolunteersPermissionsId]) REFERENCES [Permissions] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220727193143_addVolunteerPermission', N'6.0.7');
+GO
+
+COMMIT;
+GO
+
