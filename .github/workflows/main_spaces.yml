@@ -38,10 +38,12 @@ jobs:
         shell: bash
 
       - name: Build with dotnet 
-        run: dotnet build --source ./server/apiplate  --configuration Release
+        run: 
+          cd ./server/apiplate
+          dotnet build  --configuration Release
   
       - name: dotnet publish
-        run: dotnet publish --source ./server/apiplate -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish --source -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
