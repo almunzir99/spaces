@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using apiplate.StartupTasks.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-
+using System;
 namespace apiplate
 {
     public class Program
