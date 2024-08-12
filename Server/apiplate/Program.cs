@@ -16,7 +16,12 @@ namespace apiplate
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                      var webRootPath = Environment.GetEnvironmentVariable("ASPNETCORE_WEBROOT");
+                
+                // Set the custom web root path
+                webBuilder.UseWebRoot(webRootPath);
                     webBuilder.UseStartup<Startup>();
+                    
                 });
     }
 }
