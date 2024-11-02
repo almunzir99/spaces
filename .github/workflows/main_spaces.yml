@@ -24,7 +24,7 @@ jobs:
       - name: Install Angular dependencies
         run: |
           cd Server/apiplate/ClientApp 
-          npm install
+          npm install --force
       - name: Set NODE_OPTIONS
         run: |
           export NODE_OPTIONS=--openssl-legacy-provider
