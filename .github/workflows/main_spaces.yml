@@ -23,7 +23,7 @@ jobs:
       # Step 3: Install Angular dependencies and build
       - name: Install Angular dependencies
         run: |
-          cd server/apiplate/clientApp 
+          cd Server/apiplate/ClientApp 
           npm install
       - name: Set NODE_OPTIONS
         run: |
@@ -37,12 +37,12 @@ jobs:
 
       - name: Build with dotnet 
         run: |
-          cd server/apiplate 
+          cd Server/apiplate 
           dotnet build  --configuration Release
   
       - name: dotnet publish
         run: |
-          cd server/apiplate 
+          cd Server/apiplate 
           dotnet publish -c Release --output publish
 
       - name: Upload to FTP
