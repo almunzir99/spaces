@@ -53,6 +53,6 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./publish # Directory containing the published files
-          server-dir: /wwwroot # Adjust the target directory on your FTP server
+          local-dir: ./publish/ # Directory containing the published files
+          server-dir: /wwwroot/ # Adjust the target directory on your FTP server
           
