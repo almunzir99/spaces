@@ -22,18 +22,13 @@ jobs:
 
       # Step 3: Install Angular dependencies and build
       - name: Install Angular dependencies
-        working-directory: /server/apiplate/clientApp
-        run: npm install
-
-      - name: Build Angular project
-        working-directory: /server/apiplate/clientApp
-        run: npm run build --prod
-        
+        run: 
+          cd ./server/apiplate/clientApp &&
+          npm install
       - name: Set NODE_OPTIONS
         run: |
           export NODE_OPTIONS=--openssl-legacy-provider
         shell: bash
-
       # Step 4: Set up .NET SDK
       - name: Set up .NET
         uses: actions/setup-dotnet@v3
