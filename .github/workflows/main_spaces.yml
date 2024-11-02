@@ -1,49 +1,51 @@
-name: Publish ASP.NET Core with Angular to FTP
+ # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy ASP.Net Core app to Azure Web App - spaces
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: windows-latest
 
     steps:
-      # Step 1: Check out the code
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      # Step 2: Set up Node.js for Angular build
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
         with:
-          node-version: '16'
+          dotnet-version: '6.0.x'
+          
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
 
-      # Step 3: Install Angular dependencies and build
-      - name: Install Angular dependencies
-        run: |
-          cd Server/apiplate/ClientApp 
+      - name: Install npm dependencies
+        run: 
+          cd ./Server/apiplate/ClientApp &&
           npm install --force
+        shell: bash
+
       - name: Set NODE_OPTIONS
         run: |
           export NODE_OPTIONS=--openssl-legacy-provider
         shell: bash
-      # Step 4: Set up .NET SDK
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '6.0.x' # Adjust the .NET version as needed
 
       - name: Build with dotnet 
-        run: |
-          cd Server/apiplate 
+        run: 
+          cd ./Server/apiplate &&
           dotnet build  --configuration Release
   
       - name: dotnet publish
-        run: |
-          cd Server/apiplate 
-          dotnet publish -c Release --output publish
+        run: 
+          cd ./Server/apiplate &&
+          dotnet publish   -c Release -o publish
 
       - name: Upload to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
