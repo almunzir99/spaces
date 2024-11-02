@@ -22,8 +22,8 @@ jobs:
 
       # Step 3: Install Angular dependencies and build
       - name: Install Angular dependencies
-        run: 
-          cd ./server/apiplate/clientApp &&
+        run: |
+          cd server/apiplate/clientApp 
           npm install
       - name: Set NODE_OPTIONS
         run: |
@@ -36,13 +36,13 @@ jobs:
           dotnet-version: '6.0.x' # Adjust the .NET version as needed
 
       - name: Build with dotnet 
-        run: 
-          cd ./server/apiplate &&
+        run: |
+          cd server/apiplate 
           dotnet build  --configuration Release
   
       - name: dotnet publish
-        run: 
-          cd ./server/apiplate &&
+        run: |
+          cd server/apiplate 
           dotnet publish   -c Release -o "${{env.DOTNET_ROOT}}/publish"
 
       # Step 6: Deploy to FTP server
