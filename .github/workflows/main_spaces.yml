@@ -46,6 +46,16 @@ jobs:
         run: 
           cd ./Server/apiplate &&
           dotnet publish   -c Release -o ./publish
+          
+      - name: Delete web.config
+        uses: StephanThierry/ftp-delete-action@v2.1
+        with:
+          host: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          remoteFiles: "web.config"
+          workingDir: "/wwwroot/"
+          ignoreSSL: "1"
 
       - name: Upload to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
