@@ -45,7 +45,7 @@ jobs:
       - name: dotnet publish
         run: 
           cd ./server/apiplate &&
-          dotnet publish   -c Release -o "${{env.DOTNET_ROOT}}/myapp"
+          dotnet publish   -c Release -o "${{env.DOTNET_ROOT}}/publish"
 
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
@@ -53,6 +53,6 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./publish/ # Directory containing the published files
+          local-dir: ${{env.DOTNET_ROOT}}/publish
           server-dir: /wwwroot/ # Adjust the target directory on your FTP server
           
