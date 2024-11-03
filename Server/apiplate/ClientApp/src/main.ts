@@ -5,7 +5,7 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 export function getBaseUrl() {
-  return "https://spaces-ccgnc6afbpawa9f2.eastus-01.azurewebsites.net/";
+  return "https://https://spacess.runasp.net/";
 }
 
 const providers = [
