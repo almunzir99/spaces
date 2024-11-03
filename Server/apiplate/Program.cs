@@ -23,11 +23,7 @@ namespace apiplate
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                     .Build();
 
-                // Get the WebRootPath value from appsettings.json
-                var webRootPath = config.GetValue<string>("WebRootPath");
-
-                // Set the custom web root path
-                webBuilder.UseWebRoot(webRootPath);
+                 
                     webBuilder.UseStartup<Startup>();
                 });
     }
