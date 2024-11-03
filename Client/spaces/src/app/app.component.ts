@@ -42,7 +42,7 @@ export class AppComponent {
         });
       },
       error: (err) => {
-        window.location.href = `${this.baseUrl}redirect`;
+        // window.location.href = `${this.baseUrl}redirect`;
         this.pageLoading = false;
         console.log(err);
       }

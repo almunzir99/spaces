@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl:"https://localhost:5001/"
+  baseUrl:"https://spaces-ccgnc6afbpawa9f2.eastus-01.azurewebsites.net/"
 };
 
 /* 

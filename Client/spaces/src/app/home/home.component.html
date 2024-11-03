@@ -1,4 +1,5 @@
 <swiper dir="ltr" *ngIf="sliders.length > 0" class="hero-swiper" [config]="config" #swiper (swiper)="onSwiper($event)"
+
     (slideChange)="onSlideChange($event)">
     <ng-template *ngFor="let slider of sliders ; let i = index;" swiperSlide>
         <div class="hero">

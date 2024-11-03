@@ -44,5 +44,5 @@ import { SharedModule } from './shared/shared.module';
 })
 export class AppModule { }
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, `${environment.baseUrl}assets/contents/`, '.json');
+  return new TranslateHttpLoader(http, `${environment.baseUrl}api/cms/`, '');
 }

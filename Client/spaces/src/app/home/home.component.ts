@@ -84,6 +84,7 @@ export class HomeComponent implements OnInit {
 
 
     ]).pipe(map(([sliders, sectors, partners, articles,testimonials,gallery,video]) => {
+      console.log(sliders)
       return { sliders, sectors, partners, articles,testimonials,gallery,video }
     }));
    var sub = obs.subscribe({
