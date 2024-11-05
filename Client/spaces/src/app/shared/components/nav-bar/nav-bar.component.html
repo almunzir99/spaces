@@ -24,14 +24,20 @@
         </div>
         <div class="end-section" style="display: flex;align-items:center">
             <div class="socials">
-                <div class="icon-container"><i class="cib-facebook"></i></div>
+                <div class="icon-container"><a target="_blank"
+                        href="https://www.facebook.com/SpacesSDGs?mibextid=ZbWKwL"><i class="cib-facebook"></i></a>
+                </div>
                 <div class="icon-container"><i class="cib-twitter"></i></div>
                 <div class="icon-container"><i class="cib-instagram"></i></div>
+                <div class="icon-container"><a target="_blank"
+                        href="https://www.facebook.com/SpacesSDGs?mibextid=ZbWKwL"><i class="cib-linkedin"></i></a>
+                </div>
+
             </div>
             <div class="langs">
                 <div (click)="changeLang('en')" [class.active]="currentLang == 'en'" class="lang">EN</div>
                 <span class="sep">/</span>
-                <div  (click)="changeLang('ar')"[class.active]="currentLang == 'ar'" class="lang"> AR</div>
+                <div (click)="changeLang('ar')" [class.active]="currentLang == 'ar'" class="lang"> AR</div>
             </div>
         </div>
     </div>
@@ -43,14 +49,17 @@
         </div>
         <div class="navbar-list">
             <ul class="main-list">
-                <li class="main-menu-item"  (click)="opened = item.children != undefined" [routerLink]="item.children != undefined ? undefined : ['/',currentLang,item.route]"
+                <li class="main-menu-item" (click)="opened = item.children != undefined"
+                    [routerLink]="item.children != undefined ? undefined : ['/',currentLang,item.route]"
                     *ngFor="let item of navList">
                     <p [innerHTML]="'nav_bar.'+item.title!.toLowerCase() | translate"></p>
-                    <div *ngIf="sectors?.length! > 0 && item.title?.toLocaleLowerCase() == 'sectors'" class="sub-menu-container">
+                    <div *ngIf="sectors?.length! > 0 && item.title?.toLocaleLowerCase() == 'sectors'"
+                        class="sub-menu-container">
                         <ul>
-                            <li [textContent]="currentLang == 'ar' ? sector.title!.ar : sector.title!.en" (click)="opened = false" [routerLink]="['/',currentLang,item.route,sector.id]" class="submenu-item"
-                                *ngFor="let sector of sectors">
-                                
+                            <li [textContent]="currentLang == 'ar' ? sector.title!.ar : sector.title!.en"
+                                (click)="opened = false" [routerLink]="['/',currentLang,item.route,sector.id]"
+                                class="submenu-item" *ngFor="let sector of sectors">
+
                             </li>
                         </ul>
                     </div>
