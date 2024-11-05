@@ -33,7 +33,7 @@ namespace apiplate.StartupTasks
                 {
                     if (image.Path != null)
                     {
-                        var uri = new Uri(image.Path);
+                        var uri = new Uri(image.Path.Replace("5001s", "5001"));
                         var oldBaseUrl = uri.GetLeftPart(System.UriPartial.Authority);
                         image.Path = image.Path.Replace(oldBaseUrl, baseUrl);
                     }

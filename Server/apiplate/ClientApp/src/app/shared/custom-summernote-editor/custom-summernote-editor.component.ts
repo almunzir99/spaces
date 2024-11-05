@@ -48,8 +48,10 @@ export class CustomSummernoteEditorComponent implements OnInit {
       this.imageInputElement = imageInput.querySelector('.note-image-url') as HTMLElement;
       this.summernoteModal.appendChild(filePickerNode);
     });
-    this.noteEditor.addEventListener('DOMSubtreeModified',()=>{
-      var   tempNoteEditor = (targetEditor.querySelector('.note-editable') as HTMLElement);
+    this.noteEditor.addEventListener('input', () => {
+      var tempNoteEditor = (targetEditor.querySelector('.note-editable') as HTMLElement);
+      console.log(this.noteEditor.innerHTML)
+
       this.htmlContentChange.emit(this.noteEditor.innerHTML);
 
      });

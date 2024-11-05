@@ -236,6 +236,7 @@ export class SectorsComponent implements OnInit {
         controlGroups: form
       }
     )).onApprove((result) => {
+      console.log(result)
       result['title'] = {
         "ar": result["ar_title"],
         "en": result["title"],

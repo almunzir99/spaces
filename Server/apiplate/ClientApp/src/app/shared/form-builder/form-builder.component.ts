@@ -54,6 +54,7 @@ export class FormBuilderComponent implements OnInit {
     this.cancelEventEmitter.emit();
   }
   editorChange(controlName: string, content) {
+    console.log(content)
     this.resultObject[controlName] = content;
   }
   ngAfterContentInit() {
