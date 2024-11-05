@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Server",
+    "\\Server\\apiplate"
   ],
+  "SelectedNode": "\\Server\\apiplate\\apiplate.sln",
   "PreviewInSolutionExplorer": false
 }

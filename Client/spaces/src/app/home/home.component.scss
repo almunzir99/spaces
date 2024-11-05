@@ -2,7 +2,7 @@
 
 .hero {
     height: auto;
-    min-height: 650px;
+    min-height: 90vh;
     width: 100%;
     position: relative;
 
@@ -72,7 +72,7 @@
 
     .hero-img {
         position: absolute;
-        height: 90vh;
+        height: 100%;
         width: 100%;
     }
 }

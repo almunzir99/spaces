@@ -17,8 +17,8 @@
                 <br>
                 <h3 [textContent]="currentLang == 'ar' ? item?.subtitle?.ar : item?.subtitle?.en"></h3>
                 <br>
-                <div [innerHTML]="currentLang == 'ar' ? item?.content?.ar : item?.content?.en" class="text-content">
-
+                <div  [innerHTML]="currentLang == 'ar' ? item?.safeArContent : item?.safeEnContent" class="text-content">
+                    
                 </div>
                 <div class="share-section">
                     <p> {{'details.share' | translate}} :</p>

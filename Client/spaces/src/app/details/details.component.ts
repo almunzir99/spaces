@@ -8,6 +8,7 @@ import { Comment } from '../core/models/comment.model';
 import { DetailService } from '../core/services/detail.service';
 import { TranslationService } from '../core/services/translation.service';
 import { HTMLToText } from '../shared/utils/html-to-text';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-details',
@@ -18,22 +19,22 @@ export class DetailsComponent implements OnInit {
   subscription = new Subscription();
   item?: Article;
   items: Article[] = [];
-  comments:Comment[] = [];
+  comments: Comment[] = [];
   pageLoading = false;
   isButtonLoading = false;
   currentLang: string = "en";
   HTMLToText = HTMLToText;
   base: string = "articles";
   articleId?: number;
-  constructor(private _service: DetailService, private _translationService: TranslationService, private route: ActivatedRoute, private toastr: ToastrService) {
+  constructor(private _service: DetailService, private sanitizer: DomSanitizer, private _translationService: TranslationService, private route: ActivatedRoute, private toastr: ToastrService) {
   }
   loadData(base: string, id: number) {
     this.pageLoading = true;
     var obs = forkJoin([
       this._service.single(base, id),
       this._service.get(base),
-      this._service.getComments(base,id),
-    ]).pipe(map(([item, items,comments]) => {
+      this._service.getComments(base, id),
+    ]).pipe(map(([item, items, comments]) => {
       return { item, items, comments }
     }));
     var sub = obs.subscribe({
@@ -42,6 +43,12 @@ export class DetailsComponent implements OnInit {
         this.item = res.item.data!;
         this.items = res.items.data!;
         this.comments = res.comments.data!;
+        if(this.item.content)
+        {
+          this.item.safeArContent = this.sanitizer.bypassSecurityTrustHtml(this.item.content!.ar!);
+          this.item.safeEnContent = this.sanitizer.bypassSecurityTrustHtml(this.item.content!.en!);
+
+        }
       },
       error: (err) => {
         this.pageLoading = false;
@@ -79,7 +86,7 @@ export class DetailsComponent implements OnInit {
           this.toastr.success('نجاح', 'تم نشر التعليق بنجاح');
         else
           this.toastr.success('Success', 'Comment Submitted Successfully!');
-          this.comments.push(res.data!);
+        this.comments.push(res.data!);
 
       }, error: (err) => {
 
@@ -92,9 +99,9 @@ export class DetailsComponent implements OnInit {
       }
     })
   }
-  getDate(datetime:string):string{
-      var date = new Date(datetime);
-      return date.toDateString();
+  getDate(datetime: string): string {
+    var date = new Date(datetime);
+    return date.toDateString();
 
   }
   ngOnDestroy() {

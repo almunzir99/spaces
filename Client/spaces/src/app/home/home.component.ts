@@ -14,7 +14,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Media } from '../core/models/media.model';
 
-SwiperCore.use([Autoplay])
+SwiperCore.use([Autoplay,Pagination,Navigation])
 
 @Component({
   selector: 'app-home',
@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
     },
     loop: true,
     pagination: { clickable: true },
+    navigation:true,
     scrollbar: { draggable: true },
   };
   onSwiper(swiper: SwiperComponent) {

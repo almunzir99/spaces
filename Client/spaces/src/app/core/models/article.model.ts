@@ -14,5 +14,8 @@ export class Article extends Base {
     image?:Image;
     authorId?:number;
     author?:User;
+    safeArContent:any;
+    safeEnContent:any;
+
 
 }

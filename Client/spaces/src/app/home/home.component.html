@@ -159,8 +159,8 @@
                             </h3>
                             <div class="date-container">
                                 <div class="date">
-                                    <div class="day">21</div>
-                                    <div class="month">July</div>
+                                    <div class="day">{{article.createdAt | date:'dd'}}</div>
+                                    <div class="month">{{article.createdAt | date:'MMM'}}</div>
                                 </div>
                             </div>
                         </div>
